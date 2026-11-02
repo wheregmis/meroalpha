@@ -12,16 +12,19 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <header class="nav container">
-    <a class="brand" href="./" aria-label="MeroAlpha home">
-      <img src="assets/meroalpha.svg" width="32" height="32" alt="">
-      <span>MeroAlpha</span>
-    </a>
-    <nav aria-label="Main">
-      <a class="nav__link" href="#day">How it trades</a>
-      <a class="nav__link" href="#data">Your data</a>
-      <a class="btn btn--small" href="https://github.com/wheregmis/meroalpha/releases/latest">Download</a>
-    </nav>
+  <header class="masthead">
+    <div class="nav container">
+      <a class="brand" href="./" aria-label="MeroAlpha home">
+        <img src="assets/meroalpha.svg" width="32" height="32" alt="">
+        <span>MeroAlpha</span>
+      </a>
+      <nav aria-label="Main">
+        <a class="nav__link" href="#tour">Screens</a>
+        <a class="nav__link" href="#day">How it trades</a>
+        <a class="nav__link" href="privacy.html">Privacy</a>
+        <a class="btn btn--small" href="https://github.com/wheregmis/meroalpha/releases/latest">Download</a>
+      </nav>
+    </div>
   </header>
 
   <main id="main">
@@ -111,6 +114,7 @@
         <div><dt>Sharing is optional</dt><dd>Signed in, it shares verified findings with their page’s address and hash, never the page.</dd></div>
         <div><dt>Your own agent</dt><dd>Connect Claude or Codex over ACP, signed in with its own CLI.</dd></div>
       </dl>
+      <p class="data__more"><a class="link" href="privacy.html">Read the privacy policy</a></p>
     </section>
 
     <section class="close container" aria-labelledby="close-title">
@@ -125,13 +129,44 @@
     </section>
   </main>
 
-  <footer class="foot container">
-    <div class="brand">
-      <img src="assets/meroalpha.svg" width="24" height="24" alt="">
-      <span>MeroAlpha</span>
+  <footer class="foot">
+    <div class="container foot__grid">
+      <div class="foot__about">
+        <a class="brand" href="./">
+          <img src="assets/meroalpha.svg" width="24" height="24" alt="">
+          <span>MeroAlpha</span>
+        </a>
+        <p>A macOS app that researches NEPSE and runs a paper account in virtual NPR. No real money moves and no brokerage is connected.</p>
+      </div>
+      <nav class="foot__col" aria-labelledby="foot-product">
+        <h2 class="foot__head" id="foot-product">Product</h2>
+        <ul>
+          <li><a href="https://github.com/wheregmis/meroalpha/releases/latest">Download for macOS</a></li>
+          <li><a href="#tour">Screens</a></li>
+          <li><a href="#day">How it trades</a></li>
+          <li><a href="https://github.com/wheregmis/meroalpha/releases">Release notes</a></li>
+        </ul>
+      </nav>
+      <nav class="foot__col" aria-labelledby="foot-legal">
+        <h2 class="foot__head" id="foot-legal">Legal</h2>
+        <ul>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="terms.html">Terms of use</a></li>
+          <li><a href="terms.html#advice">Not investment advice</a></li>
+        </ul>
+      </nav>
+      <nav class="foot__col" aria-labelledby="foot-help">
+        <h2 class="foot__head" id="foot-help">Help</h2>
+        <ul>
+          <li><a href="https://github.com/wheregmis/meroalpha/issues">Report a problem</a></li>
+          <li><a href="https://github.com/wheregmis/meroalpha">Website source</a></li>
+        </ul>
+      </nav>
     </div>
-    <p>Paper account: virtual NPR, no real money. Information only, not financial advice. Screens show synthetic test data.</p>
-    <a class="link" href="https://github.com/wheregmis/meroalpha">GitHub</a>
+    <div class="container foot__legal">
+      <p>Information only, not investment advice. MeroAlpha is not licensed by the Securities Board of Nepal (SEBON) and is not affiliated with NEPSE, ShareSansar or MeroLagani; their names belong to their owners. Screens show synthetic test data.</p>
+      <p>© 2026 MeroAlpha</p>
+    </div>
   </footer>
 
   <script>

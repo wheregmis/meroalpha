@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy policy: MeroAlpha</title>
+  <meta name="description" content="What MeroAlpha keeps on your Mac, what leaves it, and who sees it.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/meroalpha.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="masthead">
+    <div class="nav container">
+      <a class="brand" href="./" aria-label="MeroAlpha home">
+        <img src="assets/meroalpha.svg" width="32" height="32" alt="">
+        <span>MeroAlpha</span>
+      </a>
+      <nav aria-label="Main">
+        <a class="nav__link" href="./#tour">Screens</a>
+        <a class="nav__link" href="./#day">How it trades</a>
+        <a class="nav__link" href="privacy.html" aria-current="page">Privacy</a>
+        <a class="btn btn--small" href="https://github.com/wheregmis/meroalpha/releases/latest">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="legal container">
+    <div class="legal__head">
+      <h1>Privacy policy</h1>
+      <p class="legal__date">Last updated <time datetime="2026-11-02">Mon 2 Nov 2026</time></p>
+    </div>
+
+    <nav class="legal__toc" aria-labelledby="toc-title">
+      <h2 class="legal__toc-title" id="toc-title">On this page</h2>
+      <ol>
+        <li><a href="#short">The short version</a></li>
+        <li><a href="#mac">What stays on your Mac</a></li>
+        <li><a href="#leaves">What leaves your Mac</a></li>
+        <li><a href="#shared">The shared insight store</a></li>
+        <li><a href="#site">This website</a></li>
+        <li><a href="#rights">Your choices and rights</a></li>
+        <li><a href="#changes">Changes and contact</a></li>
+      </ol>
+    </nav>
+
+    <article class="legal__body">
+      <section id="short" class="legal__summary">
+        <h2>The short version</h2>
+        <ul>
+          <li>MeroAlpha has no MeroAlpha account to create, and works fully signed out.</li>
+          <li>Your research, paper account and settings stay on your Mac.</li>
+          <li>Your questions go to the AI agent you connect, under your own account with that provider.</li>
+          <li>If you sign in, verified findings are shared with other MeroAlpha users. Page contents, screenshots and your account’s cash are never shared.</li>
+          <li>No ads, no analytics and no selling of data.</li>
+        </ul>
+      </section>
+
+      <section id="mac">
+        <h2>What stays on your Mac</h2>
+        <p>The app keeps everything it makes in <code>~/Library/Application Support/com.meroalpha.agent/</code>:</p>
+        <ul>
+          <li><strong>Agent connection</strong>: which AI agent you chose and how to start it.</li>
+          <li><strong>Evidence</strong>: the pages the agent captured and the findings it drew from them.</li>
+          <li><strong>Paper account</strong>: virtual cash, holdings, orders, plans and the schedule.</li>
+          <li><strong>Optional keys and sign-in</strong>: a Jev key if you add one, and the shared store’s sign-in token, both saved readable only by your user account.</li>
+        </ul>
+        <p>We cannot see this folder. Quitting the app clears the chat history; deleting the folder removes everything else.</p>
+      </section>
+
+      <section id="leaves">
+        <h2>What leaves your Mac</h2>
+        <h3>The AI agent you connect</h3>
+        <p>MeroAlpha talks to an agent you install and sign in to yourself, such as Claude or Codex. Your questions, the pages the agent reads and the paper account details a run needs are sent to that agent, and through it to its provider (for example Anthropic or OpenAI). That provider’s own privacy policy and terms apply. We do not receive a copy.</p>
+        <h3>The websites the agent reads</h3>
+        <p>The agent opens public pages, such as NEPSE, ShareSansar, MeroLagani and news sites, in your Mac’s own web view. Those sites see an ordinary visit from your network, as they would if you opened the page yourself.</p>
+        <h3>Jev browsing, if you turn it on</h3>
+        <p>Off by default. When a chat hands a task to Jev, the page’s controls and the task’s goal go to the provider you picked (TypeSafe or OpenRouter), using your key.</p>
+        <h3>Update checks</h3>
+        <p>At launch, and when you choose Check for Updates, the app asks GitHub’s public releases API for the latest version. Nothing about you or your account is included; GitHub sees an ordinary request.</p>
+      </section>
+
+      <section id="shared">
+        <h2>The shared insight store</h2>
+        <p>Optional. If you sign in with Google, the app joins a shared store hosted on Supabase, so agents can learn from each other’s research.</p>
+        <h3>What we keep about you</h3>
+        <p>Your email address and an account ID, from Google sign-in. Other users never see your email.</p>
+        <h3>What is shared</h3>
+        <ul>
+          <li>Verified findings: a company, a fact about it, its value and the dates it holds.</li>
+          <li>The address, title and a content fingerprint of each page that stated it, never the page itself.</li>
+          <li>Your agent’s checks of other findings (support, dispute or retract) and its open research questions.</li>
+          <li>Graded paper calls and paper plans, with how they turned out, and weekly counts of how each source performed.</li>
+        </ul>
+        <p>Signed-in users can read shared rows. Each row carries your account ID, not your name or email. Rows cannot be edited once shared, so do not put personal information in a question to the agent you would not want recorded.</p>
+        <h3>How long</h3>
+        <p>Shared rows are kept while your account exists. Deleting your account deletes every row linked to it. Signing out stops sharing and revokes the session on your Mac.</p>
+      </section>
+
+      <section id="site">
+        <h2>This website</h2>
+        <p>This site sets no cookies and runs no analytics or trackers. It is hosted on GitHub Pages, which keeps standard request logs, such as IP addresses, under <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">GitHub’s privacy statement</a>.</p>
+      </section>
+
+      <section id="rights">
+        <h2>Your choices and rights</h2>
+        <ul>
+          <li>Use the app signed out, and nothing goes to the shared store.</li>
+          <li>Ask us what your account holds, to correct it, or to delete it.</li>
+          <li>These rights include those under Nepal’s Privacy Act, 2075 (2018), and the law where you live.</li>
+        </ul>
+        <p>MeroAlpha is not meant for anyone under 18.</p>
+      </section>
+
+      <section id="changes">
+        <h2>Changes and contact</h2>
+        <p>When this policy changes, we update the date above and say what changed in the release notes. A change that shares more about you needs your consent first.</p>
+        <p>Questions or requests: <span class="fill" data-fill="contact email">contact email to be added</span>, or open an issue on <a href="https://github.com/wheregmis/meroalpha/issues">GitHub</a>. For a deletion request, write from the email you signed in with.</p>
+      </section>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <div class="container foot__grid">
+      <div class="foot__about">
+        <a class="brand" href="./">
+          <img src="assets/meroalpha.svg" width="24" height="24" alt="">
+          <span>MeroAlpha</span>
+        </a>
+        <p>A macOS app that researches NEPSE and runs a paper account in virtual NPR. No real money moves and no brokerage is connected.</p>
+      </div>
+      <nav class="foot__col" aria-labelledby="foot-product">
+        <h2 class="foot__head" id="foot-product">Product</h2>
+        <ul>
+          <li><a href="https://github.com/wheregmis/meroalpha/releases/latest">Download for macOS</a></li>
+          <li><a href="./#tour">Screens</a></li>
+          <li><a href="./#day">How it trades</a></li>
+          <li><a href="https://github.com/wheregmis/meroalpha/releases">Release notes</a></li>
+        </ul>
+      </nav>
+      <nav class="foot__col" aria-labelledby="foot-legal">
+        <h2 class="foot__head" id="foot-legal">Legal</h2>
+        <ul>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="terms.html">Terms of use</a></li>
+          <li><a href="terms.html#advice">Not investment advice</a></li>
+        </ul>
+      </nav>
+      <nav class="foot__col" aria-labelledby="foot-help">
+        <h2 class="foot__head" id="foot-help">Help</h2>
+        <ul>
+          <li><a href="https://github.com/wheregmis/meroalpha/issues">Report a problem</a></li>
+          <li><a href="https://github.com/wheregmis/meroalpha">Website source</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container foot__legal">
+      <p>Information only, not investment advice. MeroAlpha is not licensed by the Securities Board of Nepal (SEBON) and is not affiliated with NEPSE, ShareSansar or MeroLagani; their names belong to their owners. Screens show synthetic test data.</p>
+      <p>© 2026 MeroAlpha</p>
+    </div>
+  </footer>
+</body>
+</html>
