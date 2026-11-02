@@ -74,7 +74,7 @@
 .data__list dd { margin: 0; color: var(--color-muted); }
 
 /* Close */
-.close { padding-block: var(--section-gap-s) var(--section-gap); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-2xl); align-items: center; }
+.close { padding-block: var(--section-gap-s) var(--section-gap); }
 .close__text { display: grid; gap: var(--space-lg); justify-items: start; }
 .close h2 { max-width: 12ch; }
 .close .lead { color: var(--color-muted); max-width: 32ch; }
@@ -86,7 +86,7 @@
 .foot p { font-size: var(--text-sm); color: var(--color-muted); max-width: none; }
 
 @media (max-width: 60rem) {
-  .hero, .data, .close { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+  .hero, .data { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
   .shot--hero { margin-right: 0; }
   .day__list { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--space-xl); }
   .foot { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }

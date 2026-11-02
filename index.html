@@ -45,23 +45,13 @@
     </section>
 
     <section class="tour container" id="tour" aria-labelledby="tour-title">
-      <h2 id="tour-title">Four screens, each with one job</h2>
+      <h2 id="tour-title">Three screens, each with one job</h2>
       <div class="switch" data-switch>
         <div class="seg" role="tablist" aria-label="Screens">
-          <button role="tab" id="t-ask" aria-controls="p-ask" aria-selected="true">Ask</button>
-          <button role="tab" id="t-stock" aria-controls="p-stock" aria-selected="false" tabindex="-1">Stock page</button>
+          <button role="tab" id="t-stock" aria-controls="p-stock" aria-selected="true">Stock page</button>
           <button role="tab" id="t-chart" aria-controls="p-chart" aria-selected="false" tabindex="-1">Advanced chart</button>
           <button role="tab" id="t-portfolio" aria-controls="p-portfolio" aria-selected="false" tabindex="-1">Portfolio</button>
         </div>
-        <section class="panel" role="tabpanel" id="p-ask" aria-labelledby="t-ask">
-          <p class="panel__caption">Ask about any stock. The agent opens ShareSansar, MeroLagani and NEPSE pages, then answers with numbered sources.</p>
-          <figure class="shot">
-            <picture>
-              <source media="(prefers-color-scheme: dark)" srcset="assets/dark-07-ask.jpg">
-              <img src="assets/light-07-ask.jpg" width="1920" height="1260" loading="lazy" alt="The Ask panel with suggested questions beside a stock page">
-            </picture>
-          </figure>
-        </section>
         <section class="panel" role="tabpanel" id="p-stock" aria-labelledby="t-stock">
           <p class="panel__caption">The price, your paper position and the agent’s plan. Information only: there are no buy or sell buttons.</p>
           <figure class="shot">
@@ -132,12 +122,6 @@
         </div>
         <pre class="cmd" aria-label="Install the Claude agent"><code>npm install -g @agentclientprotocol/claude-agent-acp</code></pre>
       </div>
-      <figure class="shot">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="assets/dark-04-portfolio.jpg">
-          <img src="assets/light-04-portfolio.jpg" width="1920" height="1260" loading="lazy" alt="The portfolio screen, where the report card grades each call">
-        </picture>
-      </figure>
     </section>
   </main>
 
