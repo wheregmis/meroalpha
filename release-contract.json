@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "repository": "wheregmis/meroalpha",
+  "channel": "stable",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "bundleIdentifier": "com.meroalpha.agent",
+  "minimumSystemVersion": "14.0",
+  "tagPattern": "^v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$",
+  "archive": "MeroAlpha-Agent-macos-arm64.zip",
+  "checksum": "MeroAlpha-Agent-macos-arm64.zip.sha256",
+  "appcast": "appcast.xml",
+  "feedURL": "https://github.com/wheregmis/meroalpha/releases/latest/download/appcast.xml",
+  "appcastOptional": true
+}
