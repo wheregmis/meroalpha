@@ -7,3 +7,5 @@ README.md
 release-contract.json
 scripts
 tests
+# Hidden local state (tool databases, environment files, agent metadata) is never a public asset.
+.*
