@@ -1,0 +1,15 @@
+/* pages/story.astro: the data platform we didn’t ship. Loaded after site.css. */
+.story { display: grid; gap: var(--section-gap-s); padding-bottom: var(--section-gap); }
+.story > section:not(.story__hero) { display: grid; gap: var(--space-xl); }
+.story__hero { display: grid; gap: var(--space-lg); justify-items: start; padding-top: var(--space-3xl); }
+.story__hero h1 { font-size: var(--text-display-s); max-width: 16ch; }
+.story__hero h1 em { font-style: normal; color: var(--color-accent); }
+.story__hero .lead, .story__close .lead { color: var(--color-muted); }
+.story__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
+.story__grid li { display: grid; gap: var(--space-sm); align-content: start; padding: var(--space-lg); }
+.story__grid h3 { font-size: var(--text-lg); }
+.story__grid p { color: var(--color-muted); }
+.story__prose { display: grid; gap: var(--space-md); font-size: var(--text-lead); line-height: 1.5; }
+.story__card { display: grid; gap: var(--space-lg); justify-items: start; padding: var(--space-2xl) var(--space-xl); background: radial-gradient(ellipse at 100% 130%, var(--glow), transparent 60%), var(--color-paper-2); }
+.story__card h2 { font-size: var(--text-section); }
+@media (max-width: 40rem) { .story__grid { grid-template-columns: minmax(0, 1fr); } .story__card { padding: var(--space-xl) var(--space-lg); } }

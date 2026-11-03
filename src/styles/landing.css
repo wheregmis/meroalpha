@@ -75,11 +75,20 @@
 .data__list svg { width: 40px; height: 40px; padding: 8px; border-radius: 10px; fill: none; stroke: var(--color-accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; background: var(--color-paper-3); }
 .data__list dd { margin: 0; color: var(--color-muted); }
 
+/* Products: what MeroAlpha makes, and what it shelved */
+.products { padding-block: var(--section-gap-s) 0; display: grid; gap: var(--space-xl); }
+.products__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
+.products__list li { display: grid; gap: var(--space-sm); align-content: start; justify-items: start; padding: var(--space-xl); }
+.products__list p:not(.kicker) { color: var(--color-muted); }
+.chip--quiet { background: var(--color-paper-3); color: var(--color-muted); }
+
 /* Close */
 .close { padding-block: var(--section-gap-s) var(--section-gap); }
 .close__card { display: grid; gap: var(--space-lg); justify-items: center; text-align: center; padding: var(--space-3xl) var(--space-xl); background: radial-gradient(ellipse at 50% 130%, var(--glow), transparent 60%), var(--color-paper-2); }
 .close h2 { max-width: 14ch; font-size: clamp(2.25rem, 4vw + 0.5rem, 4.25rem); }
-.close .lead { color: var(--color-muted); max-width: 36ch; }
+.close .lead { color: var(--color-muted); max-width: 44ch; }
+.close .wait { margin-inline: auto; }
+.close .wait__status { text-align: center; }
 
 @media (max-width: 60rem) {
   .hero, .data { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
@@ -94,6 +103,6 @@
   .hud { display: none; }
   /* A phone gets the app's desktop layout squeezed: offer the full tab instead. */
   .window { display: none; }
-  .day__list, .data__list { grid-template-columns: minmax(0, 1fr); }
+  .day__list, .data__list, .products__list { grid-template-columns: minmax(0, 1fr); }
   .close__card { padding: var(--space-2xl) var(--space-md); }
 }

@@ -1,8 +1,8 @@
 ---
 const columns = [
-  { id: 'product', title: 'Product', links: [['/download', 'Download for macOS'], ['/demo/', 'Try it in your browser'], ['/#day', 'How it trades'], ['/changelog', 'Changelog']] },
+  { id: 'product', title: 'Product', links: [['/waitlist', 'Join the waitlist'], ['/demo/', 'Try it in your browser'], ['/#day', 'How it trades'], ['/changelog', 'Changelog']] },
+  { id: 'company', title: 'Company', links: [['/story', 'Our story'], ['mailto:get2sabin@gmail.com', 'get2sabin@gmail.com'], ['https://github.com/wheregmis/meroalpha/issues', 'Report a problem']] },
   { id: 'legal', title: 'Legal', links: [['/privacy', 'Privacy policy'], ['/terms', 'Terms of use'], ['/terms#advice', 'Not investment advice']] },
-  { id: 'help', title: 'Help', links: [['https://github.com/wheregmis/meroalpha/issues', 'Report a problem'], ['https://github.com/wheregmis/meroalpha', 'Website source']] },
 ];
 ---
 <footer class="foot">
@@ -12,7 +12,7 @@ const columns = [
         <img src="/assets/meroalpha.svg" width="24" height="24" alt="">
         <span>MeroAlpha</span>
       </a>
-      <p>A macOS app that researches NEPSE and runs a paper account in virtual NPR. No real money moves and no brokerage is connected.</p>
+      <p>MeroAlpha Agent, in private testing: a macOS app that researches NEPSE and runs a paper account in virtual NPR. No real money moves and no brokerage is connected.</p>
     </div>
     {columns.map((c) => (
       <nav class="foot__col" aria-labelledby={`foot-${c.id}`}>

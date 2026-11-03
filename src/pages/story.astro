@@ -1,0 +1,76 @@
+---
+import Page from '../layouts/Page.astro';
+import Section from '../components/Section.astro';
+import Surface from '../components/Surface.astro';
+import Pill from '../components/Pill.astro';
+import PrimaryButton from '../components/PrimaryButton.astro';
+import SecondaryButton from '../components/SecondaryButton.astro';
+import '../styles/story.css';
+
+// What the data platform (meroalpha_data_platform) collected and served.
+const built = [
+  { title: 'Collectors', body: 'Company reference data, market snapshots every five minutes, daily prices, floorsheets, corporate actions, financial statements, mutual fund NAVs, news and announcements, on a schedule set to Kathmandu time.' },
+  { title: 'Evidence', body: 'Every response archived before parsing, byte for byte, under its SHA-256 with a manifest of where and when it came from. Nothing was overwritten; corrections were imported, never guessed.' },
+  { title: 'An API and an MCP server', body: 'Versioned REST endpoints over PostgreSQL and TimescaleDB, with API keys, plans, rate limits and an MCP endpoint, so an AI agent could query NEPSE history directly.' },
+  { title: 'A research lab', body: 'Historical backtests and paper accounts driven by AI research methods, with costs, rolling validation windows and a held-out final test, so a strategy had to earn its keep.' },
+];
+
+const lessons = [
+  { title: 'Don’t redistribute what you don’t own', body: 'MeroAlpha never resells or republishes market data. There is no MeroAlpha feed and no MeroAlpha API.' },
+  { title: 'Read the market the way you would', body: 'The agent opens public pages in a browser on your Mac, in front of you, the same pages you could open yourself.' },
+  { title: 'Cite, don’t copy', body: 'Each finding keeps the page’s address, title and a hash of what it said. If you share findings, the page itself never leaves your Mac.' },
+  { title: 'Keep the rigour', body: 'The habits from the platform stayed: dated evidence, fees and slippage on every fill, and a report card graded against the NEPSE index.' },
+];
+---
+<Page title="Our story: the data platform we didn’t ship" description="We built a NEPSE market-data platform, then couldn’t find a licensed source to serve it from. Here is what we learned, and how MeroAlpha Agent works instead." current="/story">
+  <main id="main" class="story">
+    <section class="story__hero container" aria-labelledby="story-title">
+      <Pill>Our story</Pill>
+      <h1 id="story-title">The data platform <em>we didn’t ship</em></h1>
+      <p class="lead">Before MeroAlpha Agent, we built a market-data platform for NEPSE: about 600 changes of work, a public API and an AI research lab. It never went public. This is why, and what we do now.</p>
+    </section>
+
+    <Section id="built" num="01" label="What we built" title="Everything a NEPSE developer could ask for">
+      <p slot="intro" class="panel__caption">The MeroAlpha Data Platform was meant to be the dependable NEPSE source that developers, dashboards and research tools lacked.</p>
+      <ul class="story__grid">
+        {built.map((b) => (
+          <Surface as="li">
+            <h3>{b.title}</h3>
+            <p>{b.body}</p>
+          </Surface>
+        ))}
+      </ul>
+    </Section>
+
+    <Section id="stopped" num="02" label="Why it stopped" title="No one could license us the data">
+      <div class="story__prose" data-reveal>
+        <p>A data product is only as legitimate as its source. To sell NEPSE prices, floorsheets and filings through an API, we needed a provider with the right to let us redistribute them.</p>
+        <p>We looked, and we didn’t find one. Collecting public pages for your own research is one thing; packaging them as a paid feed for others is another, and we weren’t willing to do it without a licence.</p>
+        <p>So the platform stays private. The code works. We just won’t run it as a public service until there is a lawful source behind it.</p>
+      </div>
+    </Section>
+
+    <Section id="approach" num="03" label="What we do now" title="An analyst on your Mac, not a feed">
+      <p slot="intro" class="panel__caption">MeroAlpha Agent keeps the platform’s discipline and drops the part we couldn’t do properly.</p>
+      <ul class="story__grid">
+        {lessons.map((l) => (
+          <Surface as="li">
+            <h3>{l.title}</h3>
+            <p>{l.body}</p>
+          </Surface>
+        ))}
+      </ul>
+    </Section>
+
+    <section class="story__close container" aria-labelledby="story-close">
+      <Surface class="story__card" still>
+        <h2 id="story-close">Have a licensed NEPSE data source?</h2>
+        <p class="lead">We would like to talk. Write to <a class="link" href="mailto:get2sabin@gmail.com">get2sabin@gmail.com</a>.</p>
+        <div class="actions">
+          <PrimaryButton href="/waitlist">Join the Agent waitlist</PrimaryButton>
+          <SecondaryButton href="/#demo">Try the demo</SecondaryButton>
+        </div>
+      </Surface>
+    </section>
+  </main>
+</Page>

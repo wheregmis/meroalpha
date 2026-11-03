@@ -6,14 +6,14 @@ An [Astro](https://astro.build) site: every page is static HTML, and React runs 
 
 ```
 src/
-  pages/       index · download · changelog · privacy · terms · 404   (one file per route)
+  pages/       index · story · waitlist · changelog · privacy · terms · 404   (one file per route)
   layouts/     Page.astro: head, header, footer
   components/  named after the app's kit (apps/desktop/src/ui/kit.tsx): PrimaryButton · SecondaryButton · Section ·
-               Surface · Pill · Segmented (React) · Screenshot (React) · Terminal · Releases · Header · Footer
+               Surface · Pill · Segmented (React) · Screenshot (React) · Waitlist · Releases · Header · Footer
   styles/      tokens.css (the app's colours) · base.css · site.css (shared) · one sheet per page or component
-  lib/         changelog.mjs · release-notes.mjs (tested in tests/)
-  scripts/     motion.mjs · copy.mjs (browser-only)
-public/        copied as-is: assets/ · demo/ · install.sh · _headers · .assetsignore
+  lib/         changelog.mjs · release-notes.mjs · waitlist.mjs (tested in tests/)
+  scripts/     motion.mjs (browser-only)
+public/        copied as-is: assets/ · demo/ · _headers · .assetsignore
 dist/          the build, which Cloudflare serves (gitignored)
 scripts/  tests/  release-contract.json   release tooling, never published
 ```
@@ -42,19 +42,13 @@ npm run site:dev      # http://localhost:8787
 The asset root is `dist/`: the built pages plus `public/`, copied as-is. Scripts, tests, sources and configuration are outside it. `.assetsignore` (from `public/`) still excludes hidden files, such as environment files and tooling databases. Never copy credentials or private application data into `public/`.
 
 
-## Install
+## Waitlist
 
-On a Mac with Apple silicon (macOS 14+), one command installs the latest release into `/Applications`:
-
-```sh
-curl -fsSL https://meroalpha.com/install.sh | sh
-```
-
-It downloads the ZIP and its checksum from the latest release, checks the checksum, re-signs the app ad-hoc,
-replaces any installed copy only once the new one is in place, and opens it. Read it first at
-[meroalpha.com/install.sh](https://meroalpha.com/install.sh) ([`public/install.sh`](public/install.sh) here). It skips the
-Privacy & Security prompt because `curl` does not mark files as downloaded from the internet, which is what
-Gatekeeper checks. It does not make the app notarized.
+MeroAlpha Agent is in private testing, so the site offers no builds: `/download` redirects to `/waitlist`. The form
+(`src/components/Waitlist.astro`, `src/lib/waitlist.mjs`) calls `join_waitlist` in the agent's Supabase project straight
+from the browser. Its migration and test live with the project's others in `meroalpha_agent/supabase/`
+(`*_waitlist.sql`): the function answers a new and a repeat address the same way, and the API can't touch the table
+itself. Read sign-ups in the Supabase dashboard.
 
 ## App releases
 
@@ -80,8 +74,8 @@ The agent's local script builds/seals ad-hoc packages without Apple credentials.
 It optionally authenticates update ZIPs using an existing Sparkle Ed25519 key.
 Apple Developer ID and notarization are future optional improvements, not required
 for downloads or archive authentication. Ad-hoc signing does not satisfy Gatekeeper:
-macOS can block initial installation or an update. `install.sh` avoids that block by downloading
-with `curl`, which Gatekeeper does not check; a browser download still needs Privacy & Security.
+macOS can block initial installation or an update; a browser download needs Privacy & Security. (The site's
+`install.sh`, which avoided that by downloading with `curl`, was removed while builds are private; it is in git history.)
 Enabled builds support authenticated native updates. The public ad-hoc 0.3.1 → 0.3.2 install/relaunch test passed after disposable acceptance; the owner completed initial installation. Builds without an enabled authenticated updater retain the public release-page fallback.
 
 Maintainers validate local artifacts, create a draft, attach all allowed assets,
