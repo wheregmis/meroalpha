@@ -75,7 +75,8 @@ export function mountFeedback(doc = document, send = submitFeedback, makeId = ()
       button.textContent = result === 'error' || result === 'limited' ? 'Try sending again' : 'Send message';
       status.textContent = MESSAGES[result] || MESSAGES.error;
       status.dataset.state = result;
-      if (result === 'ok') { form.reset(); updateEmail(); }
+      if (result === 'ok') { previous = ''; requestId = undefined; form.reset(); updateEmail(); }
     });
+    fields.disabled = false;
   }
 }

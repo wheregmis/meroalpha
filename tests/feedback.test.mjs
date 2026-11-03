@@ -41,8 +41,21 @@ function fixture() {
   const form = { ...node(), elements: Object.fromEntries(['category', 'email', 'message', 'website'].map(k => [k, node()])),
     querySelector(s) { return nodes[s] ||= node(); }, addEventListener(k, v) { events[k] = v; }, reset() { this.elements.message.value = ''; this.elements.email.value = ''; this.elements.category.value = 'feedback'; } };
   Object.entries(valid).forEach(([k,v]) => form.elements[k].value = v);
+  form.querySelector('fieldset').disabled = true;
   return { form, nodes, events, doc: { querySelectorAll: () => [form] }, submit: () => events.submit({ preventDefault() {} }) };
 }
+
+test('form remains disabled until its submit handler is attached', () => {
+  const f = fixture();
+  const attach = f.form.addEventListener;
+  f.form.addEventListener = (name, handler) => {
+    assert.equal(f.nodes.fieldset.disabled, true);
+    attach(name, handler);
+  };
+  mountFeedback(f.doc);
+  assert.equal(typeof f.events.submit, 'function');
+  assert.equal(f.nodes.fieldset.disabled, false);
+});
 
 test('form blocks double submit, preserves failed input, retries same ID and resets only on success', async () => {
   const original = globalThis.FormData;
@@ -65,9 +78,14 @@ test('form blocks double submit, preserves failed input, retries same ID and res
     resolve('ok'); await changed;
     assert.equal(f.form.elements.message.value, '');
     assert.equal(f.nodes['[data-feedback-status]'].dataset.state, 'ok');
+    Object.entries(calls[2][0]).forEach(([k,v]) => f.form.elements[k].value = v);
+    const fresh = f.submit();
+    assert.deepEqual(calls[3][0], calls[2][0]);
+    assert.notEqual(calls[3][1], calls[2][1]);
+    resolve('ok'); await fresh;
     f.form.elements.category.value = 'question'; f.form.elements.category.change();
     assert.equal(f.form.elements.email.required, true);
-    await f.submit(); assert.equal(calls.length, 3);
+    await f.submit(); assert.equal(calls.length, 4);
     assert.equal(f.form.elements.email.attrs['aria-invalid'], 'true');
     assert.equal(f.form.elements.email.focused, true);
   } finally { globalThis.FormData = original; }
