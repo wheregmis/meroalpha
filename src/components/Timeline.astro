@@ -2,14 +2,16 @@
 // Steps on a lit rail, left to right; the first is lit. Stacks below 60rem.
 import Surface from './Surface.astro';
 
-interface Props { items: { label: string; title: string; body: string }[]; class?: string }
-const { items, class: cls } = Astro.props;
+// `level={2}` for steps that sit straight under a page's h1, with no h2 between; they look the same.
+interface Props { items: { label: string; title: string; body: string }[]; class?: string; level?: 2 | 3 }
+const { items, class: cls, level = 3 } = Astro.props;
+const Heading = level === 2 ? 'h2' : 'h3';
 ---
 <ol class:list={['rail', cls]} style={`--steps: ${items.length}`}>
   {items.map((item) => (
     <Surface as="li">
       <span class="rail__label">{item.label}</span>
-      <h3>{item.title}</h3>
+      <Heading class:list={[level === 2 && 'as-h3']}>{item.title}</Heading>
       <p>{item.body}</p>
     </Surface>
   ))}

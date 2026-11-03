@@ -14,12 +14,12 @@ import ScrollDemo from '../components/ScrollDemo.astro';
 import '../styles/changelog.css';
 import '../styles/landing.css';
 
-const facts = ['Cites every page', 'Virtual NPR', '5-minute candles', 'Stops at 14:30 NPT', 'Graded against NEPSE', 'Runs on your Mac', 'Claude or Codex over ACP', 'No brokerage connected'];
+const facts = ['Cites every page', 'Virtual NPR', '5-minute candles', 'No new entries after 14:30 NPT', 'Graded against NEPSE', 'Runs on your Mac', 'Works with Claude or Codex', 'No brokerage connected'];
 
 const screens = [
-  { id: 'stock', label: 'Stock page', image: '06-stock.jpg', caption: 'The price, your paper position and the agent’s plan. Information only: there are no buy or sell buttons.', alt: 'A stock page with the last close, a three-month price graph, the 52-week range and news' },
+  { id: 'stock', label: 'Stock page', image: '06-stock.jpg', caption: 'The price, your paper position and the agent’s plan. Information only: there are no buy or sell buttons.', alt: 'NABIL’s stock page on sample data: the last close, a three-month graph with the plan’s stop and target, and the paper position' },
   { id: 'chart', label: 'Advanced chart', image: '06-advanced-chart.jpg', caption: 'Candles, indicators and drawing tools, on MeroAlpha’s own chart engine.', alt: 'The advanced chart with daily candles, a 20-day moving average, volume and drawing tools' },
-  { id: 'portfolio', label: 'Portfolio', image: '04-portfolio.jpg', caption: 'Cash, holdings and the loss limit, and a report card for every call.', alt: 'The portfolio screen with the total value, cash, the agent’s next run and the report card' },
+  { id: 'portfolio', label: 'Portfolio', image: '04-portfolio.jpg', caption: 'Your paper account at a glance: value, cash, the loss limit and what the agent did last.', alt: 'The portfolio on sample data after one session: total value with its change, invested and cash, the loss limit, and the agent’s last run' },
 ];
 
 const day = [
@@ -33,7 +33,7 @@ const day = [
 const data = [
   { title: 'Local by default', body: 'Captured pages, findings and the paper account live in your Library folder.', icon: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>' },
   { title: 'Sharing is optional', body: 'Signed in, it shares verified findings with their page’s address and hash, never the page.', icon: '<path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/>' },
-  { title: 'Your own agent', body: 'Connect Claude or Codex over ACP, signed in with its own CLI.', icon: '<circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/>' },
+  { title: 'Your own agent', body: 'Connect your own Claude or Codex, signed in with its own command-line tool.', icon: '<circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/>' },
 ];
 ---
 <Page title="MeroAlpha: a NEPSE analyst that trades on paper"
@@ -52,8 +52,8 @@ const data = [
         <p class="note">For Macs with Apple silicon, in private testing. Virtual NPR only; no brokerage is connected.</p>
       </div>
       <div class="hero__stage">
-        <Screenshot name="07-ask.jpg" className="shot--hero" priority
-          alt="MeroAlpha’s stock page for NABIL with a price graph, and the Ask panel open beside it offering questions about the stock" />
+        <Screenshot name="07-ask.jpg" phone="07-ask-phone.jpg" className="shot--hero" priority
+          alt="MeroAlpha on sample data: NABIL’s stock page beside the Ask panel, where the agent compares NABIL’s and NICA’s closes after opening two pages and cites both" />
         <p class="hud hud--a" aria-hidden="true"><span class="dot"></span>Researching in a live browser</p>
         <p class="hud hud--b" aria-hidden="true"><span class="hud__key">Sources</span>Every finding cites its page</p>
         <p class="hud hud--c" aria-hidden="true"><span class="hud__key">Risk</span>1% of equity per plan</p>

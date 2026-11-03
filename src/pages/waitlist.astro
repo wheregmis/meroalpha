@@ -15,7 +15,7 @@ const next = [
 ---
 <Page title="Join the MeroAlpha waitlist" description="MeroAlpha Agent is in private testing. Leave your email and we’ll write when there’s a build for you." current="/waitlist">
   <main id="main">
-    <Section id="join" class="join" title="MeroAlpha Agent is in private testing">
+    <Section id="join" class="join" level={1} title="MeroAlpha Agent is in private testing">
       <Fragment slot="intro">
         <Pill>Private testing · macOS · Apple silicon</Pill>
         <p class="lead">There are no public builds yet. Leave your email and we’ll write when there’s one for you to try. Until then, <a class="link" href="/#demo">watch it work a trade</a>.</p>
@@ -24,7 +24,7 @@ const next = [
         <Waitlist id="join-email" />
         <p class="note">We keep only your address and the date you joined. See the <a class="link" href="/privacy#waitlist">privacy policy</a>.</p>
       </Surface>
-      <CardGrid class="join__next" items={next} cols={3} ordered />
+      <CardGrid class="join__next" items={next} cols={3} ordered level={2} />
     </Section>
 
     <Section id="contact" class="join join--contact" label="Contact" title="Talk to us">
