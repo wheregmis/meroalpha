@@ -14,8 +14,8 @@ test('HTML and tracking images remain inert text and no token is sent',async()=>
  const created=[];const element=tag=>({tag,children:[],append(...items){this.children.push(...items);},set innerHTML(_){throw Error('Unsafe HTML rendering');}});
  const status=element('p'),list=element('div'),doc={querySelector:q=>q==='[data-release-status]'?status:list,createElement:tag=>{const e=element(tag);created.push(e);return e;}};
  const malicious='<img src="https://tracker.invalid" onerror="alert(1)"><script>alert(2)</script>';
- await loadChangelog(doc,async(url,init)=>{assert.equal(url,RELEASE_API);assert.equal(init.credentials,'omit');assert.equal(init.headers.Authorization,undefined);return{ok:true,json:async()=>[release('1.0.0',malicious)]};});
- assert.equal(list.children.length,1);assert.ok(created.some(x=>x.tag==='p'&&x.textContent===malicious));assert.ok(!created.some(x=>['img','script','iframe'].includes(x.tag)));assert.equal(status.hidden,true);
+ await loadChangelog(doc,async(url,init)=>{assert.equal(url,RELEASE_API);assert.equal(init.credentials,'omit');assert.equal(init.headers.Authorization,undefined);return{ok:true,json:async()=>[release('1.0.0',malicious),release('0.9.0')]};});
+ assert.equal(list.children.length,2);assert.deepEqual(created.filter(x=>x.tag==='li').map(x=>x.textContent),['Updates work']);assert.ok(created.some(x=>x.tag==='p'&&x.textContent===malicious));assert.ok(!created.some(x=>['img','script','iframe'].includes(x.tag)));assert.equal(status.hidden,true);
 });
 test('empty, rate limited, offline and malformed responses leave a useful fallback',async()=>{
  for(const get of [async()=>({ok:true,json:async()=>[]}),async()=>({ok:false}),async()=>{throw Error('offline');},async()=>({ok:true,json:async()=>({message:'rate limited'})})]){
