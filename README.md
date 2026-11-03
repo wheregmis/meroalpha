@@ -45,10 +45,10 @@ The asset root is `dist/`: the built pages plus `public/`, copied as-is. Scripts
 ## Waitlist
 
 MeroAlpha Agent is in private testing, so the site offers no builds: `/download` redirects to `/waitlist`. The form
-(`src/components/Waitlist.astro`, `src/lib/waitlist.mjs`) posts the address straight from the browser to the `waitlist`
-table in the agent's Supabase project. Its migration and row-level-security test live with the project's others in
-`meroalpha_agent/supabase/` (`*_waitlist.sql`): anyone may insert an address, nobody can read or delete one through the
-API. Read sign-ups in the Supabase dashboard.
+(`src/components/Waitlist.astro`, `src/lib/waitlist.mjs`) calls `join_waitlist` in the agent's Supabase project straight
+from the browser. Its migration and test live with the project's others in `meroalpha_agent/supabase/`
+(`*_waitlist.sql`): the function answers a new and a repeat address the same way, and the API can't touch the table
+itself. Read sign-ups in the Supabase dashboard.
 
 ## App releases
 

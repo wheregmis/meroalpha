@@ -1,19 +1,19 @@
 // The waitlist lives in the agent's Supabase project (meroalpha_agent/supabase/migrations/*_waitlist.sql).
-// The publishable key is public by design: row-level security lets anyone insert an address and nobody read one.
+// The publishable key is public by design: it can only call join_waitlist, which can't read the list.
 export const SUPABASE = { url: 'https://hzdbjqsjydgbrpwuvpcq.supabase.co', key: 'sb_publishable_o6x-lgI1tptYK50ZQ1-bRg_pDe_Td-G' };
 const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-/** Adds an address; resolves 'ok', 'invalid' or 'error'. A repeat address is 'ok' too, so the form never reveals who is on the list. */
+/** Adds an address; resolves 'ok', 'invalid' or 'error'. The database answers a repeat address like a new one, so nothing reveals who is on the list. */
 export async function joinWaitlist(email, fetchImpl = fetch) {
   const address = String(email ?? '').trim().toLowerCase();
   if (address.length > 254 || !EMAIL.test(address)) return 'invalid';
   try {
-    const res = await fetchImpl(`${SUPABASE.url}/rest/v1/waitlist`, {
+    const res = await fetchImpl(`${SUPABASE.url}/rest/v1/rpc/join_waitlist`, {
       method: 'POST',
-      headers: { apikey: SUPABASE.key, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-      body: JSON.stringify({ email: address, product: 'agent' }),
+      headers: { apikey: SUPABASE.key, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ address }),
     });
-    return res.ok || res.status === 409 ? 'ok' : 'error';
+    return res.ok ? 'ok' : 'error';
   } catch {
     return 'error';
   }
