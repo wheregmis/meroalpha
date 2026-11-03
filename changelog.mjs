@@ -20,7 +20,14 @@ export async function loadChangelog(doc = document, get = fetch) {
       const header=doc.createElement('div');header.className='release__head';
       const title=doc.createElement('h3'),link=doc.createElement('a');link.href=release.url;link.textContent=`Version ${release.version}`;link.className='link';title.append(link);
       const date=doc.createElement('time');date.dateTime=release.date;date.textContent=release.date;
-      const notes=doc.createElement('p');notes.className='release__notes';notes.textContent=release.notes;
+      const notes=doc.createElement('div');notes.className='release__notes';
+      for(const block of release.notes.split(/\n\n+/)) {
+        const lines=block.split('\n'), bullets=lines.every(line=>/^[-*]\s+/.test(line));
+        const content=doc.createElement(bullets?'ul':'p');
+        if(bullets)for(const line of lines){const item=doc.createElement('li');item.textContent=line.replace(/^[-*]\s+/,'');content.append(item);}
+        else content.textContent=block;
+        notes.append(content);
+      }
       header.append(title,date);item.append(header,notes);list.append(item);
     }
     status.textContent=releases.length?'':'No releases are available yet. Check the release history for updates.';

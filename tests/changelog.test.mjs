@@ -15,7 +15,7 @@ test('HTML and tracking images remain inert text and no token is sent',async()=>
  const status=element('p'),list=element('div'),doc={querySelector:q=>q==='[data-release-status]'?status:list,createElement:tag=>{const e=element(tag);created.push(e);return e;}};
  const malicious='<img src="https://tracker.invalid" onerror="alert(1)"><script>alert(2)</script>';
  await loadChangelog(doc,async(url,init)=>{assert.equal(url,RELEASE_API);assert.equal(init.credentials,'omit');assert.equal(init.headers.Authorization,undefined);return{ok:true,json:async()=>[release('1.0.0',malicious)]};});
- assert.equal(list.children.length,1);assert.equal(created.find(x=>x.className==='release__notes').textContent,malicious);assert.ok(!created.some(x=>['img','script','iframe'].includes(x.tag)));assert.equal(status.hidden,true);
+ assert.equal(list.children.length,1);assert.ok(created.some(x=>x.tag==='p'&&x.textContent===malicious));assert.ok(!created.some(x=>['img','script','iframe'].includes(x.tag)));assert.equal(status.hidden,true);
 });
 test('empty, rate limited, offline and malformed responses leave a useful fallback',async()=>{
  for(const get of [async()=>({ok:true,json:async()=>[]}),async()=>({ok:false}),async()=>{throw Error('offline');},async()=>({ok:true,json:async()=>({message:'rate limited'})})]){
