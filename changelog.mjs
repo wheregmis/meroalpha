@@ -15,11 +15,11 @@ export async function loadChangelog(doc = document, get = fetch) {
     const response=await get(RELEASE_API,{signal:controller.signal,credentials:'omit',headers:{Accept:'application/vnd.github+json'}});
     if(!response.ok)throw Error('Release notes unavailable');
     const releases=publicReleases(await response.json());
-    for(const release of releases) {
-      const item=doc.createElement('article');item.className='release';
+    for(const [i,release] of releases.entries()) {
+      const item=doc.createElement('article');item.className=i?'release':'release release--latest';
       const header=doc.createElement('div');header.className='release__head';
-      const title=doc.createElement('h3'),link=doc.createElement('a');link.href=release.url;link.textContent=`Version ${release.version}`;link.className='link';title.append(link);
-      const date=doc.createElement('time');date.dateTime=release.date;date.textContent=release.date;
+      const title=doc.createElement('h3'),link=doc.createElement('a');link.href=release.url;link.textContent=`v${release.version}`;title.append(link);
+      const date=doc.createElement('time');date.dateTime=release.date;date.textContent=new Date(release.date).toLocaleDateString('en',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
       const notes=doc.createElement('div');notes.className='release__notes';
       for(const block of release.notes.split(/\n\n+/)) {
         const lines=block.split('\n'), bullets=lines.every(line=>/^[-*]\s+/.test(line));
@@ -28,7 +28,9 @@ export async function loadChangelog(doc = document, get = fetch) {
         else content.textContent=block;
         notes.append(content);
       }
-      header.append(title,date);item.append(header,notes);list.append(item);
+      header.append(title);
+      if(!i){const badge=doc.createElement('span');badge.className='release__badge';badge.textContent='Latest';header.append(badge);}
+      header.append(date);item.append(header,notes);list.append(item);
     }
     status.textContent=releases.length?'':'No releases are available yet. Check the release history for updates.';
     status.hidden=!!releases.length;
