@@ -34,7 +34,7 @@ Gatekeeper checks. It does not make the app notarized.
 This public repo also hosts MeroAlpha Agent downloads; app source stays private.
 [Releases](https://github.com/wheregmis/meroalpha/releases/latest) are readable
 without an account. Existing download buttons already use this destination.
-A production binary becomes available when a maintainer publishes the first release.
+Stable binaries are published here, beginning with [v0.3.1](https://github.com/wheregmis/meroalpha/releases/tag/v0.3.1).
 
 | Asset | Purpose |
 | --- | --- |
@@ -55,15 +55,14 @@ Apple Developer ID and notarization are future optional improvements, not requir
 for downloads or archive authentication. Ad-hoc signing does not satisfy Gatekeeper:
 macOS can block initial installation or an update. `install.sh` avoids that block by downloading
 with `curl`, which Gatekeeper does not check; a browser download still needs Privacy & Security.
-In-app installation remains disabled until a disposable two-version test succeeds
-under normal macOS security settings; otherwise the app opens the release page.
+Enabled builds support authenticated native updates. The public ad-hoc 0.3.1 → 0.3.2 install/relaunch test passed after disposable acceptance; the owner completed initial installation. Builds without an enabled authenticated updater retain the public release-page fallback.
 
 Maintainers validate local artifacts, create a draft, attach all allowed assets,
 and publish as latest only after every upload succeeds. The cross-repository token
 needs Contents: write on **this repository only**. Token/signing-key creation or
 configuration needs separate owner approval. No secrets belong in this public
 repo. The agent repo documents the local fallback for billing-blocked hosted CI.
-This PR creates neither credentials, production releases, nor deployments.
+The release scripts do not create credentials or change website deployment settings.
 
 Published versions are immutable; fix packaging mistakes with a new version.
 Inspect/retry failed drafts. Never mark an older release as latest, since that also
