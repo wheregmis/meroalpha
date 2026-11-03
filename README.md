@@ -15,6 +15,20 @@ npm run site:build    # rebuilds demo/; commit it here
 npm run site:dev      # http://localhost:8787
 ```
 
+## Install
+
+On a Mac with Apple silicon (macOS 14+), one command installs the latest release into `/Applications`:
+
+```sh
+curl -fsSL https://meroalpha.com/install.sh | sh
+```
+
+It downloads the ZIP and its checksum from the latest release, checks the checksum, re-signs the app ad-hoc,
+replaces any installed copy only once the new one is in place, and opens it. Read it first at
+[meroalpha.com/install.sh](https://meroalpha.com/install.sh) ([`install.sh`](install.sh) here). It skips the
+Privacy & Security prompt because `curl` does not mark files as downloaded from the internet, which is what
+Gatekeeper checks. It does not make the app notarized.
+
 ## App releases
 
 This public repo also hosts MeroAlpha Agent downloads; app source stays private.
@@ -39,7 +53,8 @@ The agent's local script builds/seals ad-hoc packages without Apple credentials.
 It optionally authenticates update ZIPs using an existing Sparkle Ed25519 key.
 Apple Developer ID and notarization are future optional improvements, not required
 for downloads or archive authentication. Ad-hoc signing does not satisfy Gatekeeper:
-macOS can block initial installation or an update. No security check is bypassed.
+macOS can block initial installation or an update. `install.sh` avoids that block by downloading
+with `curl`, which Gatekeeper does not check; a browser download still needs Privacy & Security.
 In-app installation remains disabled until a disposable two-version test succeeds
 under normal macOS security settings; otherwise the app opens the release page.
 
