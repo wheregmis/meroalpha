@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { publicReleases, loadChangelog, RELEASE_API, dayLabel } from '../public/js/changelog.mjs';
+import { publicReleases, loadChangelog, RELEASE_API, dayLabel } from '../src/lib/changelog.mjs';
 const release=(version='1.2.3',body='### Fixes\n\n* **Updates** work')=>({tag_name:`v${version}`,html_url:`https://github.com/wheregmis/meroalpha/releases/tag/v${version}`,published_at:'2026-11-03T01:00:00Z',body});
 test('public changelog validates release URLs/versions/dates, filters unstable records and sorts versions',()=>{
  const list=publicReleases([release('1.2.3'),{...release(),draft:true},{...release(),prerelease:true},{...release(),html_url:'https://evil.invalid'},{...release(),published_at:'bad'},release('9999999999999999999.0.0'),release('01.2.3'),release('1.10.0'),release('2.0.0'),release('1.9.0')]);
@@ -10,6 +10,7 @@ test('public changelog validates release URLs/versions/dates, filters unstable r
  assert.equal(publicReleases([release('1.0.0','x'.repeat(40000))])[0].notes.length,2000);
  assert.throws(()=>publicReleases({}),/Invalid/);
  assert.equal(dayLabel('2026-11-03'),'Tue 3 Nov 2026');
+ assert.deepEqual(publicReleases([release('1.0.0'),release('1.1.0'),release('1.2.0'),release('1.3.0')],10).map(x=>x.version),['1.3.0','1.2.0','1.1.0','1.0.0']);
 });
 test('HTML and tracking images remain inert text and no token is sent',async()=>{
  const created=[];const element=tag=>({tag,children:[],append(...items){this.children.push(...items);},set innerHTML(_){throw Error('Unsafe HTML rendering');}});

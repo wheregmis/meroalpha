@@ -1,0 +1,26 @@
+---
+import PrimaryButton from './PrimaryButton.astro';
+
+interface Props { current?: string }
+const { current } = Astro.props;
+const links = [
+  { href: '/#demo', label: 'Try it' },
+  { href: '/#day', label: 'How it trades' },
+  { href: '/changelog', label: 'Changelog', keep: true },
+  { href: '/privacy', label: 'Privacy' },
+];
+---
+<header class="masthead">
+  <div class="nav container">
+    <a class="brand" href="/" aria-label="MeroAlpha home">
+      <img src="/assets/meroalpha.svg" width="32" height="32" alt="">
+      <span>MeroAlpha</span>
+    </a>
+    <nav aria-label="Main">
+      {links.map((l) => (
+        <a class:list={['nav__link', l.keep && 'nav__link--keep']} href={l.href} aria-current={current === l.href ? 'page' : undefined}>{l.label}</a>
+      ))}
+      <PrimaryButton href="/download" small>Download</PrimaryButton>
+    </nav>
+  </div>
+</header>

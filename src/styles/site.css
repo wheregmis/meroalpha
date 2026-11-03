@@ -51,10 +51,39 @@ main, .foot, .masthead { position: relative; z-index: var(--z-base); }
 .kicker { font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.02em; color: var(--color-muted); }
 .kicker b { color: var(--color-accent); font-weight: 600; font-variant-numeric: tabular-nums; }
 
-/* Card: the app's Surface, with a soft light that follows the pointer (js/motion.mjs) */
+/* Card: the app's Surface, with a soft light that follows the pointer (scripts/motion.mjs) */
 .card { position: relative; isolation: isolate; border: 1px solid var(--card-line); border-radius: var(--radius-card); background: var(--color-paper-2); box-shadow: 0 1px 3px var(--color-shadow); overflow: hidden; transition: transform var(--dur-long) var(--ease-out), box-shadow var(--dur-long) var(--ease-out); }
 .card::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), var(--wash-strong), transparent 60%); transition: opacity var(--dur-long) var(--ease-out); }
 .card:hover::before { opacity: 1; }
+
+/* Ambient light: two slow fields of the action colour behind everything */
+.aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.aurora span { position: absolute; width: 70vmax; height: 70vmax; border-radius: 50%; background: radial-gradient(closest-side, var(--glow), transparent); animation: drift 30s var(--ease-in-out) infinite alternate; }
+.aurora span:nth-child(1) { left: -25vmax; top: -35vmax; }
+.aurora span:nth-child(2) { right: -30vmax; top: 10vh; opacity: 0.6; animation-duration: 38s; animation-delay: -12s; }
+@keyframes drift { to { transform: translate3d(10vw, 8vh, 0) scale(1.15); } }
+
+/* Reveal on scroll */
+.js [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out), box-shadow var(--dur-long) var(--ease-out); }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+.card:hover, .js .card[data-reveal].is-in:hover { transform: translateY(-3px); box-shadow: 0 24px 50px -24px var(--color-shadow); transition-delay: 0s; }
+[data-reveal]:nth-child(2) { transition-delay: 90ms; }
+[data-reveal]:nth-child(3) { transition-delay: 180ms; }
+[data-reveal]:nth-child(4) { transition-delay: 270ms; }
+
+
+/* Section head */
+h2 { color: var(--color-ink); }
+.head { display: grid; gap: var(--space-md); justify-items: start; }
+.panel__caption { font-size: var(--text-lead); color: var(--color-muted); max-width: 56ch; }
+
+
+/* The app's Pill: a status with an action dot */
+.chip { display: inline-flex; align-items: center; gap: var(--space-xs); padding: 6px 12px; border-radius: var(--radius-pill); background: var(--wash-strong); font-size: var(--text-xs); font-weight: 500; color: var(--color-ink); }
+.dot { position: relative; width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--color-accent); }
+.dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--color-accent); animation: ping 2s var(--ease-out) infinite; }
+@keyframes ping { to { transform: scale(3); opacity: 0; } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(12px); } }
 
 /* Screens */
 .shot { margin: 0; min-width: 0; }

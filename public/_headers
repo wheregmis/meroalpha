@@ -1,5 +1,7 @@
 # Pages keep Cloudflare's default (max-age=0, must-revalidate), so a release shows at once.
-# The demo's files are named by their content (nsh package --target web): cache them for good.
+# Astro's built files and the demo's are named by their content: cache them for good.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
 /demo/*.js
   Cache-Control: public, max-age=31536000, immutable
 /demo/*.wasm

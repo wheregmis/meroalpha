@@ -1,0 +1,6 @@
+---
+// The app's PrimaryButton: the action fill. One per view; `glow` for the page's main call to action.
+interface Props { href: string; small?: boolean; glow?: boolean }
+const { href, small, glow } = Astro.props;
+---
+<a class:list={['btn', small && 'btn--small', glow && 'btn--glow']} href={href}><slot /></a>

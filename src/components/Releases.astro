@@ -1,0 +1,15 @@
+---
+// The latest public releases, fetched from GitHub in the browser so a new release shows without a site build.
+import '../styles/changelog.css';
+
+interface Props { limit?: number }
+const { limit = 3 } = Astro.props;
+---
+<div class="changelog__content">
+  <p class="note" role="status" data-release-status>See the full release history on GitHub for all changes.</p>
+  <div class="releases" data-releases data-limit={limit}></div>
+</div>
+<script>
+  import { loadChangelog } from '../lib/changelog.mjs';
+  void loadChangelog();
+</script>

@@ -1,11 +1,14 @@
-// The landing page and the in-browser demo, served as Workers static assets.
-// Workers Builds deploys master; demo/ is built in the app repository (`npm run site:build`).
+// The Astro site (src/) built into dist/, with public/ (assets, demo, install.sh) copied in, served as Workers static assets.
+// Workers Builds deploys master; public/demo/ is built in the app repository (`npm run site:build`).
 {
   "$schema": "https://unpkg.com/wrangler@4.151.1/config-schema.json",
   "name": "meroalpha",
   "compatibility_date": "2026-10-19",
+  // Wrangler runs this before `deploy`, `preview` and `dev`, so Workers Builds needs no build command of its own (it installs dependencies itself).
+  "build": { "command": "npm run build" },
   "assets": {
-    "directory": "./public"
+    "directory": "./dist",
+    "not_found_handling": "404-page"
   },
   // Workers Builds runs `wrangler preview` for branches other than master; it needs this block, empty is fine.
   "previews": {}

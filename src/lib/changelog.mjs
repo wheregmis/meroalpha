@@ -3,10 +3,10 @@ export const RELEASE_API = 'https://api.github.com/repos/wheregmis/meroalpha/rel
 const page = 'https://github.com/wheregmis/meroalpha/releases/tag/';
 // The app's dayLabel format: Tue 3 Nov 2026.
 export const dayLabel = (iso) => { const d=new Date(iso), f=o=>d.toLocaleDateString('en',{...o,timeZone:'UTC'}); return `${f({weekday:'short'})} ${d.getUTCDate()} ${f({month:'short'})} ${d.getUTCFullYear()}`; };
-export function publicReleases(value) {
+export function publicReleases(value, limit = 3) {
   if (!Array.isArray(value)) throw Error('Invalid release list');
   const releases = value.filter(r => r && !r.draft && !r.prerelease && typeof r.tag_name === 'string' && /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/.test(r.tag_name) && r.tag_name.slice(1).split('.').every(n=>Number.isSafeInteger(Number(n))) && r.html_url === page + r.tag_name && typeof r.published_at === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(r.published_at) && Number.isFinite(Date.parse(r.published_at)));
-  return releases.sort((a,b)=>{const x=a.tag_name.slice(1).split('.').map(Number),y=b.tag_name.slice(1).split('.').map(Number);return y[0]-x[0]||y[1]-x[1]||y[2]-x[2];}).slice(0,3).map(r=>({version:r.tag_name.slice(1),url:r.html_url,date:new Date(r.published_at).toISOString().slice(0,10),notes:releaseNotesText(r.body,2000)||'No change details were provided for this version.'}));
+  return releases.sort((a,b)=>{const x=a.tag_name.slice(1).split('.').map(Number),y=b.tag_name.slice(1).split('.').map(Number);return y[0]-x[0]||y[1]-x[1]||y[2]-x[2];}).slice(0,limit).map(r=>({version:r.tag_name.slice(1),url:r.html_url,date:new Date(r.published_at).toISOString().slice(0,10),notes:releaseNotesText(r.body,2000)||'No change details were provided for this version.'}));
 }
 export async function loadChangelog(doc = document, get = fetch) {
   const status=doc.querySelector('[data-release-status]'), list=doc.querySelector('[data-releases]');
@@ -16,7 +16,7 @@ export async function loadChangelog(doc = document, get = fetch) {
   try {
     const response=await get(RELEASE_API,{signal:controller.signal,credentials:'omit',headers:{Accept:'application/vnd.github+json'}});
     if(!response.ok)throw Error('Release notes unavailable');
-    const releases=publicReleases(await response.json());
+    const releases=publicReleases(await response.json(),Number(list.dataset?.limit)||3);
     for(const [i,release] of releases.entries()) {
       const item=doc.createElement('article');item.className=i?'card release':'card release release--latest';
       const header=doc.createElement('div');header.className='release__head';
@@ -39,4 +39,3 @@ export async function loadChangelog(doc = document, get = fetch) {
   } catch {status.textContent='Release notes couldn’t load. You can still read the release history on GitHub.';}
   finally {clearTimeout(timer);}
 }
-if(typeof document!=='undefined')void loadChangelog();
