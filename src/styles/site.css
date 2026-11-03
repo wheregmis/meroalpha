@@ -95,7 +95,7 @@ h2 { color: var(--color-ink); }
 .card-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: var(--space-lg); }
 .card-grid--2 { --cols: 2; } .card-grid--3 { --cols: 3; }
 .card-grid li { display: grid; gap: var(--space-sm); align-content: start; padding: var(--space-lg); }
-.card-grid h3 { font-size: var(--text-lg); }
+.card-grid h3, .card-grid .as-h3 { font-size: var(--text-lg); }
 .card-grid p:not(.kicker) { color: var(--color-muted); }
 
 /* Timeline: cards on a lit rail */

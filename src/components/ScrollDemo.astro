@@ -44,12 +44,12 @@ const candles = [
               <p class:list={[i !== 4 && 'is-current']}>NABIL <span class="is-gain">+0.40%</span></p><p>NICA <span>—</span></p>
             </div>
             <div class="scroll-demo__main">
-            <div class="scroll-demo__toolbar"><span>{i === 4 ? 'Portfolio' : i === 3 ? <>NABIL <b>Advanced chart</b></> : <>NABIL <b>NABIL Fixture Limited</b></>}</span><span class="scroll-demo__pills"><i>NEPSE <b>2,000.50</b> <em>+1.00%</em></i><i><span></span>Running</i><i>Ask <b>⌘K</b></i></span></div>
+            <div class="scroll-demo__toolbar"><span>{i === 4 ? 'Portfolio' : i === 3 ? <>NABIL <b>Advanced chart</b></> : <>NABIL <b>Sample data</b></>}</span><span class="scroll-demo__pills"><i>NEPSE <b>2,000.50</b> <em>+1.00%</em></i><i><span></span>Running</i><i>Ask <b>⌘K</b></i></span></div>
             <div class={`scroll-demo__scene scroll-demo__scene--${i}`}>
               {i === 0 && <>
                 <div class="scroll-demo__ask-head"><b>Ask the agent</b><small>Your agent · cites the pages it reads</small></div>
                 <div class="scroll-demo__ask-orbit"><p>What do you want to know?</p><small>The agent searches the web and NEPSE sources in its own browser and answers with citations to the pages it read.</small></div>
-                <div class="scroll-demo__prompt"><p data-demo-prompt>Is NABIL worth a paper position this week?</p><small><span>Claude · ACP</span><b>↑</b></small></div>
+                <div class="scroll-demo__prompt"><p data-demo-prompt>Is NABIL worth a paper position this week?</p><small><span>Claude</span><b>↑</b></small></div>
                 <p class="scroll-demo__fine">Answers can be wrong. Information only, not financial advice.</p>
               </>}
               {i === 1 && <div class="scroll-demo__research">

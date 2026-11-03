@@ -1,12 +1,14 @@
 ---
 // A titled page section, like the app's Section: a label, a heading, an optional intro (slot "intro"), then content.
-interface Props { id: string; title: string; label?: string; num?: string; class?: string }
-const { id, title, label, num, class: cls } = Astro.props;
+// `level={1}` makes the heading the page's h1, for a page that opens with a Section; it looks the same.
+interface Props { id: string; title: string; label?: string; num?: string; class?: string; level?: 1 | 2 }
+const { id, title, label, num, class: cls, level = 2 } = Astro.props;
+const Heading = level === 1 ? 'h1' : 'h2';
 ---
 <section class:list={['container', cls]} id={id} aria-labelledby={`${id}-title`}>
   <div class="head" data-reveal>
     {label && <p class="kicker">{num && <b>{num}</b>} {label}</p>}
-    <h2 id={`${id}-title`}>{title}</h2>
+    <Heading id={`${id}-title`} class:list={[level === 1 && 'as-h2']}>{title}</Heading>
     <slot name="intro" />
   </div>
   <slot />

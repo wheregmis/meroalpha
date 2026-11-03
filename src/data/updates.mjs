@@ -11,7 +11,7 @@ export const areas = {
 
 export const shipped = [
   { area: 'agent', kind: 'Feature', title: 'Ask the agent', body: 'Ask about a stock, the market or a report. The agent reads the web and NEPSE sources in its own browser and answers with citations to the pages it read.', href: '/#demo' },
-  { area: 'agent', kind: 'Feature', title: 'Claude or Codex over ACP', body: 'Connect your own agent over the Agent Client Protocol, signed in with its own CLI.', href: '/#data' },
+  { area: 'agent', kind: 'Feature', title: 'Bring your own Claude or Codex', body: 'Connect your own agent over the Agent Client Protocol, signed in with its own CLI.', href: '/#data' },
   { area: 'paper', kind: 'Feature', title: 'Plans with hard limits', body: 'After the close, the agent drafts plans for the watchlist: an entry ceiling, a fixed stop and target, and 1% of equity at risk.', href: '/#day' },
   { area: 'paper', kind: 'Feature', title: 'Five-minute triggers', body: 'A plan triggers on a five-minute candle above the first 15 minutes’ high, and never after 14:30 NPT.', href: '/#day' },
   { area: 'paper', kind: 'Feature', title: 'Fills from trade prints', body: 'Paper orders fill only from fresh trade prints, with fees, slippage and a 10% participation cap.', href: '/#day' },
