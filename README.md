@@ -41,7 +41,7 @@ Gatekeeper checks. It does not make the app notarized.
 This public repo also hosts MeroAlpha Agent downloads; app source stays private.
 [Releases](https://github.com/wheregmis/meroalpha/releases/latest) are readable
 without an account. Existing download buttons already use this destination.
-A production binary becomes available when a maintainer publishes the first release.
+Stable binaries are published here, beginning with [v0.3.1](https://github.com/wheregmis/meroalpha/releases/tag/v0.3.1).
 
 | Asset | Purpose |
 | --- | --- |
@@ -62,15 +62,14 @@ Apple Developer ID and notarization are future optional improvements, not requir
 for downloads or archive authentication. Ad-hoc signing does not satisfy Gatekeeper:
 macOS can block initial installation or an update. `install.sh` avoids that block by downloading
 with `curl`, which Gatekeeper does not check; a browser download still needs Privacy & Security.
-In-app installation remains disabled until a disposable two-version test succeeds
-under normal macOS security settings; otherwise the app opens the release page.
+Enabled builds support authenticated native updates. The public ad-hoc 0.3.1 → 0.3.2 install/relaunch test passed after disposable acceptance; the owner completed initial installation. Builds without an enabled authenticated updater retain the public release-page fallback.
 
 Maintainers validate local artifacts, create a draft, attach all allowed assets,
 and publish as latest only after every upload succeeds. The cross-repository token
 needs Contents: write on **this repository only**. Token/signing-key creation or
 configuration needs separate owner approval. No secrets belong in this public
 repo. The agent repo documents the local fallback for billing-blocked hosted CI.
-This PR creates neither credentials, production releases, nor deployments.
+The release scripts do not create credentials or change website deployment settings.
 
 Published versions are immutable; fix packaging mistakes with a new version.
 Inspect/retry failed drafts. Never mark an older release as latest, since that also
@@ -92,3 +91,9 @@ repository/tag URL, stable version, byte length and Ed25519 signature. Missing o
 invalid authentication is never silently downgraded to manual-only. A checksum
 beside a ZIP is not authenticity; do not get the key from that same download.
 Research/account data is never included in a release or sent by update checks.
+
+## Landing-page changelog
+
+The What’s new section reads the latest three stable public releases from GitHub's unauthenticated releases API. Version/date links are validated against this repository; bodies render as bounded plain text, never HTML or remote images. No token, server or deployment secret is needed. API failure/rate limiting and disabled JavaScript retain a link to the full release history. Existing release notes are shown as-is; future agent releases supply useful changes from their reviewed prepared notes.
+
+Run `node --test tests/changelog.test.mjs tests/release.test.mjs`. Serve locally with `python3 -m http.server` for visual checks. Website deployment is separate from a code PR.
