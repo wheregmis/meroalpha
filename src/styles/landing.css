@@ -31,18 +31,8 @@
 .marquee span::before { content: "·"; margin-right: var(--space-lg); color: var(--color-accent); font-weight: 700; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
-/* Demo: the app's web build (demo/) in a window frame with a slow sweep of light round its edge */
+/* Demo */
 .demo { padding-block: var(--section-gap-s); display: grid; gap: var(--space-xl); }
-.window { position: relative; border-radius: calc(var(--radius-shot) + 1px); padding: 1px; background: conic-gradient(from var(--angle, 0deg), var(--color-rule) 0 70%, var(--color-accent) 85%, var(--color-rule)); box-shadow: 0 40px 120px -50px var(--color-accent), 0 2px 6px var(--color-shadow); animation: spin 8s linear infinite; }
-@property --angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-@keyframes spin { to { --angle: 360deg; } }
-.window__bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: var(--radius-shot) var(--radius-shot) 0 0; background: var(--color-paper-3); font-size: var(--text-xs); font-weight: 500; color: var(--color-muted); }
-/* The macOS window controls: system colours, not brand ones */
-.window__bar i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
-.window__bar i:nth-child(2) { background: #febc2e; } .window__bar i:nth-child(3) { background: #28c840; }
-.window__bar span { margin-inline: auto; padding-right: 52px; }
-.demo__frame { aspect-ratio: 1280 / 820; min-height: 560px; border-radius: 0 0 var(--radius-shot) var(--radius-shot); overflow: hidden; background: var(--color-paper-2); }
-.demo__frame iframe { display: block; width: 100%; height: 100%; border: 0; }
 
 /* Tour: the app's Segmented control */
 .tour { padding-block: var(--section-gap-s); display: grid; gap: var(--space-xl); }
@@ -54,15 +44,8 @@
 .seg button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .panel { display: grid; gap: var(--space-lg); animation: fade-up var(--dur-long) var(--ease-out); }
 
-/* Trading day: four cards on a lit rail */
+/* Trading day: a Timeline */
 .day { padding-block: var(--section-gap-s); display: grid; gap: var(--space-xl); }
-.day__list { position: relative; list-style: none; margin: 0; padding: var(--space-xl) 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-lg); counter-reset: step; }
-.day__list::before { content: ""; position: absolute; top: 5px; left: 28px; right: 28px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--color-accent), var(--color-rule)); }
-.day__list li { display: grid; align-content: start; gap: var(--space-sm); padding: var(--space-lg); counter-increment: step; overflow: visible; }
-.day__list li::after { content: ""; position: absolute; top: calc(-1 * var(--space-xl) - 1px); left: 22px; width: 14px; height: 14px; border-radius: 50%; background: var(--color-paper); border: 2px solid var(--color-rule-strong); }
-.day__list li:first-child::after { border-color: var(--color-accent); background: var(--color-accent); box-shadow: 0 0 0 5px var(--glow); }
-.day__time { font-size: var(--text-xs); font-weight: 600; color: var(--color-accent); font-variant-numeric: tabular-nums; }
-.day__list p { color: var(--color-muted); }
 
 /* Data: a bento of three */
 .data { padding-block: var(--section-gap-s); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-2xl); align-items: start; }
@@ -95,14 +78,10 @@
   .hero__stage { margin-right: 0; }
   .shot--hero { transform: rotateX(8deg); }
   .hud--a, .hud--b { left: 2%; } .hud--c { right: 2%; }
-  .day__list { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: 0; }
-  .day__list::before, .day__list li::after { display: none; }
 }
 @media (max-width: 40rem) {
   .hero { padding-top: var(--space-2xl); }
   .hud { display: none; }
-  /* A phone gets the app's desktop layout squeezed: offer the full tab instead. */
-  .window { display: none; }
-  .day__list, .data__list, .products__list { grid-template-columns: minmax(0, 1fr); }
+  .data__list, .products__list { grid-template-columns: minmax(0, 1fr); }
   .close__card { padding: var(--space-2xl) var(--space-md); }
 }

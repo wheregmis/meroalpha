@@ -1,5 +1,5 @@
-// The Astro site (src/) built into dist/, with public/ (assets, demo, install.sh) copied in, served as Workers static assets.
-// Workers Builds deploys master; public/demo/ is built in the app repository (`npm run site:build`).
+// The Astro site (src/) built into dist/, with public/ (assets, install.sh) copied in, served as Workers static assets.
+// Workers Builds deploys master.
 {
   "$schema": "https://unpkg.com/wrangler@4.151.1/config-schema.json",
   "name": "meroalpha",

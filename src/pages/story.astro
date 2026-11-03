@@ -2,7 +2,10 @@
 import Page from '../layouts/Page.astro';
 import Section from '../components/Section.astro';
 import Surface from '../components/Surface.astro';
-import Pill from '../components/Pill.astro';
+import PageHero from '../components/PageHero.astro';
+import CardGrid from '../components/CardGrid.astro';
+import Timeline from '../components/Timeline.astro';
+import Stats from '../components/Stats.astro';
 import PrimaryButton from '../components/PrimaryButton.astro';
 import SecondaryButton from '../components/SecondaryButton.astro';
 import '../styles/story.css';
@@ -15,6 +18,21 @@ const built = [
   { title: 'A research lab', body: 'Historical backtests and paper accounts driven by AI research methods, with costs, rolling validation windows and a held-out final test, so a strategy had to earn its keep.' },
 ];
 
+// The figures come from the sections below.
+const stats = [
+  { value: '~600', label: 'changes of work' },
+  { value: '8', label: 'kinds of NEPSE data collected' },
+  { value: '5 min', label: 'between market snapshots' },
+  { value: '0', label: 'public launches' },
+];
+
+const arc = [
+  { label: 'First', title: 'We built the platform', body: 'Collectors, an evidence archive, a REST API, an MCP server and a research lab.' },
+  { label: 'Then', title: 'We looked for a licence', body: 'Selling NEPSE data through an API needs a provider with the right to let us redistribute it.' },
+  { label: 'So', title: 'We kept it private', body: 'We found no such provider, and we weren’t willing to run a paid feed without one.' },
+  { label: 'Now', title: 'We built the agent', body: 'An analyst on your Mac that reads public pages in front of you and trades on paper.' },
+];
+
 const lessons = [
   { title: 'Don’t redistribute what you don’t own', body: 'MeroAlpha never resells or republishes market data. There is no MeroAlpha feed and no MeroAlpha API.' },
   { title: 'Read the market the way you would', body: 'The agent opens public pages in a browser on your Mac, in front of you, the same pages you could open yourself.' },
@@ -24,27 +42,25 @@ const lessons = [
 ---
 <Page title="Our story: the data platform we didn’t ship" description="We built a NEPSE market-data platform, then couldn’t find a licensed source to serve it from. Here is what we learned, and how MeroAlpha Agent works instead." current="/story">
   <main id="main" class="story">
-    <section class="story__hero container" aria-labelledby="story-title">
-      <Pill>Our story</Pill>
-      <h1 id="story-title">The data platform <em>we didn’t ship</em></h1>
-      <p class="lead">Before MeroAlpha Agent, we built a market-data platform for NEPSE: about 600 changes of work, a public API and an AI research lab. It never went public. This is why, and what we do now.</p>
+    <PageHero id="story-title" pill="Our story">
+      The data platform <em>we didn’t ship</em>
+      <p slot="lead" class="lead">Before MeroAlpha Agent, we built a market-data platform for NEPSE, with a public API and an AI research lab. It never went public. This is why, and what we do now.</p>
+      <Fragment slot="after"><Stats items={stats} /></Fragment>
+    </PageHero>
+
+    <section class="container story__arc" aria-label="The story in four steps">
+      <Timeline items={arc} />
     </section>
 
     <Section id="built" num="01" label="What we built" title="Everything a NEPSE developer could ask for">
       <p slot="intro" class="panel__caption">The MeroAlpha Data Platform was meant to be the dependable NEPSE source that developers, dashboards and research tools lacked.</p>
-      <ul class="story__grid">
-        {built.map((b) => (
-          <Surface as="li">
-            <h3>{b.title}</h3>
-            <p>{b.body}</p>
-          </Surface>
-        ))}
-      </ul>
+      <CardGrid items={built.map((b, i) => ({ kicker: `0${i + 1}`, ...b }))} />
     </Section>
 
-    <Section id="stopped" num="02" label="Why it stopped" title="No one could license us the data">
+    <Section id="stopped" class="story__stopped" num="02" label="Why it stopped" title="No one could license us the data">
+      <blockquote class="story__quote" data-reveal><p>A data product is only as legitimate as its source.</p></blockquote>
       <div class="story__prose" data-reveal>
-        <p>A data product is only as legitimate as its source. To sell NEPSE prices, floorsheets and filings through an API, we needed a provider with the right to let us redistribute them.</p>
+        <p>To sell NEPSE prices, floorsheets and filings through an API, we needed a provider with the right to let us redistribute them.</p>
         <p>We looked, and we didn’t find one. Collecting public pages for your own research is one thing; packaging them as a paid feed for others is another, and we weren’t willing to do it without a licence.</p>
         <p>So the platform stays private. The code works. We just won’t run it as a public service until there is a lawful source behind it.</p>
       </div>
@@ -52,14 +68,7 @@ const lessons = [
 
     <Section id="approach" num="03" label="What we do now" title="An analyst on your Mac, not a feed">
       <p slot="intro" class="panel__caption">MeroAlpha Agent keeps the platform’s discipline and drops the part we couldn’t do properly.</p>
-      <ul class="story__grid">
-        {lessons.map((l) => (
-          <Surface as="li">
-            <h3>{l.title}</h3>
-            <p>{l.body}</p>
-          </Surface>
-        ))}
-      </ul>
+      <CardGrid items={lessons.map((l, i) => ({ kicker: `0${i + 1}`, ...l }))} ordered />
     </Section>
 
     <section class="story__close container" aria-labelledby="story-close">
@@ -68,7 +77,7 @@ const lessons = [
         <p class="lead">We would like to talk. Write to <a class="link" href="mailto:get2sabin@gmail.com">get2sabin@gmail.com</a>.</p>
         <div class="actions">
           <PrimaryButton href="/waitlist">Join the Agent waitlist</PrimaryButton>
-          <SecondaryButton href="/#demo">Try the demo</SecondaryButton>
+          <SecondaryButton href="/#demo">See it work</SecondaryButton>
         </div>
       </Surface>
     </section>

@@ -1,0 +1,106 @@
+---
+import PrimaryButton from './PrimaryButton.astro';
+import '../styles/scroll-demo.css';
+
+const chapters = [
+  { title: 'Ask', body: 'One question starts the research. You can watch every step.', detail: 'A question, not an order.' },
+  { title: 'Research in a browser you can watch', body: 'Pages become findings. Every finding keeps its source.', detail: 'Three pages. Three citations.' },
+  { title: 'A plan with hard limits', body: 'An entry ceiling, a fixed stop and a target. Risk is set before a paper position opens.', detail: '1% of equity at risk.' },
+  { title: 'Every five minutes', body: 'A candle must close above the first 15 minutes’ high. No new triggers after 14:30 NPT.', detail: 'Wait for the close.' },
+  { title: 'Filled on paper, graded against NEPSE', body: 'Simulated execution has friction. Five sessions later, the call gets a report card.', detail: 'Virtual NPR. Real accountability.' },
+];
+const sources = [
+  { url: 'nepalstock.com.np/company/nabil', title: 'NABIL · company overview', text: 'Recent trading activity supports a closer look.', finding: 'Trading activity reviewed' },
+  { url: 'market-news.example/nabil-outlook', title: 'Banking sector · market brief', text: 'The sector outlook adds context, not certainty.', finding: 'Sector context captured' },
+  { url: 'reports.example/nabil-quarterly.pdf', title: 'NABIL · quarterly report', text: 'Quarterly earnings and downside risks reviewed.', finding: 'Earnings and risks checked' },
+];
+const candles = [
+  [38, 188, 224, 201, 216], [74, 175, 217, 204, 188], [110, 164, 206, 188, 177],
+  [146, 174, 218, 185, 205], [182, 169, 208, 199, 181], [218, 155, 196, 182, 169],
+  [254, 161, 202, 173, 188], [290, 144, 192, 183, 158], [326, 116, 171, 159, 129],
+  [362, 92, 143, 130, 105], [398, 83, 128, 108, 96], [434, 67, 112, 99, 81],
+];
+---
+<div class="scroll-demo" data-scroll-demo>
+  <div class="scroll-demo__stage">
+    <div class="scroll-demo__grid" aria-hidden="true"></div>
+    <div class="scroll-demo__glow" aria-hidden="true"></div>
+    <ol class="scroll-demo__chapters">
+      {chapters.map((chapter, i) => (
+        <li class="scroll-demo__chapter" style={`--chapter: ${i}`}>
+          <div class="scroll-demo__caption">
+            <p class="kicker"><b>0{i + 1}</b> / 05 <span>— {chapter.detail}</span></p>
+            <h3>{chapter.title}</h3>
+            <p>{chapter.body}</p>
+            <div class="scroll-demo__rail" aria-hidden="true">{chapters.map((_, n) => <i style={`--segment: ${n}`} />)}</div>
+          </div>
+          <div class="scroll-demo__window" aria-hidden="true">
+            <div class="scroll-demo__bar"><i></i><i></i><i></i><span>meroalpha agent</span><b>Paper</b></div>
+            <div class="scroll-demo__body">
+            <div class="scroll-demo__sidebar">
+              <p class="scroll-demo__brand"><img src="/assets/meroalpha.svg" width="16" height="16" alt="" />MeroAlpha</p>
+              <p class:list={[i === 4 && 'is-current']}>Portfolio <kbd>⌘1</kbd></p><p>Market <kbd>⌘2</kbd></p><p>Activity <kbd>⌘3</kbd></p>
+              <small>Watchlist</small>
+              <p class:list={[i !== 4 && 'is-current']}>NABIL <span class="is-gain">+0.40%</span></p><p>NICA <span>—</span></p>
+            </div>
+            <div class="scroll-demo__main">
+            <div class="scroll-demo__toolbar"><span>{i === 4 ? 'Portfolio' : i === 3 ? <>NABIL <b>Advanced chart</b></> : <>NABIL <b>NABIL Fixture Limited</b></>}</span><span class="scroll-demo__pills"><i>NEPSE <b>2,000.50</b> <em>+1.00%</em></i><i><span></span>Running</i><i>Ask <b>⌘K</b></i></span></div>
+            <div class={`scroll-demo__scene scroll-demo__scene--${i}`}>
+              {i === 0 && <>
+                <div class="scroll-demo__ask-head"><b>Ask the agent</b><small>Your agent · cites the pages it reads</small></div>
+                <div class="scroll-demo__ask-orbit"><p>What do you want to know?</p><small>The agent searches the web and NEPSE sources in its own browser and answers with citations to the pages it read.</small></div>
+                <div class="scroll-demo__prompt"><p data-demo-prompt>Is NABIL worth a paper position this week?</p><small><span>Claude · ACP</span><b>↑</b></small></div>
+                <p class="scroll-demo__fine">Answers can be wrong. Information only, not financial advice.</p>
+              </>}
+              {i === 1 && <div class="scroll-demo__research">
+                <div class="scroll-demo__browser">
+                  <div class="scroll-demo__browser-head">‹ &nbsp; › <span>Watching the research</span><b>↗</b></div>
+                  <div class="scroll-demo__pages">{sources.map((source, n) => <div class="scroll-demo__page" style={`--source: ${n}`}>
+                    <div class="scroll-demo__url">◇ {source.url}</div>
+                    <div class="scroll-demo__document"><small>ILLUSTRATIVE SOURCE {n + 1}</small><h4>{source.title}</h4><div class="scroll-demo__lines"></div><p class="scroll-demo__highlight">{source.text}</p><div class="scroll-demo__lines"></div><span class="scroll-demo__citation">[{n + 1}] Captured</span></div>
+                  </div>)}</div>
+                </div>
+                <div class="scroll-demo__findings"><p class="kicker">Findings · NABIL</p>{sources.map((source, n) => <div class="scroll-demo__finding" style={`--source: ${n}`}><b>[{n + 1}]</b><span>{source.finding}<small>Page cited and captured</small></span></div>)}<p class="scroll-demo__fine">Illustrative URLs and findings.<br />No live research is running.</p></div>
+              </div>}
+              {i === 2 && <div class="scroll-demo__plan">
+                <div class="scroll-demo__plan-top"><span class="chip">NABIL · paper plan</span><span>Sources [1] [2] [3]</span></div>
+                <h4>A thesis. With boundaries.</h4>
+                <div class="scroll-demo__limits">
+                  <div><span>Entry ceiling</span><strong>NPR <b data-demo-number="entry">505.00</b></strong></div>
+                  <div><span>Fixed stop</span><strong>NPR <b data-demo-number="stop">485.00</b></strong></div>
+                  <div><span>Target</span><strong>NPR <b data-demo-number="target">545.00</b></strong></div>
+                </div>
+                <div class="scroll-demo__risk"><span>1% of equity at risk</span><b>NPR 1,000.00 of NPR 100,000.00</b><i></i></div>
+                <p class="scroll-demo__fine">Only if the five-minute close confirms. Otherwise, wait.</p>
+              </div>}
+              {i === 3 && <div class="scroll-demo__chart">
+                <div class="scroll-demo__chart-head"><h4>NABIL <span>5m</span></h4><span class="chip">Watching for confirmation</span></div>
+                <svg viewBox="0 0 560 290" role="presentation">
+                  <path class="scroll-demo__chart-grid" d="M20 60H540M20 120H540M20 180H540M20 240H540" />
+                  <path class="scroll-demo__threshold" d="M20 145H490" />
+                  <text x="22" y="136">First 15-minute high</text>
+                  {candles.map(([x, high, low, open, close], n) => <g class:list={['scroll-demo__candle', close < open ? 'is-gain' : 'is-loss']} style={`--candle: ${n}; transform-origin: ${x}px 240px`}><path d={`M${x} ${high}V${low}`} /><rect x={x - 8} y={Math.min(open, close)} width="16" height={Math.abs(open - close)} rx="2" /></g>)}
+                  <g class="scroll-demo__trigger"><circle cx="326" cy="129" r="23" /><circle cx="326" cy="129" r="6" /><text x="280" y="48">Close confirmed</text></g>
+                  <path class="scroll-demo__cutoff" d="M500 60V250" /><text x="537" y="272" text-anchor="end">14:30 NPT cutoff</text>
+                </svg>
+                <p class="scroll-demo__fine">A close above the high triggers the paper plan. Invented candles.</p>
+              </div>}
+              {i === 4 && <div class="scroll-demo__portfolio">
+                <div class="scroll-demo__toast"><span>✓</span><div><strong>Paper fill</strong><p>Fees, slippage, 10% participation cap</p></div></div>
+                <p class="kicker">Total value · paper · watching NABIL, NICA</p><div class="scroll-demo__value">NPR <b data-demo-number="portfolio">102,180.00</b></div><p class="scroll-demo__gain">NPR 2,180.00 (+2.18%) since the start</p>
+                <div class="scroll-demo__report"><p class="kicker">Report card · graded 5 sessions later against NEPSE</p><div><span>NABIL call</span><strong>+4.20%</strong><i></i></div><div><span>NEPSE index</span><strong>+1.30%</strong><i></i></div><p>Call outperformed by 2.90 percentage points.</p></div>
+              </div>}
+            </div>
+            </div>
+            </div>
+            <div class="scroll-demo__status"><span><i></i> Virtual NPR · no brokerage</span><span>Information only</span></div>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <div class="scroll-demo__cta">
+      <PrimaryButton href="/waitlist">Join the waitlist <span aria-hidden="true">→</span></PrimaryButton>
+    </div>
+  </div>
+</div>
+<script>import '../scripts/scroll-demo.mjs';</script>

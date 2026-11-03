@@ -1,0 +1,17 @@
+---
+// A list of Surface cards with a title and a body, two or three across.
+import Surface from './Surface.astro';
+
+interface Props { items: { title: string; body: string; kicker?: string }[]; cols?: 2 | 3; ordered?: boolean; class?: string }
+const { items, cols = 2, ordered, class: cls } = Astro.props;
+const List = ordered ? 'ol' : 'ul';
+---
+<List class:list={['card-grid', `card-grid--${cols}`, cls]}>
+  {items.map((item) => (
+    <Surface as="li">
+      {item.kicker && <p class="kicker"><b>{item.kicker}</b></p>}
+      <h3>{item.title}</h3>
+      <p>{item.body}</p>
+    </Surface>
+  ))}
+</List>
