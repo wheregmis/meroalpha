@@ -1,10 +1,12 @@
 // The landing page and the in-browser demo, served as Workers static assets.
-// Deploy from the app repository: `npm run site:deploy` packages the demo into demo/ first.
+// Workers Builds deploys master; demo/ is built in the app repository (`npm run site:build`).
 {
   "$schema": "https://unpkg.com/wrangler@4.151.1/config-schema.json",
   "name": "meroalpha",
   "compatibility_date": "2026-10-19",
   "assets": {
     "directory": "."
-  }
+  },
+  // Workers Builds runs `wrangler preview` for branches other than master; it needs this block, empty is fine.
+  "previews": {}
 }

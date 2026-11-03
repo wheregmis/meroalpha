@@ -8,11 +8,11 @@ Plain HTML and CSS, no build step. Preview the pages alone with:
 python3 -m http.server 4173
 ```
 
-Screenshots and the in-browser demo (`demo/`, not committed) come from the app's synthetic tour fixture. The app repository builds the demo with NSH (`nsh package --target web`) and serves or deploys the site on Cloudflare with `wrangler.jsonc`:
+Screenshots and the in-browser demo (`demo/`) come from the app's synthetic tour fixture. The app repository builds the demo with NSH (`nsh package --target web`); `demo/` is committed so Cloudflare's Workers Builds deploys it from this repo with `wrangler.jsonc`. To refresh it, from the app repository:
 
 ```sh
+npm run site:build    # rebuilds demo/; commit it here
 npm run site:dev      # http://localhost:8787
-npm run site:deploy   # needs `wrangler login` or CLOUDFLARE_API_TOKEN
 ```
 
 ## App releases
