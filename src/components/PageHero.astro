@@ -1,0 +1,14 @@
+---
+// The top of an inner page: a Pill, the h1 (wrap the accent part in <em>), a lead (slot "lead") and actions (slot "actions").
+import Pill from './Pill.astro';
+
+interface Props { id: string; pill: string; class?: string }
+const { id, pill, class: cls } = Astro.props;
+---
+<section class:list={['page-hero container', cls]} aria-labelledby={id}>
+  <Pill>{pill}</Pill>
+  <h1 id={id}><slot /></h1>
+  <slot name="lead" />
+  {Astro.slots.has('actions') && <div class="actions"><slot name="actions" /></div>}
+  <slot name="after" />
+</section>

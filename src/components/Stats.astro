@@ -1,0 +1,8 @@
+---
+// A row of big figures with a caption under each.
+interface Props { items: { value: string; label: string }[] }
+const { items } = Astro.props;
+---
+<dl class="stats" data-reveal>
+  {items.map((s) => <div><dt>{s.label}</dt><dd>{s.value}</dd></div>)}
+</dl>

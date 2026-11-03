@@ -2,6 +2,7 @@
 import Page from '../layouts/Page.astro';
 import Section from '../components/Section.astro';
 import Surface from '../components/Surface.astro';
+import CardGrid from '../components/CardGrid.astro';
 import Pill from '../components/Pill.astro';
 import Waitlist from '../components/Waitlist.astro';
 import '../styles/join.css';
@@ -17,24 +18,17 @@ const next = [
     <Section id="join" class="join" title="MeroAlpha Agent is in private testing">
       <Fragment slot="intro">
         <Pill>Private testing · macOS · Apple silicon</Pill>
-        <p class="lead">There are no public builds yet. Leave your email and we’ll write when there’s one for you to try. Until then, <a class="link" href="/#demo">try the demo in your browser</a>.</p>
+        <p class="lead">There are no public builds yet. Leave your email and we’ll write when there’s one for you to try. Until then, <a class="link" href="/#demo">watch it work a trade</a>.</p>
       </Fragment>
       <Surface class="join__card" still>
         <Waitlist id="join-email" />
         <p class="note">We keep only your address and the date you joined. See the <a class="link" href="/privacy#waitlist">privacy policy</a>.</p>
       </Surface>
-      <ol class="join__next">
-        {next.map((n) => (
-          <Surface as="li">
-            <h3>{n.title}</h3>
-            <p>{n.body}</p>
-          </Surface>
-        ))}
-      </ol>
+      <CardGrid class="join__next" items={next} cols={3} ordered />
     </Section>
 
     <Section id="contact" class="join join--contact" label="Contact" title="Talk to us">
-      <p slot="intro" class="lead">Questions, press, data partnerships or a bug in the demo: <a class="link" href="mailto:get2sabin@gmail.com">get2sabin@gmail.com</a>.</p>
+      <p slot="intro" class="lead">Questions, press, data partnerships or a bug on this site: <a class="link" href="mailto:get2sabin@gmail.com">get2sabin@gmail.com</a>.</p>
     </Section>
   </main>
 </Page>

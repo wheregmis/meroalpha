@@ -3,9 +3,5 @@
 .join--contact { padding-block: 0 var(--section-gap); }
 .join .lead { color: var(--color-muted); }
 .join__card { display: grid; gap: var(--space-md); padding: var(--space-xl); max-width: 880px; }
-.join__next { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg); max-width: 880px; }
-.join__next li { display: grid; gap: var(--space-sm); align-content: start; padding: var(--space-lg); }
-.join__next h3 { font-size: var(--text-lg); }
-.join__next p { color: var(--color-muted); }
-@media (max-width: 60rem) { .join__next { grid-template-columns: minmax(0, 1fr); } }
+.join__next { max-width: 880px; }
 @media (max-width: 40rem) { .join__card { padding: var(--space-lg); } }

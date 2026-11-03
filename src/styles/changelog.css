@@ -35,3 +35,18 @@
   .release::after { left: calc(-1 * var(--space-lg) + 1px); }
   .release__head time { margin-left: 0; width: 100%; }
 }
+
+/* pages/changelog.astro: summary, shipped features (components/Updates.astro), what is in development, release notes */
+.changelog-page__summary { margin: var(--space-md) 0 0; display: grid; gap: var(--space-xs); font-size: var(--text-md); }
+.changelog-page__summary div { display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+.changelog-page__summary dt { font-weight: 600; }
+.changelog-page__summary dd { margin: 0; color: var(--color-muted); }
+.changelog-page__shipped, .changelog-page__building { display: grid; gap: var(--space-xl); padding-block: var(--section-gap-s) 0; }
+.changelog-page__shipped .updates, .changelog-page__next { max-width: 880px; }
+.changelog-page__next { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-md); }
+.changelog-page__next li { display: grid; gap: var(--space-xs); justify-items: start; align-content: start; padding: var(--space-lg); }
+#planned .changelog-page__next li { border-style: dashed; border-color: var(--color-rule); background: transparent; box-shadow: none; }
+#building .update__kind { border-color: var(--color-accent); color: var(--color-accent); }
+.changelog-page__next p:not(.update__tags) { color: var(--color-muted); }
+.changelog-page__next .link { font-size: var(--text-sm); }
+.changelog-page .changelog--page { padding-top: var(--section-gap-s); }

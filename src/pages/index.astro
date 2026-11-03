@@ -8,8 +8,10 @@ import SecondaryButton from '../components/SecondaryButton.astro';
 import Screenshot from '../components/Screenshot';
 import Segmented from '../components/Segmented';
 import Waitlist from '../components/Waitlist.astro';
-import Releases from '../components/Releases.astro';
+import Updates from '../components/Updates.astro';
+import Timeline from '../components/Timeline.astro';
 import ScrollDemo from '../components/ScrollDemo.astro';
+import '../styles/changelog.css';
 import '../styles/landing.css';
 
 const facts = ['Cites every page', 'Virtual NPR', '5-minute candles', 'Stops at 14:30 NPT', 'Graded against NEPSE', 'Runs on your Mac', 'Claude or Codex over ACP', 'No brokerage connected'];
@@ -72,15 +74,7 @@ const data = [
     </Section>
 
     <Section id="day" class="day" num="03" label="The loop" title="How a trading day runs">
-      <ol class="day__list">
-        {day.map((d, i) => (
-          <Surface as="li">
-            <span class="day__time">Step {i + 1}</span>
-            <h3>{d.title}</h3>
-            <p>{d.body}</p>
-          </Surface>
-        ))}
-      </ol>
+      <Timeline items={day.map((d, i) => ({ label: `Step ${i + 1}`, ...d }))} />
     </Section>
 
     <Section id="data" class="data" num="04" label="Privacy" title="Your research stays on your Mac">
@@ -97,10 +91,10 @@ const data = [
 
     <Section id="changelog" class="changelog" num="05" label="Changelog" title="What’s new">
       <Fragment slot="intro">
-        <p class="lead">The latest changes to MeroAlpha Agent, straight from the public releases.</p>
-        <SecondaryButton href="/changelog" small>All releases</SecondaryButton>
+        <p class="lead">What MeroAlpha Agent does today, and what we are building next.</p>
+        <SecondaryButton href="/changelog" small>Full changelog</SecondaryButton>
       </Fragment>
-      <Releases />
+      <Updates limit={3} />
     </Section>
 
     <Section id="products" class="products" num="06" label="From MeroAlpha" title="What we make">

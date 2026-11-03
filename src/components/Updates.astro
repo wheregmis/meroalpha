@@ -1,0 +1,45 @@
+---
+// Shipped features on a lit vertical rail, filterable by area (scripts in the page enhance it; without JS all show).
+import { areas, shipped } from '../data/updates.mjs';
+import '../styles/updates.css';
+
+interface Props { limit?: number; filter?: boolean }
+const { limit, filter } = Astro.props;
+const items = shipped.slice(0, limit);
+---
+<div class="updates" data-updates>
+  {filter && (
+    <div class="updates__bar">
+      <fieldset class="updates__filter">
+        <legend class="visually-hidden">Show updates for</legend>
+        {[['all', 'All'], ...Object.entries(areas).map(([k, a]) => [k, a.label])].map(([value, label]) => (
+          <label><input type="radio" name="area" value={value} checked={value === 'all'} />{label}</label>
+        ))}
+      </fieldset>
+      <p class="note" role="status" data-updates-count>Showing {items.length} updates</p>
+    </div>
+  )}
+  <ol class="updates__list">
+    {items.map((u) => (
+      <li class="update" data-area={u.area}>
+        <svg class="update__node" viewBox="0 0 24 24" aria-hidden="true" set:html={areas[u.area].icon} />
+        <article class="card update__card">
+          <p class="update__tags"><span>{areas[u.area].label}</span><span class="update__kind">{u.kind}</span></p>
+          <h3>{u.title}</h3>
+          <p>{u.body}</p>
+          <a class="link" href={u.href}>Learn more<span class="visually-hidden"> about {u.title}</span> <span aria-hidden="true">↳</span></a>
+        </article>
+      </li>
+    ))}
+  </ol>
+</div>
+{filter && <script>
+  const root = document.querySelector('[data-updates]');
+  const count = root?.querySelector('[data-updates-count]');
+  root?.addEventListener('change', (e) => {
+    const area = e.target.value;
+    let shown = 0;
+    for (const li of root.querySelectorAll('.update')) shown += (li.hidden = area !== 'all' && li.dataset.area !== area) ? 0 : 1;
+    count.textContent = `Showing ${shown} update${shown === 1 ? '' : 's'}`;
+  });
+</script>}

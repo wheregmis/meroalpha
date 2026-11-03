@@ -1,0 +1,16 @@
+---
+// Steps on a lit rail, left to right; the first is lit. Stacks below 60rem.
+import Surface from './Surface.astro';
+
+interface Props { items: { label: string; title: string; body: string }[]; class?: string }
+const { items, class: cls } = Astro.props;
+---
+<ol class:list={['rail', cls]} style={`--steps: ${items.length}`}>
+  {items.map((item) => (
+    <Surface as="li">
+      <span class="rail__label">{item.label}</span>
+      <h3>{item.title}</h3>
+      <p>{item.body}</p>
+    </Surface>
+  ))}
+</ol>

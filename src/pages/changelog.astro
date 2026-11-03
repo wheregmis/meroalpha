@@ -1,12 +1,54 @@
 ---
 import Page from '../layouts/Page.astro';
+import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
+import Surface from '../components/Surface.astro';
+import PrimaryButton from '../components/PrimaryButton.astro';
 import SecondaryButton from '../components/SecondaryButton.astro';
+import Updates from '../components/Updates.astro';
 import Releases from '../components/Releases.astro';
+import { shipped, roadmap } from '../data/updates.mjs';
+
+const building = roadmap.filter((r) => r.status === 'In development');
+const planned = roadmap.filter((r) => r.status === 'Planned');
+const plural = (n: number) => `${n} ${n === 1 ? 'item' : 'items'}`;
+import '../styles/changelog.css';
 ---
-<Page title="Changelog: MeroAlpha" description="Every public release of MeroAlpha Agent, newest first." current="/changelog">
-  <main id="main">
-    <Section id="changelog" class="changelog changelog--page" label="Changelog" title="Every release, newest first">
+<Page title="Changelog: MeroAlpha" description="What MeroAlpha Agent does today, what we are building, and every public release." current="/changelog">
+  <main id="main" class="changelog-page">
+    <PageHero id="changelog-title" pill="MeroAlpha Agent · private testing">
+      Changelog
+      <Fragment slot="actions">
+        <PrimaryButton href="/waitlist">Join the waitlist</PrimaryButton>
+        <SecondaryButton href="mailto:get2sabin@gmail.com?subject=MeroAlpha%20feature%20request">Request a feature</SecondaryButton>
+      </Fragment>
+      <dl slot="after" class="changelog-page__summary">
+        <div><dt>Shipped.</dt><dd>{shipped.length} features in the app today.</dd></div>
+        <div><dt>In development.</dt><dd>{plural(building.length)} being built and tested now.</dd></div>
+        <div><dt>Planned.</dt><dd>{plural(planned.length)} queued next, in order.</dd></div>
+      </dl>
+    </PageHero>
+
+    <Section id="shipped" class="changelog-page__shipped" label="Shipped" title="Everything we’ve shipped">
+      <Updates filter />
+    </Section>
+
+    {[['building', 'In development', 'Being built now', building], ['planned', 'Planned', 'Coming next', planned]].map(([id, label, title, items]) => (
+      <Section id={id} class="changelog-page__building" label={label} title={title}>
+        <ol class="changelog-page__next">
+          {items.map((r) => (
+            <Surface as="li">
+              <p class="update__tags"><span class="update__kind">{r.status}</span></p>
+              <h3>{r.title}</h3>
+              <p>{r.body}</p>
+              {r.href && <a class="link" href={r.href}>Learn more<span class="visually-hidden"> about {r.title}</span> <span aria-hidden="true">↳</span></a>}
+            </Surface>
+          ))}
+        </ol>
+      </Section>
+    ))}
+
+    <Section id="releases" class="changelog changelog--page" label="Release notes" title="Every release, newest first">
       <Fragment slot="intro">
         <p class="lead">From the releases on GitHub, for the people testing MeroAlpha Agent today.</p>
         <SecondaryButton href="https://github.com/wheregmis/meroalpha/releases" small>Releases on GitHub</SecondaryButton>
