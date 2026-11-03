@@ -27,7 +27,7 @@ Without a signed appcast, a release is **manual download only**. The stable feed
 `https://github.com/wheregmis/meroalpha/releases/latest/download/appcast.xml`;
 archive URLs inside it use immutable `vX.Y.Z` tags. No prerelease/Intel/Windows/Linux
 channel is advertised. Public tags refer to website source, not private app source.
-`release-contract.json` and `scripts/verify-release.mjs` match the agent repo;
+`release-contract.json`, `scripts/verify-release.mjs` and the standard-library XML/ZIP parser `scripts/release-metadata.py` match the agent repo;
 contract changes require coordinated PRs.
 
 The agent's local script builds/seals ad-hoc packages without Apple credentials.
@@ -50,7 +50,7 @@ Inspect/retry failed drafts. Never mark an older release as latest, since that a
 rolls back the feed. Serialize publishers. A manual-only release has no appcast,
 so the native updater reports an unavailable feed and keeps the old app intact.
 
-Local verification (Node 24+, no dependencies):
+Local verification (Node 24+ and Python 3, no package dependencies):
 
 ```sh
 node --test tests/release.test.mjs
@@ -60,7 +60,7 @@ node scripts/verify-release.mjs vX.Y.Z /path/to/assets
 node scripts/verify-release.mjs vX.Y.Z /path/to/assets "$TRUSTED_UPDATE_PUBLIC_KEY"
 ```
 
-When an appcast exists, the verifier requires the trusted key and checks exact
+Every ZIP is inspected without extraction: app identity, embedded version, minimum OS and arm64 executable must match the tag/contract. When an appcast exists, the verifier requires the trusted key and checks the actual parsed XML enclosure, exact
 repository/tag URL, stable version, byte length and Ed25519 signature. Missing or
 invalid authentication is never silently downgraded to manual-only. A checksum
 beside a ZIP is not authenticity; do not get the key from that same download.
