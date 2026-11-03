@@ -6,5 +6,7 @@
   "compatibility_date": "2026-10-19",
   "assets": {
     "directory": "."
-  }
+  },
+  // Workers Builds runs `wrangler preview` for branches other than master; it needs this block, empty is fine.
+  "previews": {}
 }
