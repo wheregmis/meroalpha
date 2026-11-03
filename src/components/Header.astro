@@ -20,7 +20,7 @@ const links = [
       {links.map((l) => (
         <a class="nav__link" href={l.href} aria-current={current === l.href ? 'page' : undefined}>{l.label}</a>
       ))}
-      <PrimaryButton href="/waitlist" small>Join the waitlist</PrimaryButton>
     </nav>
+    {current !== '/waitlist' && <PrimaryButton href="/waitlist" small>Join the waitlist</PrimaryButton>}
   </div>
 </header>

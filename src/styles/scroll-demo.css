@@ -165,7 +165,8 @@
   .scroll-demo__plan-top .chip { font-size: 9px; }
   .scroll-demo__limits { gap: 8px; }
   .scroll-demo__limits strong { font-size: 9px; }
-  .scroll-demo__limits b { font-size: 22px; }
+  /* Three prices share a phone's width: the currency sits above each figure. */
+  .scroll-demo__limits b { display: block; font-size: 20px; }
   .scroll-demo__chart-head .chip { font-size: 8px; }
   .scroll-demo__toast { margin-bottom: var(--space-md); }
   .scroll-demo__value > b { font-size: 36px; }
@@ -176,7 +177,7 @@
 @media (max-width: 720px) and (prefers-reduced-motion: no-preference) {
   .is-scrubbing .scroll-demo__stage { min-height: 0; align-content: start; }
   .is-scrubbing .scroll-demo__chapters { height: 100svh; }
-  .is-scrubbing .scroll-demo__chapter { gap: 14px; align-content: start; padding-top: 84px; }
+  .is-scrubbing .scroll-demo__chapter { gap: 14px; align-content: start; padding-top: var(--header-h); }
   .is-scrubbing .scroll-demo__caption > p:last-of-type { font-size: 12px; line-height: 1.4; }
   .is-scrubbing .scroll-demo__scene { height: clamp(260px, 36svh, 300px); }
   .is-scrubbing .scroll-demo__research { grid-template-rows: minmax(0, 1fr) 65px; }
