@@ -13,7 +13,7 @@ src/
   styles/      tokens.css (the app's colours) · base.css · site.css (shared) · one sheet per page or component
   lib/         changelog.mjs · release-notes.mjs · waitlist.mjs (tested in tests/)
   scripts/     motion.mjs (browser-only)
-public/        copied as-is: assets/ · demo/ · _headers · .assetsignore
+public/        copied as-is: assets/ · _headers · .assetsignore
 dist/          the build, which Cloudflare serves (gitignored)
 scripts/  tests/  release-contract.json   release tooling, never published
 ```
@@ -28,12 +28,7 @@ npm run preview   # serves dist/
 npm test
 ```
 
-Screenshots and the in-browser demo (`public/demo/`) come from the app's synthetic tour fixture. The app repository builds the demo with NSH (`nsh package --target web`); `public/demo/` is committed so Cloudflare's Workers Builds deploys it from this repo with `wrangler.jsonc`. To refresh it, from the app repository:
-
-```sh
-npm run site:build    # rebuilds public/demo/; commit it here
-npm run site:dev      # http://localhost:8787
-```
+Screenshots come from the app's synthetic tour fixture. The landing page's demo (`src/components/ScrollDemo.astro`) is a scroll-driven recreation of the app in HTML and SVG, on invented data.
 
 ## Workers Builds and local validation
 

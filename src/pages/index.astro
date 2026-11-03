@@ -9,6 +9,7 @@ import Screenshot from '../components/Screenshot';
 import Segmented from '../components/Segmented';
 import Waitlist from '../components/Waitlist.astro';
 import Releases from '../components/Releases.astro';
+import ScrollDemo from '../components/ScrollDemo.astro';
 import '../styles/landing.css';
 
 const facts = ['Cites every page', 'Virtual NPR', '5-minute candles', 'Stops at 14:30 NPT', 'Graded against NEPSE', 'Runs on your Mac', 'Claude or Codex over ACP', 'No brokerage connected'];
@@ -44,7 +45,7 @@ const data = [
         <p class="lead">It researches in a browser you can watch, and cites every page.</p>
         <div class="actions">
           <PrimaryButton href="/waitlist" glow>Join the waitlist <span aria-hidden="true">→</span></PrimaryButton>
-          <SecondaryButton href="#demo">Try it in your browser</SecondaryButton>
+          <SecondaryButton href="#demo">See it work</SecondaryButton>
         </div>
         <p class="note">For Macs with Apple silicon, in private testing. Virtual NPR only; no brokerage is connected.</p>
       </div>
@@ -61,15 +62,9 @@ const data = [
       <div class="marquee__track">{[...facts, ...facts].map((f) => <span>{f}</span>)}</div>
     </div>
 
-    <Section id="demo" class="demo" num="01" label="Live demo" title="Try it in your browser">
-      <p slot="intro" class="panel__caption">The real app on invented data: set up the agent, then explore the portfolio, market and charts. No agent, market or account is connected.</p>
-      <div class="window" data-reveal>
-        <div class="window__bar" aria-hidden="true"><i></i><i></i><i></i><span>meroalpha — demo</span></div>
-        <div class="demo__frame">
-          <iframe src="/demo/" title="MeroAlpha demo with synthetic data" loading="lazy" allow="clipboard-write"></iframe>
-        </div>
-      </div>
-      <p class="note"><a class="link" href="/demo/" target="_blank" rel="noopener">Open the demo in its own tab</a></p>
+    <Section id="demo" class="demo" num="01" label="Demo" title="Watch it work a trade, on paper">
+      <p slot="intro" class="panel__caption">From a question to a report card. Scroll through an invented example: information only, virtual NPR, no brokerage connected.</p>
+      <ScrollDemo />
     </Section>
 
     <Section id="tour" class="tour" num="02" label="Screens" title="Three screens, each with one job">
