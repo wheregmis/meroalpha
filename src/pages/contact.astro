@@ -1,0 +1,16 @@
+---
+import Page from '../layouts/Page.astro';
+import Section from '../components/Section.astro';
+import Surface from '../components/Surface.astro';
+import Feedback from '../components/Feedback.astro';
+import '../styles/join.css';
+---
+<Page title="Talk to us: MeroAlpha" description="Share feedback, ask a question or report a problem with MeroAlpha." current="/contact">
+  <main id="main">
+    <Section id="contact" class="join" level={1} label="Talk to us" title="Help shape MeroAlpha">
+      <p slot="intro" class="lead">Have an idea, a question or something that isn’t working? Send us a message. You don’t need an account.</p>
+      <Surface class="join__card" still><Feedback /></Surface>
+      <p class="note">Prefer email? Write to <a class="link" href="mailto:get2sabin@gmail.com">get2sabin@gmail.com</a>. For access to a build, <a class="link" href="/waitlist">join the waitlist</a>.</p>
+    </Section>
+  </main>
+</Page>

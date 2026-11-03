@@ -1,0 +1,41 @@
+---
+import '../styles/feedback.css';
+---
+<form class="feedback" data-feedback novalidate aria-describedby="feedback-privacy">
+  <fieldset disabled>
+    <legend class="visually-hidden">Your message to MeroAlpha</legend>
+    <div class="feedback__row">
+      <div class="feedback__field">
+        <label for="feedback-category">What’s this about?</label>
+        <select id="feedback-category" name="category" aria-describedby="feedback-category-error">
+          <option value="feedback">Feedback or an idea</option>
+          <option value="question">A question</option>
+          <option value="bug">A bug or site problem</option>
+          <option value="partnership">A partnership or press enquiry</option>
+        </select>
+        <p class="feedback__error" id="feedback-category-error" data-error="category"></p>
+      </div>
+      <div class="feedback__field">
+        <label for="feedback-email" data-email-label>Email address (optional)</label>
+        <input id="feedback-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" aria-describedby="feedback-email-help feedback-email-error">
+        <p class="note" id="feedback-email-help">Leave an email if you’d like a reply. Required for questions.</p>
+        <p class="feedback__error" id="feedback-email-error" data-error="email"></p>
+      </div>
+    </div>
+    <div class="feedback__field">
+      <label for="feedback-message">Your message</label>
+      <textarea id="feedback-message" name="message" rows="7" minlength="10" maxlength="8000" required aria-describedby="feedback-message-help feedback-message-error"></textarea>
+      <p class="note" id="feedback-message-help">10–4,000 characters. For a bug, tell us what happened and what you expected. Please leave out passwords, account details and copied market data.</p>
+      <p class="feedback__error" id="feedback-message-error" data-error="message"></p>
+    </div>
+    <div hidden aria-hidden="true"><label for="feedback-website">Website</label><input id="feedback-website" name="website" tabindex="-1" autocomplete="off"></div>
+    <p class="note" id="feedback-privacy">Your message stays private with the MeroAlpha team in Supabase. We use it to respond and improve the product, never to add you to the waitlist. <a class="link" href="/privacy#feedback">How we handle messages</a>.</p>
+    <button class="btn btn--glow" type="submit">Send message</button>
+  </fieldset>
+  <p class="feedback__status" role="status" aria-atomic="true" data-feedback-status></p>
+</form>
+<noscript><p class="note">The form needs JavaScript. You can email <a class="link" href="mailto:get2sabin@gmail.com">get2sabin@gmail.com</a> instead.</p></noscript>
+<script>
+  import { mountFeedback } from '../lib/feedback.mjs';
+  mountFeedback();
+</script>
