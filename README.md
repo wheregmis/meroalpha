@@ -106,3 +106,37 @@ Research/account data is never included in a release or sent by update checks.
 The What’s new section reads the latest three stable public releases from GitHub's unauthenticated releases API. Version/date links are validated against this repository; bodies render as bounded plain text, never HTML or remote images. No token, server or deployment secret is needed. API failure/rate limiting and disabled JavaScript retain a link to the full release history. Existing release notes are shown as-is; future agent releases supply useful changes from their reviewed prepared notes.
 
 Run `npm test`. Use `npm run dev` for visual checks. The landing page shows the latest three releases and `/changelog` up to ten. Website deployment is separate from a code PR.
+
+## Feedback and questions
+
+`/contact` collects feedback, questions, bugs and partnership/press enquiries. It is linked from every footer and
+from `/waitlist`. Email is optional except for questions. The form uses the existing public Supabase connection
+and calls only `submit_site_feedback`; no service key or new deployment secret is needed.
+
+Implementation / rollout plan:
+1. Review and apply the companion `meroalpha_agent` migration `20261103010000_site_feedback.sql` first. Its
+   `supabase/tests/site_feedback.test.sql` checks private access, validation, duplicates and quotas with synthetic data.
+2. Deploy this site after the function exists. Before that, submissions show a recoverable error and keep their text.
+3. Read and respond to messages manually in Supabase's private `site_feedback` table. Treat text as untrusted plain
+   text, including in replies or exports; spreadsheet exports need formula-injection protection. Never render it as HTML.
+4. Review old correspondence periodically and delete messages no longer needed. Deletion requests use the supplied
+   email, or an anonymous message's description/date. There is no automatic retention job or public inbox.
+
+The database validates category, reply email and a 10–4,000-character/16 KB message. RLS and revoked table grants
+prevent anonymous and signed-in visitors from reading, inserting, updating or deleting messages directly. A fixed
+`search_path` definer function inserts only validated parameters and returns no submitted data. No content is logged
+by this application. The database stores category, message, optional email, timestamp and random retry ID only;
+provider infrastructure can still process request metadata.
+
+Abuse controls: the server discards a filled honeypot, deduplicates retries, and checks rolling caps of 3 messages per
+supplied email/hour, 50 globally/hour and 500 globally/day under one transaction lock. Duplicate retries succeed at
+capacity. An email is unverified and a honeypot is bypassable: an attacker can exhaust a shared budget or spoof an
+address. These caps bound stored spam, not request traffic or denial of service. A verified challenge at an edge
+endpoint is the next step if actual abuse warrants it; do not add IP logging or service keys to the browser.
+
+Browser requests time out after 15 seconds. A retry keeps its ID while the normalized content is unchanged, so an
+uncertain response cannot duplicate a successful insert. Pending submissions lock their fields. Validation errors
+focus the first invalid field; delivery/limit errors preserve input, provide retry and keep the email fallback visible.
+`npm test` covers validation, transport and form transitions. For manual checks, use both OS color schemes at
+1280×860 and 390×844, Tab through category/email/message/send, then simulate offline, quota, retry and success
+responses with synthetic data. Never send real feedback for a test.
