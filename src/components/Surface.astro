@@ -1,0 +1,6 @@
+---
+// The app's Surface: a card. It reveals on scroll unless `still`.
+interface Props { as?: 'div' | 'li' | 'article'; class?: string; still?: boolean }
+const { as: Tag = 'div', class: cls, still } = Astro.props;
+---
+<Tag class:list={['card', cls]} data-reveal={still ? undefined : ''}><slot /></Tag>

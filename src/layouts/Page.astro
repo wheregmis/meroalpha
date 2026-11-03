@@ -1,0 +1,38 @@
+---
+// Every page: head, skip link, ambient light, header and footer. A page passes its own <main id="main">.
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/site.css';
+
+interface Props { title: string; description: string; current?: string }
+const { title, description, current } = Astro.props;
+const url = new URL(Astro.url.pathname, Astro.site);
+const image = new URL('/assets/light-07-ask.jpg', Astro.site);
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/meroalpha.svg" type="image/svg+xml">
+  <link rel="canonical" href={url}>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={url}>
+  <meta property="og:image" content={image}>
+  <meta name="twitter:card" content="summary_large_image">
+  <script is:inline>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="aurora" aria-hidden="true"><span></span><span></span></div>
+  <Header current={current} />
+  <slot />
+  <Footer />
+  <script>import '../scripts/motion.mjs';</script>
+</body>
+</html>

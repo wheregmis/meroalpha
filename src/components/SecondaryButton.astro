@@ -1,0 +1,6 @@
+---
+// The app's SecondaryButton: a surface fill with a hairline.
+interface Props { href: string; small?: boolean }
+const { href, small } = Astro.props;
+---
+<a class:list={['btn', 'btn--ghost', small && 'btn--small']} href={href}><slot /></a>

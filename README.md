@@ -2,24 +2,44 @@
 
 The landing page for [MeroAlpha](https://github.com/wheregmis/meroalpha), a macOS app where an AI agent researches the Nepal stock market (NEPSE) in a browser you can watch and runs a paper account in virtual NPR. No real money moves.
 
-Plain HTML and CSS, no build step. Preview the pages alone with:
+An [Astro](https://astro.build) site: every page is static HTML, and React runs only in the components a page hydrates (`client:*`), today the screen switcher. Node 24+.
 
-```sh
-python3 -m http.server 4173
+```
+src/
+  pages/       index · download · changelog · privacy · terms · 404   (one file per route)
+  layouts/     Page.astro: head, header, footer
+  components/  named after the app's kit (apps/desktop/src/ui/kit.tsx): PrimaryButton · SecondaryButton · Section ·
+               Surface · Pill · Segmented (React) · Screenshot (React) · Terminal · Releases · Header · Footer
+  styles/      tokens.css (the app's colours) · base.css · site.css (shared) · one sheet per page or component
+  lib/         changelog.mjs · release-notes.mjs (tested in tests/)
+  scripts/     motion.mjs · copy.mjs (browser-only)
+public/        copied as-is: assets/ · demo/ · install.sh · _headers · .assetsignore
+dist/          the build, which Cloudflare serves (gitignored)
+scripts/  tests/  release-contract.json   release tooling, never published
 ```
 
-Screenshots and the in-browser demo (`demo/`) come from the app's synthetic tour fixture. The app repository builds the demo with NSH (`nsh package --target web`); `demo/` is committed so Cloudflare's Workers Builds deploys it from this repo with `wrangler.jsonc`. To refresh it, from the app repository:
+`src/styles/tokens.css` mirrors the light and dark `theme.cssVars` in the agent's `apps/desktop/nsh.json`; the site uses those colours only, as the agent's `docs/design-system.md` describes. Pages build as `privacy.html` and so on (`build.format: 'file'`), so old `.html` links keep working and Workers also serves `/privacy`.
 
 ```sh
-npm run site:build    # rebuilds demo/; commit it here
+npm ci
+npm run dev       # http://localhost:4321, with hot reload
+npm run build     # into dist/
+npm run preview   # serves dist/
+npm test
+```
+
+Screenshots and the in-browser demo (`public/demo/`) come from the app's synthetic tour fixture. The app repository builds the demo with NSH (`nsh package --target web`); `public/demo/` is committed so Cloudflare's Workers Builds deploys it from this repo with `wrangler.jsonc`. To refresh it, from the app repository:
+
+```sh
+npm run site:build    # rebuilds public/demo/; commit it here
 npm run site:dev      # http://localhost:8787
 ```
 
 ## Workers Builds and local validation
 
-`wrangler preview` requires the tracked `previews: {}` block in `wrangler.jsonc`; branches created before that fix must bring in current `master`. Static assets stay at the top level. A read-only packaging check is `npx wrangler@4.156.2 deploy --dry-run`; it does not create a Preview or deploy the site.
+`wrangler preview` requires the tracked `previews: {}` block in `wrangler.jsonc`; branches created before that fix must bring in current `master`. Wrangler runs `npm run build` first (`build.command`) and serves `dist/`; Workers Builds installs dependencies itself. A read-only packaging check is `npx wrangler@4.156.2 deploy --dry-run`; it does not create a Preview or deploy the site.
 
-The asset root is this directory. `.assetsignore` excludes hidden local state, including environment files and tooling databases, in addition to scripts/tests/configuration. Never copy credentials or private application data into the site's public files. The committed `demo/` and normal HTML/CSS/JavaScript/assets remain included.
+The asset root is `dist/`: the built pages plus `public/`, copied as-is. Scripts, tests, sources and configuration are outside it. `.assetsignore` (from `public/`) still excludes hidden files, such as environment files and tooling databases. Never copy credentials or private application data into `public/`.
 
 
 ## Install
@@ -32,7 +52,7 @@ curl -fsSL https://meroalpha.com/install.sh | sh
 
 It downloads the ZIP and its checksum from the latest release, checks the checksum, re-signs the app ad-hoc,
 replaces any installed copy only once the new one is in place, and opens it. Read it first at
-[meroalpha.com/install.sh](https://meroalpha.com/install.sh) ([`install.sh`](install.sh) here). It skips the
+[meroalpha.com/install.sh](https://meroalpha.com/install.sh) ([`public/install.sh`](public/install.sh) here). It skips the
 Privacy & Security prompt because `curl` does not mark files as downloaded from the internet, which is what
 Gatekeeper checks. It does not make the app notarized.
 
@@ -96,4 +116,4 @@ Research/account data is never included in a release or sent by update checks.
 
 The What’s new section reads the latest three stable public releases from GitHub's unauthenticated releases API. Version/date links are validated against this repository; bodies render as bounded plain text, never HTML or remote images. No token, server or deployment secret is needed. API failure/rate limiting and disabled JavaScript retain a link to the full release history. Existing release notes are shown as-is; future agent releases supply useful changes from their reviewed prepared notes.
 
-Run `node --test tests/changelog.test.mjs tests/release.test.mjs`. Serve locally with `python3 -m http.server` for visual checks. Website deployment is separate from a code PR.
+Run `npm test`. Use `npm run dev` for visual checks. The landing page shows the latest three releases and `/changelog` up to ten. Website deployment is separate from a code PR.

@@ -1,0 +1,28 @@
+---
+const columns = [
+  { id: 'product', title: 'Product', links: [['/download', 'Download for macOS'], ['/demo/', 'Try it in your browser'], ['/#day', 'How it trades'], ['/changelog', 'Changelog']] },
+  { id: 'legal', title: 'Legal', links: [['/privacy', 'Privacy policy'], ['/terms', 'Terms of use'], ['/terms#advice', 'Not investment advice']] },
+  { id: 'help', title: 'Help', links: [['https://github.com/wheregmis/meroalpha/issues', 'Report a problem'], ['https://github.com/wheregmis/meroalpha', 'Website source']] },
+];
+---
+<footer class="foot">
+  <div class="container foot__grid">
+    <div class="foot__about">
+      <a class="brand" href="/">
+        <img src="/assets/meroalpha.svg" width="24" height="24" alt="">
+        <span>MeroAlpha</span>
+      </a>
+      <p>A macOS app that researches NEPSE and runs a paper account in virtual NPR. No real money moves and no brokerage is connected.</p>
+    </div>
+    {columns.map((c) => (
+      <nav class="foot__col" aria-labelledby={`foot-${c.id}`}>
+        <h2 class="foot__head" id={`foot-${c.id}`}>{c.title}</h2>
+        <ul>{c.links.map(([href, label]) => <li><a href={href}>{label}</a></li>)}</ul>
+      </nav>
+    ))}
+  </div>
+  <div class="container foot__legal">
+    <p>Information only, not investment advice. MeroAlpha is not licensed by the Securities Board of Nepal (SEBON) and is not affiliated with NEPSE, ShareSansar or MeroLagani; their names belong to their owners. Screens show synthetic test data.</p>
+    <p>© 2026 MeroAlpha</p>
+  </div>
+</footer>

@@ -1,32 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy policy: MeroAlpha</title>
-  <meta name="description" content="What MeroAlpha keeps on your Mac, what leaves it, and who sees it.">
-  <meta name="color-scheme" content="light dark">
-  <link rel="icon" href="assets/meroalpha.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
-
-  <header class="masthead">
-    <div class="nav container">
-      <a class="brand" href="./" aria-label="MeroAlpha home">
-        <img src="assets/meroalpha.svg" width="32" height="32" alt="">
-        <span>MeroAlpha</span>
-      </a>
-      <nav aria-label="Main">
-        <a class="nav__link" href="./#tour">Screens</a>
-        <a class="nav__link" href="./#day">How it trades</a>
-        <a class="nav__link" href="privacy.html" aria-current="page">Privacy</a>
-        <a class="btn btn--small" href="https://github.com/wheregmis/meroalpha/releases/latest">Download</a>
-      </nav>
-    </div>
-  </header>
-
+---
+import Page from '../layouts/Page.astro';
+import '../styles/legal.css';
+---
+<Page title="Privacy policy: MeroAlpha" description="What MeroAlpha keeps on your Mac, what leaves it, and who sees it." current="/privacy">
   <main id="main" class="legal container">
     <div class="legal__head">
       <h1>Privacy policy</h1>
@@ -121,45 +97,4 @@
       </section>
     </article>
   </main>
-
-  <footer class="foot">
-    <div class="container foot__grid">
-      <div class="foot__about">
-        <a class="brand" href="./">
-          <img src="assets/meroalpha.svg" width="24" height="24" alt="">
-          <span>MeroAlpha</span>
-        </a>
-        <p>A macOS app that researches NEPSE and runs a paper account in virtual NPR. No real money moves and no brokerage is connected.</p>
-      </div>
-      <nav class="foot__col" aria-labelledby="foot-product">
-        <h2 class="foot__head" id="foot-product">Product</h2>
-        <ul>
-          <li><a href="https://github.com/wheregmis/meroalpha/releases/latest">Download for macOS</a></li>
-          <li><a href="./#tour">Screens</a></li>
-          <li><a href="./#day">How it trades</a></li>
-          <li><a href="https://github.com/wheregmis/meroalpha/releases">Release notes</a></li>
-        </ul>
-      </nav>
-      <nav class="foot__col" aria-labelledby="foot-legal">
-        <h2 class="foot__head" id="foot-legal">Legal</h2>
-        <ul>
-          <li><a href="privacy.html">Privacy policy</a></li>
-          <li><a href="terms.html">Terms of use</a></li>
-          <li><a href="terms.html#advice">Not investment advice</a></li>
-        </ul>
-      </nav>
-      <nav class="foot__col" aria-labelledby="foot-help">
-        <h2 class="foot__head" id="foot-help">Help</h2>
-        <ul>
-          <li><a href="https://github.com/wheregmis/meroalpha/issues">Report a problem</a></li>
-          <li><a href="https://github.com/wheregmis/meroalpha">Website source</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="container foot__legal">
-      <p>Information only, not investment advice. MeroAlpha is not licensed by the Securities Board of Nepal (SEBON) and is not affiliated with NEPSE, ShareSansar or MeroLagani; their names belong to their owners. Screens show synthetic test data.</p>
-      <p>© 2026 MeroAlpha</p>
-    </div>
-  </footer>
-</body>
-</html>
+</Page>

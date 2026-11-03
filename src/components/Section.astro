@@ -1,0 +1,13 @@
+---
+// A titled page section, like the app's Section: a label, a heading, an optional intro (slot "intro"), then content.
+interface Props { id: string; title: string; label?: string; num?: string; class?: string }
+const { id, title, label, num, class: cls } = Astro.props;
+---
+<section class:list={['container', cls]} id={id} aria-labelledby={`${id}-title`}>
+  <div class="head" data-reveal>
+    {label && <p class="kicker">{num && <b>{num}</b>} {label}</p>}
+    <h2 id={`${id}-title`}>{title}</h2>
+    <slot name="intro" />
+  </div>
+  <slot />
+</section>

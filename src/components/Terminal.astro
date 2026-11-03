@@ -1,0 +1,13 @@
+---
+// Shell commands, each with a label and a Copy button.
+import '../styles/terminal.css';
+
+interface Props { lines: { label: string; command: string }[] }
+const { lines } = Astro.props;
+---
+<div class="term">
+  {lines.map((l) => (
+    <div class="term__line"><span class="term__label">{l.label}</span><code>{l.command}</code><button type="button" class="term__copy" data-copy>Copy</button></div>
+  ))}
+</div>
+<script>import '../scripts/copy.mjs';</script>

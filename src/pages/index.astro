@@ -1,0 +1,125 @@
+---
+import Page from '../layouts/Page.astro';
+import Section from '../components/Section.astro';
+import Surface from '../components/Surface.astro';
+import Pill from '../components/Pill.astro';
+import PrimaryButton from '../components/PrimaryButton.astro';
+import SecondaryButton from '../components/SecondaryButton.astro';
+import Screenshot from '../components/Screenshot';
+import Segmented from '../components/Segmented';
+import Terminal from '../components/Terminal.astro';
+import Releases from '../components/Releases.astro';
+import '../styles/landing.css';
+
+const facts = ['Cites every page', 'Virtual NPR', '5-minute candles', 'Stops at 14:30 NPT', 'Graded against NEPSE', 'Runs on your Mac', 'Claude or Codex over ACP', 'No brokerage connected'];
+
+const screens = [
+  { id: 'stock', label: 'Stock page', image: '06-stock.jpg', caption: 'The price, your paper position and the agent’s plan. Information only: there are no buy or sell buttons.', alt: 'A stock page with the last close, a three-month price graph, the 52-week range and news' },
+  { id: 'chart', label: 'Advanced chart', image: '06-advanced-chart.jpg', caption: 'Candles, indicators and drawing tools, on MeroAlpha’s own chart engine.', alt: 'The advanced chart with daily candles, a 20-day moving average, volume and drawing tools' },
+  { id: 'portfolio', label: 'Portfolio', image: '04-portfolio.jpg', caption: 'Cash, holdings and the loss limit, and a report card for every call.', alt: 'The portfolio screen with the total value, cash, the agent’s next run and the report card' },
+];
+
+const day = [
+  { title: 'After the close', body: 'It scans the watchlist and drafts plans: an entry ceiling, a fixed stop and target, and 1% of equity at risk.' },
+  { title: 'Every five minutes', body: 'A plan triggers on a five-minute candle above the first 15 minutes’ high, until 14:30 NPT.' },
+  { title: 'The fill', body: 'Orders fill only from fresh trade prints, with fees, slippage and a 10% participation cap.' },
+  { title: 'Five sessions later', body: 'Each call is graded against the NEPSE index, and the report card keeps score.' },
+];
+
+// 24-pt outline icons in the style of the app's icons.tsx.
+const data = [
+  { title: 'Local by default', body: 'Captured pages, findings and the paper account live in your Library folder.', icon: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>' },
+  { title: 'Sharing is optional', body: 'Signed in, it shares verified findings with their page’s address and hash, never the page.', icon: '<path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/>' },
+  { title: 'Your own agent', body: 'Connect Claude or Codex over ACP, signed in with its own CLI.', icon: '<circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/>' },
+];
+---
+<Page title="MeroAlpha: a NEPSE analyst that trades on paper"
+      description="A macOS app where an AI agent researches the Nepal stock market in a browser you can watch and runs a paper account in virtual NPR.">
+  <main id="main">
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__text">
+        <Pill>NEPSE · paper trading · macOS</Pill>
+        <h1 id="hero-title">A NEPSE analyst that <em>trades on paper</em></h1>
+        <p class="lead">It researches in a browser you can watch, and cites every page.</p>
+        <div class="actions">
+          <PrimaryButton href="/download" glow>Download for macOS <span aria-hidden="true">→</span></PrimaryButton>
+          <SecondaryButton href="#demo">Try it in your browser</SecondaryButton>
+        </div>
+        <p class="note">Apple silicon. Virtual NPR only; no brokerage is connected.</p>
+      </div>
+      <div class="hero__stage">
+        <Screenshot name="07-ask.jpg" className="shot--hero" priority
+          alt="MeroAlpha’s stock page for NABIL with a price graph, and the Ask panel open beside it offering questions about the stock" />
+        <p class="hud hud--a" aria-hidden="true"><span class="dot"></span>Researching in a live browser</p>
+        <p class="hud hud--b" aria-hidden="true"><span class="hud__key">Sources</span>Every finding cites its page</p>
+        <p class="hud hud--c" aria-hidden="true"><span class="hud__key">Risk</span>1% of equity per plan</p>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">{[...facts, ...facts].map((f) => <span>{f}</span>)}</div>
+    </div>
+
+    <Section id="demo" class="demo" num="01" label="Live demo" title="Try it in your browser">
+      <p slot="intro" class="panel__caption">The real app on invented data: set up the agent, then explore the portfolio, market and charts. No agent, market or account is connected.</p>
+      <div class="window" data-reveal>
+        <div class="window__bar" aria-hidden="true"><i></i><i></i><i></i><span>meroalpha — demo</span></div>
+        <div class="demo__frame">
+          <iframe src="/demo/" title="MeroAlpha demo with synthetic data" loading="lazy" allow="clipboard-write"></iframe>
+        </div>
+      </div>
+      <p class="note"><a class="link" href="/demo/" target="_blank" rel="noopener">Open the demo in its own tab</a></p>
+    </Section>
+
+    <Section id="tour" class="tour" num="02" label="Screens" title="Three screens, each with one job">
+      <div data-reveal><Segmented client:visible label="Screens" tabs={screens} /></div>
+    </Section>
+
+    <Section id="day" class="day" num="03" label="The loop" title="How a trading day runs">
+      <ol class="day__list">
+        {day.map((d, i) => (
+          <Surface as="li">
+            <span class="day__time">Step {i + 1}</span>
+            <h3>{d.title}</h3>
+            <p>{d.body}</p>
+          </Surface>
+        ))}
+      </ol>
+    </Section>
+
+    <Section id="data" class="data" num="04" label="Privacy" title="Your research stays on your Mac">
+      <p slot="intro" class="data__more"><a class="link" href="/privacy">Read the privacy policy</a></p>
+      <dl class="data__list">
+        {data.map((d) => (
+          <Surface>
+            <dt><svg viewBox="0 0 24 24" aria-hidden="true" set:html={d.icon} />{d.title}</dt>
+            <dd>{d.body}</dd>
+          </Surface>
+        ))}
+      </dl>
+    </Section>
+
+    <Section id="changelog" class="changelog" num="05" label="Changelog" title="What’s new">
+      <Fragment slot="intro">
+        <p class="lead">The latest changes to MeroAlpha Agent, straight from the public releases.</p>
+        <SecondaryButton href="/changelog" small>All releases</SecondaryButton>
+      </Fragment>
+      <Releases />
+    </Section>
+
+    <section class="close container" aria-labelledby="close-title">
+      <Surface class="close__card">
+        <h2 id="close-title">Let it trade on paper for a week</h2>
+        <p class="lead">Then read its report card before you trust a single call.</p>
+        <div class="actions">
+          <PrimaryButton href="/download" glow>Download for macOS <span aria-hidden="true">→</span></PrimaryButton>
+        </div>
+        <Terminal lines={[
+          { label: 'Install the app', command: 'curl -fsSL https://meroalpha.com/install.sh | sh' },
+          { label: 'Install the Claude agent', command: 'npm install -g @agentclientprotocol/claude-agent-acp' },
+        ]} />
+      </Surface>
+    </section>
+  </main>
+</Page>

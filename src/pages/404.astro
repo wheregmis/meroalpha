@@ -1,0 +1,19 @@
+---
+import Page from '../layouts/Page.astro';
+import PrimaryButton from '../components/PrimaryButton.astro';
+import SecondaryButton from '../components/SecondaryButton.astro';
+---
+<Page title="Page not found: MeroAlpha" description="This page doesn’t exist.">
+  <main id="main" class="container missing">
+    <h1>This page doesn’t exist</h1>
+    <p class="lead">The link may be old. The download, the demo and the changelog are all one click away.</p>
+    <div class="actions">
+      <PrimaryButton href="/">Go to the home page</PrimaryButton>
+      <SecondaryButton href="/download">Download</SecondaryButton>
+    </div>
+  </main>
+</Page>
+<style>
+  .missing { display: grid; gap: var(--space-lg); justify-items: start; padding-block: var(--section-gap); }
+  .missing .lead { color: var(--color-muted); }
+</style>
