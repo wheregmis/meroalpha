@@ -12,6 +12,9 @@ test('validation normalizes input and requires reply details only for questions'
   for (const email of ['invalid', 'a b@c.test', 'x'.repeat(255) + '@e.test']) assert.ok(validateFeedback({ ...valid, email }).errors.email);
   for (const message of ['', 'short', 'x'.repeat(4001), null]) assert.ok(validateFeedback({ ...valid, message }).errors.message);
   assert.deepEqual(validateFeedback({ ...valid, message: 'नमस्ते '.repeat(100) }).errors, {});
+  assert.ok(validateFeedback({ ...valid, message: '😀'.repeat(5) }).errors.message);
+  assert.deepEqual(validateFeedback({ ...valid, message: '😀'.repeat(4000) }).errors, {});
+  assert.ok(validateFeedback({ ...valid, message: '😀'.repeat(4001) }).errors.message);
 });
 
 test('transport sends only bounded user fields and a stable id, treats retries identically', async () => {

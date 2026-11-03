@@ -8,7 +8,8 @@ export function validateFeedback(input) {
   const errors = {};
   if (!CATEGORIES.includes(category)) errors.category = 'Choose what your message is about.';
   if ((category === 'question' && !email) || (email && (email.length > 254 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)))) errors.email = 'Enter an email address so we can reply.';
-  if (message.length < 10 || message.length > 4000 || new TextEncoder().encode(message).length > 16000) errors.message = 'Write between 10 and 4,000 characters.';
+  const characters = [...message].length;
+  if (characters < 10 || characters > 4000 || new TextEncoder().encode(message).length > 16000) errors.message = 'Write between 10 and 4,000 characters.';
   return { data: { category, email, message }, errors };
 }
 
