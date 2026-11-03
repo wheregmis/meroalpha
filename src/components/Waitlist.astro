@@ -5,12 +5,14 @@ import '../styles/waitlist.css';
 interface Props { id?: string }
 const { id = 'waitlist-email' } = Astro.props;
 ---
-<form class="wait" data-waitlist novalidate>
+<form class="wait" method="post" data-waitlist novalidate>
   <label class="visually-hidden" for={id}>Email address</label>
   <input class="wait__input" id={id} name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" placeholder="you@example.com">
   <!-- Honeypot: hidden from people and screen readers, filled in by bots. -->
   <input class="visually-hidden" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-  <button class="btn btn--glow" type="submit">Join the waitlist</button>
+  <!-- Enabled by mountWaitlist: without JavaScript a submit would post nowhere. -->
+  <button class="btn btn--glow" type="submit" disabled>Join the waitlist</button>
+  <noscript><p class="note">The form needs JavaScript. Or email <a class="link" href="mailto:get2sabin@gmail.com?subject=MeroAlpha%20waitlist">get2sabin@gmail.com</a> to join.</p></noscript>
   <p class="wait__status note" role="status" data-waitlist-status></p>
 </form>
 <script>

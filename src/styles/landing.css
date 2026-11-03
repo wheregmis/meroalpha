@@ -59,13 +59,6 @@
 .data__list svg { width: 40px; height: 40px; padding: 8px; border-radius: 10px; fill: none; stroke: var(--color-accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; background: var(--color-paper-3); }
 .data__list dd { margin: 0; color: var(--color-muted); }
 
-/* Products: what MeroAlpha makes, and what it shelved */
-.products { padding-block: var(--section-gap-s) 0; display: grid; gap: var(--space-xl); }
-.products__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
-.products__list li { display: grid; gap: var(--space-sm); align-content: start; justify-items: start; padding: var(--space-xl); }
-.products__list p:not(.kicker) { color: var(--color-muted); }
-.chip--quiet { background: var(--color-paper-3); color: var(--color-muted); }
-
 /* Vision */
 .vision { padding-block: var(--section-gap-s) 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-2xl); align-items: start; }
 .vision__body { display: grid; gap: var(--space-lg); color: var(--color-muted); }
@@ -92,6 +85,6 @@
   /* The phone crop of the Ask panel, upright and readable rather than a tilted miniature of the window. */
   .shot--hero { transform: none; animation-name: rise-flat; max-width: 22rem; margin-inline: auto; }
   .hero__stage:hover .shot--hero { transform: none; }
-  .data__list, .products__list { grid-template-columns: minmax(0, 1fr); }
+  .data__list { grid-template-columns: minmax(0, 1fr); }
   .close__card { padding: var(--space-2xl) var(--space-md); }
 }

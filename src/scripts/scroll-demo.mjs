@@ -1,7 +1,8 @@
 const demo = document.querySelector('[data-scroll-demo]');
 
 if (demo) {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  // Reduced motion, or a screen too short for the sticky stage (a landscape phone), gets the static chapters.
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce), (max-height: 500px)');
   const prompt = demo.querySelector('[data-demo-prompt]');
   const question = prompt.textContent;
   const numbers = Object.fromEntries([...demo.querySelectorAll('[data-demo-number]')].map((el) => [el.dataset.demoNumber, el]));

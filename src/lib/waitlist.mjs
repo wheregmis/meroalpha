@@ -29,6 +29,7 @@ const MESSAGES = {
 export function mountWaitlist(doc = document) {
   for (const form of doc.querySelectorAll('[data-waitlist]')) {
     const status = form.querySelector('[data-waitlist-status]'), button = form.querySelector('button');
+    button.disabled = false;
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       // shortcut: a honeypot is the only bot check, add Turnstile if junk sign-ups show up.

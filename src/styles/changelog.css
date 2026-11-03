@@ -1,6 +1,6 @@
 /* Releases: a lit timeline of public releases, text only (lib/changelog.mjs). Used by components/Releases.astro. */
 .changelog { padding-block: var(--section-gap-s); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-2xl); }
-.changelog > .head { position: sticky; top: calc(84px + var(--space-xl)); align-self: start; }
+.changelog > .head { position: sticky; top: calc(var(--header-h) + var(--space-xl)); align-self: start; }
 .changelog > .head .lead { color: var(--color-muted); }
 .changelog__content { min-width: 0; display: grid; gap: var(--space-xl); }
 .releases { position: relative; min-width: 0; display: grid; gap: var(--space-lg); padding-left: var(--space-xl); }
