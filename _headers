@@ -1,0 +1,12 @@
+# Pages keep Cloudflare's default (max-age=0, must-revalidate), so a release shows at once.
+# The demo's files are named by their content (nsh package --target web): cache them for good.
+/demo/*.js
+  Cache-Control: public, max-age=31536000, immutable
+/demo/*.wasm
+  Cache-Control: public, max-age=31536000, immutable
+/demo/*.bin
+  Cache-Control: public, max-age=31536000, immutable
+/demo/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/demo/icons/*
+  Cache-Control: public, max-age=31536000, immutable

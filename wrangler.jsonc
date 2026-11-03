@@ -1,0 +1,10 @@
+// The landing page and the in-browser demo, served as Workers static assets.
+// Deploy from the app repository: `npm run site:deploy` packages the demo into demo/ first.
+{
+  "$schema": "https://unpkg.com/wrangler@4.151.1/config-schema.json",
+  "name": "meroalpha",
+  "compatibility_date": "2026-10-19",
+  "assets": {
+    "directory": "."
+  }
+}
