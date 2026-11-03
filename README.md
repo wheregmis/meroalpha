@@ -2,13 +2,18 @@
 
 The landing page for [MeroAlpha](https://github.com/wheregmis/meroalpha), a macOS app where an AI agent researches the Nepal stock market (NEPSE) in a browser you can watch and runs a paper account in virtual NPR. No real money moves.
 
-Plain HTML and CSS, no build step. Preview it with:
+Plain HTML and CSS, no build step. Preview the pages alone with:
 
 ```sh
 python3 -m http.server 4173
 ```
 
-Screenshots come from the app's synthetic tour fixture.
+Screenshots and the in-browser demo (`demo/`, not committed) come from the app's synthetic tour fixture. The app repository builds the demo with NSH (`nsh package --target web`) and serves or deploys the site on Cloudflare with `wrangler.jsonc`:
+
+```sh
+npm run site:dev      # http://localhost:8787
+npm run site:deploy   # needs `wrangler login` or CLOUDFLARE_API_TOKEN
+```
 
 ## App releases
 
