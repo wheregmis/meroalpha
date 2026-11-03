@@ -10,6 +10,7 @@
 .feedback__error { color: var(--color-error); font-size: var(--text-sm); }
 .feedback__error:empty { display: none; }
 .feedback button { justify-self: start; }
+.feedback button:active { opacity: 1; }
 .feedback fieldset:disabled { opacity: 0.65; }
 .feedback button:disabled { cursor: progress; }
 .feedback__status { margin-top: var(--space-lg); min-height: 3em; overflow-wrap: anywhere; }
