@@ -1,7 +1,0 @@
-/* pages/download.astro: three install steps as cards */
-.download { display: grid; gap: var(--space-xl); padding-block: var(--space-3xl) var(--section-gap); }
-.download .lead { color: var(--color-muted); }
-.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-lg); max-width: 880px; }
-.steps li { display: grid; gap: var(--space-md); justify-items: start; padding: var(--space-xl); }
-.steps li p:not(.kicker) { color: var(--color-muted); max-width: 62ch; }
-.steps .term { margin-inline: 0; }

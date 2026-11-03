@@ -1,0 +1,19 @@
+---
+// The waitlist form: an email field and the action. Posts to Supabase from the browser (lib/waitlist.mjs).
+import '../styles/waitlist.css';
+
+interface Props { id?: string }
+const { id = 'waitlist-email' } = Astro.props;
+---
+<form class="wait" data-waitlist novalidate>
+  <label class="visually-hidden" for={id}>Email address</label>
+  <input class="wait__input" id={id} name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" placeholder="you@example.com">
+  <!-- Honeypot: hidden from people and screen readers, filled in by bots. -->
+  <input class="visually-hidden" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <button class="btn btn--glow" type="submit">Join the waitlist</button>
+  <p class="wait__status note" role="status" data-waitlist-status></p>
+</form>
+<script>
+  import { mountWaitlist } from '../lib/waitlist.mjs';
+  mountWaitlist();
+</script>

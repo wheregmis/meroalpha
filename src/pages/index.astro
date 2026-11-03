@@ -7,7 +7,7 @@ import PrimaryButton from '../components/PrimaryButton.astro';
 import SecondaryButton from '../components/SecondaryButton.astro';
 import Screenshot from '../components/Screenshot';
 import Segmented from '../components/Segmented';
-import Terminal from '../components/Terminal.astro';
+import Waitlist from '../components/Waitlist.astro';
 import Releases from '../components/Releases.astro';
 import '../styles/landing.css';
 
@@ -39,14 +39,14 @@ const data = [
     <section class="hero container" aria-labelledby="hero-title">
       <div class="hero__grid" aria-hidden="true"></div>
       <div class="hero__text">
-        <Pill>NEPSE · paper trading · macOS</Pill>
+        <Pill>NEPSE · paper trading · private testing</Pill>
         <h1 id="hero-title">A NEPSE analyst that <em>trades on paper</em></h1>
         <p class="lead">It researches in a browser you can watch, and cites every page.</p>
         <div class="actions">
-          <PrimaryButton href="/download" glow>Download for macOS <span aria-hidden="true">→</span></PrimaryButton>
+          <PrimaryButton href="/waitlist" glow>Join the waitlist <span aria-hidden="true">→</span></PrimaryButton>
           <SecondaryButton href="#demo">Try it in your browser</SecondaryButton>
         </div>
-        <p class="note">Apple silicon. Virtual NPR only; no brokerage is connected.</p>
+        <p class="note">For Macs with Apple silicon, in private testing. Virtual NPR only; no brokerage is connected.</p>
       </div>
       <div class="hero__stage">
         <Screenshot name="07-ask.jpg" className="shot--hero" priority
@@ -108,17 +108,28 @@ const data = [
       <Releases />
     </Section>
 
+    <Section id="products" class="products" num="06" label="From MeroAlpha" title="What we make">
+      <ul class="products__list">
+        <Surface as="li">
+          <p class="kicker"><span class="chip"><span class="dot"></span>Private testing</span></p>
+          <h3>MeroAlpha Agent</h3>
+          <p>The macOS app on this page: an AI analyst that researches NEPSE in a browser you can watch and trades a paper account.</p>
+          <a class="link" href="/waitlist">Join the waitlist</a>
+        </Surface>
+        <Surface as="li">
+          <p class="kicker"><span class="chip chip--quiet">Shelved</span></p>
+          <h3>MeroAlpha Data Platform</h3>
+          <p>A NEPSE market-data API and research lab we built and never launched, because no provider could license us the data.</p>
+          <a class="link" href="/story">Read the story</a>
+        </Surface>
+      </ul>
+    </Section>
+
     <section class="close container" aria-labelledby="close-title">
       <Surface class="close__card">
-        <h2 id="close-title">Let it trade on paper for a week</h2>
-        <p class="lead">Then read its report card before you trust a single call.</p>
-        <div class="actions">
-          <PrimaryButton href="/download" glow>Download for macOS <span aria-hidden="true">→</span></PrimaryButton>
-        </div>
-        <Terminal lines={[
-          { label: 'Install the app', command: 'curl -fsSL https://meroalpha.com/install.sh | sh' },
-          { label: 'Install the Claude agent', command: 'npm install -g @agentclientprotocol/claude-agent-acp' },
-        ]} />
+        <h2 id="close-title">Be first to let it trade on paper</h2>
+        <p class="lead">MeroAlpha Agent is in private testing. Leave your email and we’ll write when there’s a build for you.</p>
+        <Waitlist id="close-email" />
       </Surface>
     </section>
   </main>

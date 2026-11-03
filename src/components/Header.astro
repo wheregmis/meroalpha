@@ -6,8 +6,8 @@ const { current } = Astro.props;
 const links = [
   { href: '/#demo', label: 'Try it' },
   { href: '/#day', label: 'How it trades' },
-  { href: '/changelog', label: 'Changelog', keep: true },
-  { href: '/privacy', label: 'Privacy' },
+  { href: '/story', label: 'Our story' },
+  { href: '/changelog', label: 'Changelog' },
 ];
 ---
 <header class="masthead">
@@ -18,9 +18,9 @@ const links = [
     </a>
     <nav aria-label="Main">
       {links.map((l) => (
-        <a class:list={['nav__link', l.keep && 'nav__link--keep']} href={l.href} aria-current={current === l.href ? 'page' : undefined}>{l.label}</a>
+        <a class="nav__link" href={l.href} aria-current={current === l.href ? 'page' : undefined}>{l.label}</a>
       ))}
-      <PrimaryButton href="/download" small>Download</PrimaryButton>
+      <PrimaryButton href="/waitlist" small>Join the waitlist</PrimaryButton>
     </nav>
   </div>
 </header>

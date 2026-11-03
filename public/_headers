@@ -12,6 +12,3 @@
   Cache-Control: public, max-age=31536000, immutable
 /demo/icons/*
   Cache-Control: public, max-age=31536000, immutable
-# Shown as text in a browser, so people can read the script before piping it to sh.
-/install.sh
-  Content-Type: text/plain; charset=utf-8
