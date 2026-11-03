@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MeroAlpha: a NEPSE analyst that trades on paper</title>
   <meta name="description" content="A macOS app where an AI agent researches the Nepal stock market in a browser you can watch and runs a paper account in virtual NPR.">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#05080A">
+  <meta name="color-scheme" content="light dark">
   <link rel="icon" href="assets/meroalpha.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/landing.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="aurora" aria-hidden="true"><span></span><span></span></div>
 
   <header class="masthead">
     <div class="nav container">
@@ -25,7 +25,7 @@
         <a class="nav__link" href="#demo">Try it</a>
         <a class="nav__link" href="#tour">Screens</a>
         <a class="nav__link" href="#day">How it trades</a>
-        <a class="nav__link" href="#changelog">Changelog</a>
+        <a class="nav__link nav__link--keep" href="#changelog">Changelog</a>
         <a class="nav__link" href="privacy.html">Privacy</a>
         <a class="btn btn--small" href="https://github.com/wheregmis/meroalpha/releases/latest">Download</a>
       </nav>
@@ -36,8 +36,8 @@
     <section class="hero container" aria-labelledby="hero-title">
       <div class="hero__grid" aria-hidden="true"></div>
       <div class="hero__text">
-        <p class="chip"><span class="chip__dot"></span>NEPSE · paper trading · macOS</p>
-        <h1 id="hero-title">A NEPSE analyst that <span class="glow">trades on paper</span></h1>
+        <p class="chip"><span class="dot"></span>NEPSE · paper trading · macOS</p>
+        <h1 id="hero-title">A NEPSE analyst that <em>trades on paper</em></h1>
         <p class="lead">It researches in a browser you can watch, and cites every page.</p>
         <div class="actions">
           <a class="btn btn--glow" href="https://github.com/wheregmis/meroalpha/releases/latest">Download for macOS <span aria-hidden="true">→</span></a>
@@ -47,12 +47,15 @@
       </div>
       <div class="hero__stage">
         <figure class="shot shot--hero">
-          <img src="assets/dark-07-ask.jpg" width="1920" height="1260" fetchpriority="high"
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="assets/dark-07-ask.jpg">
+            <img src="assets/light-07-ask.jpg" width="1920" height="1260" fetchpriority="high"
                alt="MeroAlpha’s stock page for NABIL with a price graph, and the Ask panel open beside it offering questions about the stock">
+          </picture>
         </figure>
-        <p class="hud hud--a" aria-hidden="true"><span class="hud__ping"></span>Researching in a live browser</p>
-        <p class="hud hud--b" aria-hidden="true"><span class="hud__key">src</span>Every finding cites its page</p>
-        <p class="hud hud--c" aria-hidden="true"><span class="hud__key">risk</span>1% of equity per plan</p>
+        <p class="hud hud--a" aria-hidden="true"><span class="dot"></span>Researching in a live browser</p>
+        <p class="hud hud--b" aria-hidden="true"><span class="hud__key">Sources</span>Every finding cites its page</p>
+        <p class="hud hud--c" aria-hidden="true"><span class="hud__key">Risk</span>1% of equity per plan</p>
       </div>
     </section>
 
@@ -65,7 +68,7 @@
 
     <section class="demo container" id="demo" aria-labelledby="demo-title">
       <div class="head" data-reveal>
-        <p class="kicker">01 / Live demo</p>
+        <p class="kicker"><b>01</b> Live demo</p>
         <h2 id="demo-title">Try it in your browser</h2>
         <p class="panel__caption">The real app on invented data: set up the agent, then explore the portfolio, market and charts. No agent, market or account is connected.</p>
       </div>
@@ -75,12 +78,12 @@
           <iframe src="demo/" title="MeroAlpha demo with synthetic data" loading="lazy" allow="clipboard-write"></iframe>
         </div>
       </div>
-      <p class="note"><a class="link" href="demo/" target="_blank" rel="noopener">Open the demo in its own tab ↗</a></p>
+      <p class="note"><a class="link" href="demo/" target="_blank" rel="noopener">Open the demo in its own tab</a></p>
     </section>
 
     <section class="tour container" id="tour" aria-labelledby="tour-title">
       <div class="head" data-reveal>
-        <p class="kicker">02 / Screens</p>
+        <p class="kicker"><b>02</b> Screens</p>
         <h2 id="tour-title">Three screens, each with one job</h2>
       </div>
       <div class="switch" data-switch data-reveal>
@@ -92,19 +95,28 @@
         <section class="panel" role="tabpanel" id="p-stock" aria-labelledby="t-stock">
           <p class="panel__caption">The price, your paper position and the agent’s plan. Information only: there are no buy or sell buttons.</p>
           <figure class="shot">
-            <img src="assets/dark-06-stock.jpg" width="1920" height="1260" loading="lazy" alt="A stock page with the last close, a three-month price graph, the 52-week range and news">
+            <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="assets/dark-06-stock.jpg">
+            <img src="assets/light-06-stock.jpg" width="1920" height="1260" loading="lazy" alt="A stock page with the last close, a three-month price graph, the 52-week range and news">
+          </picture>
           </figure>
         </section>
         <section class="panel" role="tabpanel" id="p-chart" aria-labelledby="t-chart">
           <p class="panel__caption">Candles, indicators and drawing tools, on MeroAlpha’s own chart engine.</p>
           <figure class="shot">
-            <img src="assets/dark-06-advanced-chart.jpg" width="1920" height="1260" loading="lazy" alt="The advanced chart with daily candles, a 20-day moving average, volume and drawing tools">
+            <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="assets/dark-06-advanced-chart.jpg">
+            <img src="assets/light-06-advanced-chart.jpg" width="1920" height="1260" loading="lazy" alt="The advanced chart with daily candles, a 20-day moving average, volume and drawing tools">
+          </picture>
           </figure>
         </section>
         <section class="panel" role="tabpanel" id="p-portfolio" aria-labelledby="t-portfolio">
           <p class="panel__caption">Cash, holdings and the loss limit, and a report card for every call.</p>
           <figure class="shot">
-            <img src="assets/dark-04-portfolio.jpg" width="1920" height="1260" loading="lazy" alt="The portfolio screen with the total value, cash, the agent’s next run and the report card">
+            <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="assets/dark-04-portfolio.jpg">
+            <img src="assets/light-04-portfolio.jpg" width="1920" height="1260" loading="lazy" alt="The portfolio screen with the total value, cash, the agent’s next run and the report card">
+          </picture>
           </figure>
         </section>
       </div>
@@ -112,27 +124,27 @@
 
     <section class="day container" id="day" aria-labelledby="day-title">
       <div class="head" data-reveal>
-        <p class="kicker">03 / The loop</p>
+        <p class="kicker"><b>03</b> The loop</p>
         <h2 id="day-title">How a trading day runs</h2>
       </div>
       <ol class="day__list">
-        <li class="glass" data-reveal>
-          <span class="day__time">Close</span>
+        <li class="card" data-reveal>
+          <span class="day__time">Step 1</span>
           <h3>After the close</h3>
           <p>It scans the watchlist and drafts plans: an entry ceiling, a fixed stop and target, and 1% of equity at risk.</p>
         </li>
-        <li class="glass" data-reveal>
-          <span class="day__time">Every 5 min</span>
+        <li class="card" data-reveal>
+          <span class="day__time">Step 2</span>
           <h3>Every five minutes</h3>
           <p>A plan triggers on a five-minute candle above the first 15 minutes’ high, until 14:30 NPT.</p>
         </li>
-        <li class="glass" data-reveal>
-          <span class="day__time">On print</span>
+        <li class="card" data-reveal>
+          <span class="day__time">Step 3</span>
           <h3>The fill</h3>
           <p>Orders fill only from fresh trade prints, with fees, slippage and a 10% participation cap.</p>
         </li>
-        <li class="glass" data-reveal>
-          <span class="day__time">T + 5</span>
+        <li class="card" data-reveal>
+          <span class="day__time">Step 4</span>
           <h3>Five sessions later</h3>
           <p>Each call is graded against the NEPSE index, and the report card keeps score.</p>
         </li>
@@ -141,23 +153,23 @@
 
     <section class="data container" id="data" aria-labelledby="data-title">
       <div class="head" data-reveal>
-        <p class="kicker">04 / Privacy</p>
+        <p class="kicker"><b>04</b> Privacy</p>
         <h2 id="data-title">Your research stays on your Mac</h2>
         <p class="data__more"><a class="link" href="privacy.html">Read the privacy policy</a></p>
       </div>
       <dl class="data__list">
-        <div class="glass" data-reveal><dt><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Local by default</dt><dd>Captured pages, findings and the paper account live in your Library folder.</dd></div>
-        <div class="glass" data-reveal><dt><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>Sharing is optional</dt><dd>Signed in, it shares verified findings with their page’s address and hash, never the page.</dd></div>
-        <div class="glass" data-reveal><dt><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/></svg>Your own agent</dt><dd>Connect Claude or Codex over ACP, signed in with its own CLI.</dd></div>
+        <div class="card" data-reveal><dt><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Local by default</dt><dd>Captured pages, findings and the paper account live in your Library folder.</dd></div>
+        <div class="card" data-reveal><dt><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>Sharing is optional</dt><dd>Signed in, it shares verified findings with their page’s address and hash, never the page.</dd></div>
+        <div class="card" data-reveal><dt><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/></svg>Your own agent</dt><dd>Connect Claude or Codex over ACP, signed in with its own CLI.</dd></div>
       </dl>
     </section>
 
     <section class="changelog container" id="changelog" aria-labelledby="changelog-title">
       <div class="changelog__intro head" data-reveal>
-        <p class="kicker">05 / Changelog</p>
+        <p class="kicker"><b>05</b> Changelog</p>
         <h2 id="changelog-title">What’s new</h2>
         <p class="lead">The latest changes to MeroAlpha Agent, straight from the public releases.</p>
-        <a class="btn btn--ghost btn--small" href="https://github.com/wheregmis/meroalpha/releases">Full release history ↗</a>
+        <a class="btn btn--ghost btn--small" href="https://github.com/wheregmis/meroalpha/releases">Full release history</a>
       </div>
       <div class="changelog__content">
         <p class="note" role="status" data-release-status>See the full release history for all changes.</p>
@@ -166,7 +178,7 @@
     </section>
 
     <section class="close container" aria-labelledby="close-title">
-      <div class="close__card" data-reveal>
+      <div class="close__card card" data-reveal>
         <h2 id="close-title">Let it trade on paper for a week</h2>
         <p class="lead">Then read its report card before you trust a single call.</p>
         <div class="actions">
@@ -221,49 +233,9 @@
     </div>
   </footer>
 
-  <script type="module" src="changelog.mjs"></script>
-  <script>
-    document.querySelectorAll('[data-switch]').forEach((root) => {
-      const tabs = [...root.querySelectorAll('[role="tab"]')];
-      const show = (tab) => {
-        tabs.forEach((t) => {
-          const on = t === tab;
-          t.setAttribute('aria-selected', String(on));
-          t.tabIndex = on ? 0 : -1;
-          document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-        });
-      };
-      show(tabs[0]);
-      tabs.forEach((t, i) => {
-        t.addEventListener('click', () => show(t));
-        t.addEventListener('keydown', (e) => {
-          const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-          if (!step) return;
-          const next = tabs[(i + step + tabs.length) % tabs.length];
-          show(next); next.focus();
-        });
-      });
-    });
-    // Reveal sections once as they scroll in; without JS or IntersectionObserver everything stays visible.
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-      }), { rootMargin: '0px 0px -10% 0px' });
-      document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
-    } else document.documentElement.classList.remove('js');
-    // Cards follow the pointer with a soft light.
-    document.addEventListener('pointermove', (e) => {
-      const card = e.target.closest?.('.glass, .release');
-      if (!card) return;
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      card.style.setProperty('--my', `${e.clientY - r.top}px`);
-    });
-    document.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(b.previousElementSibling.textContent); b.textContent = 'Copied'; }
-      catch { b.textContent = 'Select to copy'; }
-      setTimeout(() => { b.textContent = 'Copy'; }, 1600);
-    }));
-  </script>
+  <script type="module" src="js/changelog.mjs"></script>
+  <script type="module" src="js/tabs.mjs"></script>
+  <script type="module" src="js/motion.mjs"></script>
+  <script type="module" src="js/copy.mjs"></script>
 </body>
 </html>

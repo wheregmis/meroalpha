@@ -8,13 +8,21 @@
   --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
   --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  --color-paper: #05080A; --color-paper-2: #0B1215; --color-paper-3: #131D21;
-  --color-ink: #E9F4F0; --color-ink-2: #B9F7DF; --color-muted: #8C9E98;
-  --color-rule: #1B2A2B; --color-rule-strong: #3B4E4A;
-  --color-accent: #34D399; --color-accent-ink: #03150D; --color-focus: #5EEAD4;
-  --color-accent-2: #22D3EE; --color-accent-3: #A78BFA;
-  --color-gain: #5DD993; --color-shadow: #00000099;
+  --color-paper: #F6F8F7; --color-paper-2: #FFFFFF; --color-paper-3: #EDF2F0;
+  --color-ink: #15221E; --color-ink-2: #0E4E42; --color-muted: #596B63;
+  --color-rule: #DCE4E0; --color-rule-strong: #808F88;
+  --color-accent: #126C5B; --color-accent-ink: #FFFFFF; --color-focus: #126C5B;
+  --color-gain: #087443; --color-shadow: #122C2012;
   --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", ui-sans-serif, system-ui, sans-serif; --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", ui-sans-serif, system-ui, sans-serif; --font-mono: ui-monospace, "SF Mono", Menlo, monospace; --font-outlier: var(--font-body);
   --radius-card: 12px; --radius-shot: 14px; --radius-input: 8px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
   --tracking-display: -0.02em;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper: #0F0F10; --color-paper-2: #1A1A1C; --color-paper-3: #262628;
+    --color-ink: #F2F2F3; --color-ink-2: #A6DCCC; --color-muted: #A1A1A6;
+    --color-rule: #2C2C2F; --color-rule-strong: #6A6A70;
+    --color-accent: #80CDB8; --color-accent-ink: #0C2921; --color-focus: #80CDB8;
+    --color-gain: #5DD993; --color-shadow: #00000066;
+  }
 }

@@ -1,6 +1,8 @@
 import { releaseNotesText } from './release-notes.mjs';
 export const RELEASE_API = 'https://api.github.com/repos/wheregmis/meroalpha/releases?per_page=10';
 const page = 'https://github.com/wheregmis/meroalpha/releases/tag/';
+// The app's dayLabel format: Tue 3 Nov 2026.
+export const dayLabel = (iso) => { const d=new Date(iso), f=o=>d.toLocaleDateString('en',{...o,timeZone:'UTC'}); return `${f({weekday:'short'})} ${d.getUTCDate()} ${f({month:'short'})} ${d.getUTCFullYear()}`; };
 export function publicReleases(value) {
   if (!Array.isArray(value)) throw Error('Invalid release list');
   const releases = value.filter(r => r && !r.draft && !r.prerelease && typeof r.tag_name === 'string' && /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/.test(r.tag_name) && r.tag_name.slice(1).split('.').every(n=>Number.isSafeInteger(Number(n))) && r.html_url === page + r.tag_name && typeof r.published_at === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(r.published_at) && Number.isFinite(Date.parse(r.published_at)));
@@ -16,10 +18,10 @@ export async function loadChangelog(doc = document, get = fetch) {
     if(!response.ok)throw Error('Release notes unavailable');
     const releases=publicReleases(await response.json());
     for(const [i,release] of releases.entries()) {
-      const item=doc.createElement('article');item.className=i?'release':'release release--latest';
+      const item=doc.createElement('article');item.className=i?'card release':'card release release--latest';
       const header=doc.createElement('div');header.className='release__head';
       const title=doc.createElement('h3'),link=doc.createElement('a');link.href=release.url;link.textContent=`v${release.version}`;title.append(link);
-      const date=doc.createElement('time');date.dateTime=release.date;date.textContent=new Date(release.date).toLocaleDateString('en',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
+      const date=doc.createElement('time');date.dateTime=release.date;date.textContent=dayLabel(release.date);
       const notes=doc.createElement('div');notes.className='release__notes';
       for(const block of release.notes.split(/\n\n+/)) {
         const lines=block.split('\n'), bullets=lines.every(line=>/^[-*]\s+/.test(line));
