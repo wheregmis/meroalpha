@@ -33,7 +33,10 @@ def appcast():
     enclosure = one(item, 'enclosure')
     if item.find(SPARKLE + 'channel') is not None or SPARKLE + 'installationType' in enclosure.attrib:
         raise ValueError('Only the default application channel is supported')
-    return {'version': text(item, SPARKLE + 'version'), 'shortVersion': text(item, SPARKLE + 'shortVersionString'),
+    description = item.find('description')
+    return {'notes': description.text if description is not None else None,
+            'notesFormat': description.get(SPARKLE + 'format') if description is not None else None,
+            'version': text(item, SPARKLE + 'version'), 'shortVersion': text(item, SPARKLE + 'shortVersionString'),
             'minimum': text(item, SPARKLE + 'minimumSystemVersion'), 'url': enclosure.get('url'),
             'length': enclosure.get('length'), 'type': enclosure.get('type'),
             'signature': enclosure.get(SPARKLE + 'edSignature'), 'os': enclosure.get(SPARKLE + 'os')}

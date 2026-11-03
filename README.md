@@ -85,3 +85,9 @@ repository/tag URL, stable version, byte length and Ed25519 signature. Missing o
 invalid authentication is never silently downgraded to manual-only. A checksum
 beside a ZIP is not authenticity; do not get the key from that same download.
 Research/account data is never included in a release or sent by update checks.
+
+## Landing-page changelog
+
+The What’s new section reads the latest three stable public releases from GitHub's unauthenticated releases API. Version/date links are validated against this repository; bodies render as bounded plain text, never HTML or remote images. No token, server or deployment secret is needed. API failure/rate limiting and disabled JavaScript retain a link to the full release history. Existing release notes are shown as-is; future agent releases supply useful changes from their reviewed prepared notes.
+
+Run `node --test tests/changelog.test.mjs tests/release.test.mjs`. Serve locally with `python3 -m http.server` for visual checks. Website deployment is separate from a code PR.

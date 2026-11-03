@@ -22,6 +22,7 @@
         <a class="nav__link" href="#demo">Try it</a>
         <a class="nav__link" href="#tour">Screens</a>
         <a class="nav__link" href="#day">How it trades</a>
+        <a class="nav__link" href="#changelog">Changelog</a>
         <a class="nav__link" href="privacy.html">Privacy</a>
         <a class="btn btn--small" href="https://github.com/wheregmis/meroalpha/releases/latest">Download</a>
       </nav>
@@ -129,6 +130,18 @@
       <p class="data__more"><a class="link" href="privacy.html">Read the privacy policy</a></p>
     </section>
 
+    <section class="changelog container" id="changelog" aria-labelledby="changelog-title">
+      <div class="changelog__intro">
+        <h2 id="changelog-title">What’s new</h2>
+        <p class="lead">The latest changes to MeroAlpha Agent.</p>
+        <a class="link" href="https://github.com/wheregmis/meroalpha/releases">Full release history</a>
+      </div>
+      <div class="changelog__content">
+        <p class="note" role="status" data-release-status>See the full release history for all changes.</p>
+        <div class="releases" data-releases></div>
+      </div>
+    </section>
+
     <section class="close container" aria-labelledby="close-title">
       <div class="close__text">
         <h2 id="close-title">Let it trade on paper for a week</h2>
@@ -157,7 +170,7 @@
           <li><a href="#demo">Try it in your browser</a></li>
           <li><a href="#tour">Screens</a></li>
           <li><a href="#day">How it trades</a></li>
-          <li><a href="https://github.com/wheregmis/meroalpha/releases">Release notes</a></li>
+          <li><a href="#changelog">Changelog</a></li>
         </ul>
       </nav>
       <nav class="foot__col" aria-labelledby="foot-legal">
@@ -182,6 +195,7 @@
     </div>
   </footer>
 
+  <script type="module" src="changelog.mjs"></script>
   <script>
     document.querySelectorAll('[data-switch]').forEach((root) => {
       const tabs = [...root.querySelectorAll('[role="tab"]')];
