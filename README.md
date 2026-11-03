@@ -15,6 +15,13 @@ npm run site:build    # rebuilds demo/; commit it here
 npm run site:dev      # http://localhost:8787
 ```
 
+## Workers Builds and local validation
+
+`wrangler preview` requires the tracked `previews: {}` block in `wrangler.jsonc`; branches created before that fix must bring in current `master`. Static assets stay at the top level. A read-only packaging check is `npx wrangler@4.156.2 deploy --dry-run`; it does not create a Preview or deploy the site.
+
+The asset root is this directory. `.assetsignore` excludes hidden local state, including environment files and tooling databases, in addition to scripts/tests/configuration. Never copy credentials or private application data into the site's public files. The committed `demo/` and normal HTML/CSS/JavaScript/assets remain included.
+
+
 ## Install
 
 On a Mac with Apple silicon (macOS 14+), one command installs the latest release into `/Applications`:
@@ -85,9 +92,3 @@ repository/tag URL, stable version, byte length and Ed25519 signature. Missing o
 invalid authentication is never silently downgraded to manual-only. A checksum
 beside a ZIP is not authenticity; do not get the key from that same download.
 Research/account data is never included in a release or sent by update checks.
-
-### Workers Builds and local validation
-
-`wrangler preview` requires the tracked `previews: {}` block in `wrangler.jsonc`; branches created before that fix must bring in current `master`. Static assets stay at the top level. A read-only packaging check is `npx wrangler@4.156.2 deploy --dry-run`; it does not create a Preview or deploy the site.
-
-The asset root is this directory. `.assetsignore` excludes hidden local state, including environment files and tooling databases, in addition to scripts/tests/configuration. Never copy credentials or private application data into the site's public files. The committed `demo/` and normal HTML/CSS/JavaScript/assets remain included.
