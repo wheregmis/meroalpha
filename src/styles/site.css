@@ -145,7 +145,10 @@ h2 { color: var(--color-ink); }
 }
 /* A disclosure keeps the mobile header compact without hiding navigation when JS fails. */
 @media (max-width: 50rem) {
-  .masthead { padding-inline: var(--space-sm); }
+  /* The full fallback link stack must scroll away on short screens. Only the
+   * successfully initialized, compact header can safely stay sticky. */
+  .masthead { position: relative; padding-inline: var(--space-sm); }
+  .masthead:has(.nav[data-ready]) { position: sticky; }
   .nav { padding-inline: var(--space-md); flex-wrap: wrap; gap: 0; }
   .nav::before { inset: 0; }
   .nav .brand { min-height: 60px; }

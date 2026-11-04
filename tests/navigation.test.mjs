@@ -102,3 +102,28 @@ test('outside pointer dismisses and rescues focus from the hidden panel', () => 
   assert.equal(f.panel.hidden, true);
   assert.equal(f.doc.activeElement, f.button);
 });
+
+test('mobile fallback scrolls away; stickiness requires successful navigation initialization', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const css = await readFile(new URL('../src/styles/site.css', import.meta.url), 'utf8');
+  const mobile = css.slice(css.indexOf('@media (max-width: 50rem)'), css.indexOf('@media (max-width: 40rem)'));
+  // Stylesheet contract rather than a browser layout assertion. The fallback's
+  // 60px brand + four 48px links + CTA exceeds a 320px landscape viewport.
+  assert.match(mobile, /\.masthead\s*\{[^}]*position:\s*relative\s*;/);
+  assert.match(mobile, /\.masthead:has\(\.nav\[data-ready\]\)\s*\{\s*position:\s*sticky\s*;/);
+  assert.doesNotMatch(mobile, /\.masthead\s*\{[^}]*position:\s*sticky\s*;/);
+  const f = fixture();
+  assert.equal(f.root.hasAttribute('data-ready'), true);
+  assert.equal(f.panel.hidden, true);
+});
+
+test('missing navigation controls never mark the expanded fallback ready', () => {
+  let ready = false;
+  const root = {
+    querySelector: () => null,
+    hasAttribute: () => false,
+    setAttribute: () => { ready = true; },
+  };
+  initNavigation(root);
+  assert.equal(ready, false);
+});
