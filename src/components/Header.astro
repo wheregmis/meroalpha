@@ -11,16 +11,28 @@ const links = [
 ];
 ---
 <header class="masthead">
-  <div class="nav container">
+  <div class="nav container" data-navigation>
     <a class="brand" href="/" aria-label="MeroAlpha home">
       <img src="/assets/meroalpha.svg" width="32" height="32" alt="">
       <span>MeroAlpha</span>
     </a>
-    <nav aria-label="Main">
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="main-navigation" hidden>
+      <span>Menu</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path class="nav__menu-icon" d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        <path class="nav__close-icon" d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </svg>
+    </button>
+    <nav id="main-navigation" aria-label="Main">
       {links.map((l) => (
         <a class="nav__link" href={l.href} aria-current={current === l.href ? 'page' : undefined}>{l.label}</a>
       ))}
+      {current !== '/waitlist' && <PrimaryButton href="/waitlist" small>Join the waitlist</PrimaryButton>}
     </nav>
-    {current !== '/waitlist' && <PrimaryButton href="/waitlist" small>Join the waitlist</PrimaryButton>}
   </div>
 </header>
+
+<script>
+  import { initNavigation } from '../scripts/navigation.mjs';
+  document.querySelectorAll('[data-navigation]').forEach(initNavigation);
+</script>

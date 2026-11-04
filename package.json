@@ -9,7 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "node --test tests/changelog.test.mjs tests/release.test.mjs tests/waitlist.test.mjs tests/scroll-demo.test.mjs tests/feedback.test.mjs"
+    "test": "node --test tests/changelog.test.mjs tests/release.test.mjs tests/waitlist.test.mjs tests/scroll-demo.test.mjs tests/feedback.test.mjs tests/navigation.test.mjs"
   },
   "dependencies": {
     "@astrojs/react": "7.1.2",
