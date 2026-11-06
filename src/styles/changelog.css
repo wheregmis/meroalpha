@@ -41,9 +41,9 @@
 .changelog-page__summary div { display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
 .changelog-page__summary dt { font-weight: 600; }
 .changelog-page__summary dd { margin: 0; color: var(--color-muted); }
-.changelog-page__shipped, .changelog-page__building { display: grid; gap: var(--space-xl); padding-block: var(--section-gap-s) 0; }
+.changelog-page__shipped, .changelog-page__building { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); padding-block: var(--section-gap-s) 0; }
 .changelog-page__shipped .updates, .changelog-page__next { max-width: 880px; }
-.changelog-page__next { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-md); }
+.changelog-page__next { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: var(--space-md); }
 .changelog-page__next li { display: grid; gap: var(--space-xs); justify-items: start; align-content: start; padding: var(--space-lg); }
 #planned .changelog-page__next li { border-style: dashed; border-color: var(--color-rule); background: transparent; box-shadow: none; }
 #building .update__kind { border-color: var(--color-accent); color: var(--color-accent); }

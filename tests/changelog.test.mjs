@@ -25,3 +25,9 @@ test('empty, rate limited, offline and malformed responses leave a useful fallba
   await loadChangelog(doc,get);assert.match(status.textContent,/release history/);assert.notEqual(status.hidden,true);
  }
 });
+test('roadmap sections shrink to the screen, because the page clips sideways overflow (#17)',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const css=await readFile(new URL('../src/styles/changelog.css',import.meta.url),'utf8');
+ assert.match(css,/\.changelog-page__shipped, \.changelog-page__building \{[^}]*grid-template-columns: minmax\(0, 1fr\)/);
+ assert.match(css,/\.changelog-page__next \{[^}]*minmax\(min\(260px, 100%\), 1fr\)/);
+});
