@@ -9,7 +9,7 @@ export async function joinWaitlist(email, fetchImpl = fetch) {
   if (address.length > 254 || !EMAIL.test(address)) return 'invalid';
   try {
     const res = await fetchImpl(`${SUPABASE.url}/rest/v1/rpc/join_waitlist`, {
-      method: 'POST',
+      method: 'POST', signal: AbortSignal.timeout(15000),
       headers: { apikey: SUPABASE.key, 'Content-Type': 'application/json' },
       body: JSON.stringify({ address }),
     });
@@ -20,6 +20,7 @@ export async function joinWaitlist(email, fetchImpl = fetch) {
 }
 
 const MESSAGES = {
+  pending: 'Adding your address…',
   ok: 'You’re on the list. We’ll write to you when there’s a build to try.',
   invalid: 'That doesn’t look like an email address.',
   error: 'Something went wrong on our side. Try again, or email get2sabin@gmail.com.',
@@ -28,18 +29,26 @@ const MESSAGES = {
 /** Wires every [data-waitlist] form on the page. */
 export function mountWaitlist(doc = document) {
   for (const form of doc.querySelectorAll('[data-waitlist]')) {
-    const status = form.querySelector('[data-waitlist-status]'), button = form.querySelector('button');
+    const status = form.querySelector('[data-waitlist-status]'), button = form.querySelector('button'), email = form.elements.email;
+    const show = (state) => { status.textContent = MESSAGES[state]; status.dataset.state = state; };
     button.disabled = false;
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      email.removeAttribute('aria-invalid');
+      email.removeAttribute('aria-describedby');
       // shortcut: a honeypot is the only bot check, add Turnstile if junk sign-ups show up.
       if (form.elements.website.value) return void (status.textContent = MESSAGES.ok);
       button.disabled = true;
-      const result = await joinWaitlist(form.elements.email.value);
+      show('pending');
+      const result = await joinWaitlist(email.value);
       button.disabled = false;
-      status.textContent = MESSAGES[result];
-      status.dataset.state = result;
+      show(result);
       if (result === 'ok') form.reset();
+      if (result === 'invalid') {
+        email.setAttribute('aria-invalid', 'true');
+        email.setAttribute('aria-describedby', status.id);
+        email.focus();
+      }
     });
   }
 }

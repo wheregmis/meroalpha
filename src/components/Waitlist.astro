@@ -13,7 +13,7 @@ const { id = 'waitlist-email' } = Astro.props;
   <!-- Enabled by mountWaitlist: without JavaScript a submit would post nowhere. -->
   <button class="btn btn--glow" type="submit" disabled>Join the waitlist</button>
   <noscript><p class="note">The form needs JavaScript. Or email <a class="link" href="mailto:get2sabin@gmail.com?subject=MeroAlpha%20waitlist">get2sabin@gmail.com</a> to join.</p></noscript>
-  <p class="wait__status note" role="status" data-waitlist-status></p>
+  <p class="wait__status note" id={`${id}-status`} role="status" data-waitlist-status></p>
 </form>
 <script>
   import { mountWaitlist } from '../lib/waitlist.mjs';
