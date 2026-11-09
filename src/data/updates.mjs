@@ -20,7 +20,7 @@ export const shipped = [
   { area: 'charts', kind: 'Feature', title: 'Advanced chart', body: 'Candles, indicators and drawing tools on MeroAlpha’s own chart engine, with 5-minute to weekly bars and a NEPSE comparison.', href: '/#tour' },
   { area: 'charts', kind: 'Feature', title: 'Stock page', body: 'The last close, a price graph, the 52-week range, news and your paper position. Information only: there are no buy or sell buttons.', href: '/#tour' },
   { area: 'privacy', kind: 'Feature', title: 'Local by default', body: 'Captured pages, findings and the paper account live in your Library folder.', href: '/privacy' },
-  { area: 'privacy', kind: 'Feature', title: 'Optional sharing', body: 'Signed in, the agent shares verified findings with their page’s address and hash, never the page itself.', href: '/privacy' },
+  { area: 'privacy', kind: 'Feature', title: 'Optional sharing', body: 'Sharing is a separate switch, off by default. Turned on, findings, your agent’s checks and questions, and graded paper calls go to other users, never the pages themselves.', href: '/privacy' },
 ];
 
 // The roadmap, in order. The first two are in development; the rest are planned.
