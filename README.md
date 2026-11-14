@@ -1,6 +1,6 @@
 # MeroAlpha
 
-The landing page for [MeroAlpha](https://github.com/wheregmis/meroalpha), a macOS app where an AI agent researches the Nepal stock market (NEPSE) in a browser you can watch and runs a paper account in virtual NPR. No real money moves.
+The landing page for [MeroAlpha](https://github.com/wheregmis/meroalpha), a desktop app for macOS, Windows and Linux where an AI agent researches the Nepal stock market (NEPSE) in a browser you can watch and runs a paper account in virtual NPR. No real money moves.
 
 An [Astro](https://astro.build) site: every page is static HTML, and React runs only in the components a page hydrates (`client:*`), today the screen switcher. Node 24+.
 
