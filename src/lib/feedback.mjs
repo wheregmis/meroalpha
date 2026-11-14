@@ -1,4 +1,4 @@
-import { SUPABASE } from './waitlist.mjs';
+import { SUPABASE } from './supabase.mjs';
 
 export const CATEGORIES = ['feedback', 'question', 'bug', 'partnership'];
 export function validateFeedback(input) {
