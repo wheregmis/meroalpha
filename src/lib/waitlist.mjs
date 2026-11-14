@@ -1,6 +1,5 @@
-// The waitlist lives in the agent's Supabase project (meroalpha_agent/supabase/migrations/*_waitlist.sql).
-// The publishable key is public by design: it can only call join_waitlist, which can't read the list.
-export const SUPABASE = { url: 'https://hzdbjqsjydgbrpwuvpcq.supabase.co', key: 'sb_publishable_o6x-lgI1tptYK50ZQ1-bRg_pDe_Td-G' };
+import { SUPABASE } from './supabase.mjs';
+export { SUPABASE };
 const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 /** Adds an address; resolves 'ok', 'invalid' or 'error'. The database answers a repeat address like a new one, so nothing reveals who is on the list. */
