@@ -30,13 +30,13 @@ const arc = [
   { label: 'First', title: 'We built the platform', body: 'Collectors, an evidence archive, a REST API, an MCP server and a research lab.' },
   { label: 'Then', title: 'We looked for a licence', body: 'Selling NEPSE data through an API needs a provider with the right to let us redistribute it.' },
   { label: 'So', title: 'We kept it private', body: 'We found no such provider, and we weren’t willing to run a paid feed without one.' },
-  { label: 'Now', title: 'We built the agent', body: 'An analyst on your Mac that reads public pages in front of you and trades on paper.' },
+  { label: 'Now', title: 'We built the agent', body: 'An analyst on your computer that reads public pages in front of you and trades on paper.' },
 ];
 
 const lessons = [
   { title: 'Don’t redistribute what you don’t own', body: 'MeroAlpha never resells or republishes market data. There is no MeroAlpha feed and no MeroAlpha API.' },
-  { title: 'Read the market the way you would', body: 'The agent opens public pages in a browser on your Mac, in front of you, the same pages you could open yourself.' },
-  { title: 'Cite, don’t copy', body: 'Each finding keeps the page’s address, title and a hash of what it said. If you share findings, the page itself never leaves your Mac.' },
+  { title: 'Read the market the way you would', body: 'The agent opens public pages in a browser on your computer, in front of you, the same pages you could open yourself.' },
+  { title: 'Cite, don’t copy', body: 'Each finding keeps the page’s address, title and a hash of what it said. If you share findings, the page itself never leaves your computer.' },
   { title: 'Keep the rigour', body: 'The habits from the platform stayed: dated evidence, fees and slippage on every fill, and a report card graded against the NEPSE index.' },
 ];
 ---
@@ -66,7 +66,7 @@ const lessons = [
       </div>
     </Section>
 
-    <Section id="approach" num="03" label="What we do now" title="An analyst on your Mac, not a feed">
+    <Section id="approach" num="03" label="What we do now" title="An analyst on your computer, not a feed">
       <p slot="intro" class="panel__caption">MeroAlpha Agent keeps the platform’s discipline and drops the part we couldn’t do properly.</p>
       <CardGrid items={lessons.map((l, i) => ({ kicker: `0${i + 1}`, ...l }))} ordered />
     </Section>
