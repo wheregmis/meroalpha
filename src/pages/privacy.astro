@@ -2,7 +2,7 @@
 import Page from '../layouts/Page.astro';
 import '../styles/legal.css';
 ---
-<Page title="Privacy policy: MeroAlpha" description="What MeroAlpha keeps on your Mac, what leaves it, and who sees it." current="/privacy">
+<Page title="Privacy policy: MeroAlpha" description="What MeroAlpha keeps on your computer, what leaves it, and who sees it." current="/privacy">
   <main id="main" class="legal container">
     <div class="legal__head">
       <h1>Privacy policy</h1>
@@ -13,8 +13,8 @@ import '../styles/legal.css';
       <h2 class="legal__toc-title" id="toc-title">On this page</h2>
       <ol>
         <li><a href="#short">The short version</a></li>
-        <li><a href="#mac">What stays on your Mac</a></li>
-        <li><a href="#leaves">What leaves your Mac</a></li>
+        <li><a href="#mac">What stays on your computer</a></li>
+        <li><a href="#leaves">What leaves your computer</a></li>
         <li><a href="#shared">The shared insight store</a></li>
         <li><a href="#site">This website</a></li>
         <li><a href="#waitlist">The waitlist</a></li>
@@ -29,7 +29,7 @@ import '../styles/legal.css';
         <h2>The short version</h2>
         <ul>
           <li>You sign in with Google to use MeroAlpha. Signed out, only the sample demo is available.</li>
-          <li>Your research, paper account and settings stay on your Mac.</li>
+          <li>Your research, paper account and settings stay on your computer.</li>
           <li>Your questions go to the AI agent you connect, under your own account with that provider.</li>
           <li>Sharing is a separate switch, off by default. Only if you turn it on are findings and your agent’s research shared with other MeroAlpha users. Page contents, screenshots and your account’s cash are never shared.</li>
           <li>No ads, no analytics and no selling of data.</li>
@@ -37,8 +37,8 @@ import '../styles/legal.css';
       </section>
 
       <section id="mac">
-        <h2>What stays on your Mac</h2>
-        <p>The app keeps everything it makes in <code>~/Library/Application Support/com.meroalpha.agent/</code>:</p>
+        <h2>What stays on your computer</h2>
+        <p>The app keeps everything it makes in its data folder on your computer:</p>
         <ul>
           <li><strong>Agent connection</strong>: which AI agent you chose and how to start it.</li>
           <li><strong>Evidence</strong>: the pages the agent captured and the findings it drew from them.</li>
@@ -49,11 +49,11 @@ import '../styles/legal.css';
       </section>
 
       <section id="leaves">
-        <h2>What leaves your Mac</h2>
+        <h2>What leaves your computer</h2>
         <h3>The AI agent you connect</h3>
         <p>MeroAlpha talks to an agent you install and sign in to yourself, such as Claude or Codex. Your questions, the pages the agent reads and the paper account details a run needs are sent to that agent, and through it to its provider (for example Anthropic or OpenAI). That provider’s own privacy policy and terms apply. We do not receive a copy.</p>
         <h3>The websites the agent reads</h3>
-        <p>The agent opens public pages, such as NEPSE, ShareSansar, MeroLagani and news sites, in your Mac’s own web view. Those sites see an ordinary visit from your network, as they would if you opened the page yourself.</p>
+        <p>The agent opens public pages, such as NEPSE, ShareSansar, MeroLagani and news sites, in your computer’s own web view. Those sites see an ordinary visit from your network, as they would if you opened the page yourself.</p>
         <h3>Jev browsing, if you turn it on</h3>
         <p>Off by default. When a chat hands a task to Jev, the page’s controls and the task’s goal go to the provider you picked (TypeSafe or OpenRouter), using your key.</p>
         <h3>Update checks</h3>
@@ -74,7 +74,7 @@ import '../styles/legal.css';
         </ul>
         <p>Signed-in users can read shared rows. Each row carries your account ID, not your name or email. Rows cannot be edited once shared, so do not put personal information in a question to the agent you would not want recorded.</p>
         <h3>How long</h3>
-        <p>Shared rows are kept while your account exists. Deleting your account deletes every row linked to it. Signing out stops sharing and revokes the session on your Mac.</p>
+        <p>Shared rows are kept while your account exists. Deleting your account deletes every row linked to it. Signing out stops sharing and revokes the session on your computer.</p>
       </section>
 
       <section id="site">
