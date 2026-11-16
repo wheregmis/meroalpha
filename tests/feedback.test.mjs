@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { validateFeedback, submitFeedback, mountFeedback } from '../src/lib/feedback.mjs';
+import { SUPABASE } from '../src/lib/supabase.mjs';
 
 const valid = { category: 'feedback', email: '', message: 'A synthetic product idea.' };
 test('validation normalizes input and requires reply details only for questions', () => {
@@ -17,16 +18,20 @@ test('validation normalizes input and requires reply details only for questions'
   assert.ok(validateFeedback({ ...valid, message: '😀'.repeat(4001) }).errors.message);
 });
 
-test('transport sends only bounded user fields and a stable id, treats retries identically', async () => {
+test('transport sends only bounded user fields and a stable id, treats retries identically', async (t) => {
+  const signal = new AbortController().signal;
+  t.mock.method(AbortSignal, 'timeout', (ms) => (assert.equal(ms, 15000), signal));
   const calls = [];
   const id = '00000000-0000-4000-8000-000000000001';
   const fetcher = async (url, init) => { calls.push({ url, init }); return { ok: true }; };
   assert.equal(await submitFeedback({ ...valid, secret: 'discard' }, id, '', fetcher), 'ok');
   assert.equal(await submitFeedback(valid, id, '', fetcher), 'ok');
-  assert.equal(calls[0].url.endsWith('/rest/v1/rpc/submit_site_feedback'), true);
+  assert.equal(calls[0].url, `${SUPABASE.url}/rest/v1/rpc/submit_site_feedback`);
+  assert.equal(calls[0].init.method, 'POST');
+  assert.deepEqual(calls[0].init.headers, { apikey: SUPABASE.key, 'Content-Type': 'application/json' });
   assert.deepEqual(JSON.parse(calls[0].init.body), { ...valid, request_id: id, website: '' });
   assert.equal(calls[0].init.body, calls[1].init.body);
-  assert.ok(calls[0].init.signal instanceof AbortSignal);
+  assert.equal(calls[0].init.signal, signal);
   assert.equal(await submitFeedback({ ...valid, message: '' }, id, '', () => assert.fail('no request')), 'invalid');
 });
 

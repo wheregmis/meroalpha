@@ -1,4 +1,4 @@
-import { SUPABASE } from './supabase.mjs';
+import { callRpc } from './supabase.mjs';
 
 export const CATEGORIES = ['feedback', 'question', 'bug', 'partnership'];
 export function validateFeedback(input) {
@@ -17,11 +17,7 @@ export async function submitFeedback(data, requestId, website = '', fetchImpl = 
   const validated = validateFeedback(data);
   if (Object.keys(validated.errors).length) return 'invalid';
   try {
-    const res = await fetchImpl(`${SUPABASE.url}/rest/v1/rpc/submit_site_feedback`, {
-      method: 'POST', signal: AbortSignal.timeout(15000),
-      headers: { apikey: SUPABASE.key, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...validated.data, request_id: requestId, website }),
-    });
+    const res = await callRpc('submit_site_feedback', { ...validated.data, request_id: requestId, website }, fetchImpl);
     if (res.ok) return 'ok';
     const error = await res.json().catch(() => ({}));
     return error.code === 'P0001' ? 'limited' : 'error';
