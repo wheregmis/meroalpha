@@ -1,5 +1,5 @@
-import { SUPABASE } from './supabase.mjs';
-export { SUPABASE };
+import { callRpc } from './supabase.mjs';
+export { SUPABASE } from './supabase.mjs';
 const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 /** Adds an address; resolves 'ok', 'invalid' or 'error'. The database answers a repeat address like a new one, so nothing reveals who is on the list. */
@@ -7,11 +7,7 @@ export async function joinWaitlist(email, fetchImpl = fetch) {
   const address = String(email ?? '').trim().toLowerCase();
   if (address.length > 254 || !EMAIL.test(address)) return 'invalid';
   try {
-    const res = await fetchImpl(`${SUPABASE.url}/rest/v1/rpc/join_waitlist`, {
-      method: 'POST', signal: AbortSignal.timeout(15000),
-      headers: { apikey: SUPABASE.key, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ address }),
-    });
+    const res = await callRpc('join_waitlist', { address }, fetchImpl);
     return res.ok ? 'ok' : 'error';
   } catch {
     return 'error';
