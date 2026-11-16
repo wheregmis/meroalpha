@@ -46,6 +46,7 @@ test('a stalled request times out into the error message and keeps the address',
     assert.equal(f.status.dataset.state, 'error');
     assert.match(f.status.textContent, /went wrong/);
     assert.equal(f.button.disabled, false);
+    assert.equal(f.email.readOnly, false);
     assert.equal(f.email.value, 'me@example.com');
   });
 });
@@ -66,6 +67,34 @@ test('a pending message replaces earlier status, and success resets the form', a
   });
 });
 
+test('a pending request locks the address and ignores repeat submissions until it finishes', async () => {
+  let respond;
+  const calls = [];
+  await withFetch((_, init) => {
+    calls.push(JSON.parse(init.body));
+    return new Promise((resolve) => { respond = resolve; });
+  }, async () => {
+    const f = fixture('first@example.test');
+    const submitted = f.form.submit();
+    assert.equal(f.email.readOnly, true);
+    await f.form.submit();
+    assert.deepEqual(calls, [{ address: 'first@example.test' }]);
+    assert.equal(f.email.readOnly, true);
+    respond({ ok: true });
+    await submitted;
+    assert.equal(f.email.readOnly, false);
+    assert.equal(f.email.value, '');
+    f.email.value = 'second@example.test';
+    const retry = f.form.submit();
+    assert.deepEqual(calls[1], { address: 'second@example.test' });
+    respond({ ok: false });
+    await retry;
+    assert.equal(f.email.readOnly, false);
+    assert.equal(f.email.value, 'second@example.test');
+    assert.equal(f.status.dataset.state, 'error');
+  });
+});
+
 test('an invalid address is tied to its field, and a later valid attempt clears that', async () => {
   await withFetch(async () => ({ ok: true }), async () => {
     const f = fixture('nope');
@@ -73,6 +102,7 @@ test('an invalid address is tied to its field, and a later valid attempt clears 
     assert.equal(f.status.dataset.state, 'invalid');
     assert.deepEqual(f.email.attrs, { 'aria-invalid': 'true', 'aria-describedby': 'waitlist-email-status' });
     assert.equal(f.email.focused, true);
+    assert.equal(f.email.readOnly, false);
     f.email.value = 'me@example.com';
     await f.form.submit();
     assert.equal(f.status.dataset.state, 'ok');
