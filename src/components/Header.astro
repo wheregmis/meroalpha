@@ -16,6 +16,7 @@ const links = [
       <img src="/assets/meroalpha.svg" width="32" height="32" alt="">
       <span>MeroAlpha</span>
     </a>
+    {current !== '/waitlist' && <div class="nav__join"><PrimaryButton href="/waitlist" small>Join<span class="visually-hidden"> the waitlist</span></PrimaryButton></div>}
     <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="main-navigation" hidden>
       <span>Menu</span>
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">

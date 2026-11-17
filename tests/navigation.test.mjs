@@ -108,7 +108,7 @@ test('mobile fallback scrolls away; stickiness requires successful navigation in
   const css = await readFile(new URL('../src/styles/site.css', import.meta.url), 'utf8');
   const mobile = css.slice(css.indexOf('@media (max-width: 50rem)'), css.indexOf('@media (max-width: 40rem)'));
   // Stylesheet contract rather than a browser layout assertion. The fallback's
-  // 60px brand + four 48px links + CTA exceeds a 320px landscape viewport.
+  // 60px brand + four 48px links exceeds a 320px landscape viewport.
   assert.match(mobile, /\.masthead\s*\{[^}]*position:\s*relative\s*;/);
   assert.match(mobile, /\.masthead:has\(\.nav\[data-ready\]\)\s*\{\s*position:\s*sticky\s*;/);
   assert.doesNotMatch(mobile, /\.masthead\s*\{[^}]*position:\s*sticky\s*;/);
@@ -126,4 +126,17 @@ test('missing navigation controls never mark the expanded fallback ready', () =>
   };
   initNavigation(root);
   assert.equal(ready, false);
+});
+
+test('mobile Join precedes Menu, skips the waitlist page, and replaces the menu CTA even without JS', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const header = await readFile(new URL('../src/components/Header.astro', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../src/styles/site.css', import.meta.url), 'utf8');
+  const mobile = css.slice(css.indexOf('@media (max-width: 50rem)'), css.indexOf('@media (max-width: 40rem)'));
+  assert.match(header, /current !== '\/waitlist' && <div class="nav__join"><PrimaryButton href="\/waitlist" small>Join<span class="visually-hidden"> the waitlist<\/span>/);
+  assert.ok(header.indexOf('class="brand"') < header.indexOf('class="nav__join"'));
+  assert.ok(header.indexOf('class="nav__join"') < header.indexOf('class="nav__toggle"'));
+  assert.match(css.slice(0, css.indexOf('@media (max-width: 50rem)')), /\.nav__join\s*\{\s*display:\s*none;/);
+  assert.match(mobile, /\.nav__join\s*\{\s*display:\s*flex;/);
+  assert.match(mobile, /\.nav nav \.btn\s*\{\s*display:\s*none;/);
 });
