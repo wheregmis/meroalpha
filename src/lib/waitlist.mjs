@@ -29,14 +29,17 @@ export function mountWaitlist(doc = document) {
     button.disabled = false;
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      if (button.disabled) return;
       email.removeAttribute('aria-invalid');
       email.removeAttribute('aria-describedby');
       // shortcut: a honeypot is the only bot check, add Turnstile if junk sign-ups show up.
       if (form.elements.website.value) return void (status.textContent = MESSAGES.ok);
       button.disabled = true;
+      email.readOnly = true;
       show('pending');
       const result = await joinWaitlist(email.value);
       button.disabled = false;
+      email.readOnly = false;
       show(result);
       if (result === 'ok') form.reset();
       if (result === 'invalid') {
