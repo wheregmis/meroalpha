@@ -24,7 +24,7 @@ const items = shipped.slice(0, limit);
       <li class="update" data-area={u.area}>
         <svg class="update__node" viewBox="0 0 24 24" aria-hidden="true" set:html={areas[u.area].icon} />
         <article class="card update__card">
-          <p class="update__tags"><span>{areas[u.area].label}</span><span class="update__kind">{u.kind}</span></p>
+          <p class="update__tags"><span>{areas[u.area].label}</span><span class="update__kind update__kind--live">Shipped</span></p>
           <h3>{u.title}</h3>
           <p>{u.body}</p>
           <a class="link" href={u.href}>Learn more<span class="visually-hidden"> about {u.title}</span> <span aria-hidden="true">↳</span></a>

@@ -31,3 +31,10 @@ test('roadmap sections shrink to the screen, because the page clips sideways ove
  assert.match(css,/\.changelog-page__shipped, \.changelog-page__building \{[^}]*grid-template-columns: minmax\(0, 1fr\)/);
  assert.match(css,/\.changelog-page__next \{[^}]*minmax\(min\(260px, 100%\), 1fr\)/);
 });
+test('shipped cards carry the same Shipped status chip as the roadmap statuses (#42)',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const updates=await readFile(new URL('../src/components/Updates.astro',import.meta.url),'utf8');
+ const page=await readFile(new URL('../src/pages/changelog.astro',import.meta.url),'utf8');
+ assert.match(updates,/<span class="update__kind update__kind--live">Shipped<\/span>/);
+ assert.match(page,/'update__kind', r\.status === 'In development' && 'update__kind--live'/);
+});
