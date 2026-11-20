@@ -64,3 +64,9 @@ test('scroll demo scrubs both ways, batches frames and restores static reduced-m
   events.resize(); flush();
   assert.equal(properties.get('--p'), 100 / 3400);
 });
+
+test('phone captions stay at 14px and are never visually hidden on short phones (#41)', async () => {
+  const css = await readFile(new URL('../src/styles/scroll-demo.css', import.meta.url), 'utf8');
+  assert.match(css, /\.is-scrubbing \.scroll-demo__caption > p:last-of-type \{ font-size: var\(--text-sm\); line-height: 1\.45; \}/);
+  assert.doesNotMatch(css, /scroll-demo__caption > p:last-of-type \{ position: absolute/);
+});

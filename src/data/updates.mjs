@@ -10,17 +10,17 @@ export const areas = {
 };
 
 export const shipped = [
-  { area: 'agent', kind: 'Feature', title: 'Ask the agent', body: 'Ask about a stock, the market or a report. The agent reads the web and NEPSE sources in its own browser and answers with citations to the pages it read.', href: '/#demo' },
-  { area: 'agent', kind: 'Feature', title: 'Bring your own Claude or Codex', body: 'Connect your own agent over the Agent Client Protocol, signed in with its own CLI.', href: '/#data' },
-  { area: 'paper', kind: 'Feature', title: 'Plans with hard limits', body: 'After the close, the agent drafts plans for the watchlist: an entry ceiling, a fixed stop and target, and 1% of equity at risk.', href: '/#day' },
-  { area: 'paper', kind: 'Feature', title: 'Five-minute triggers', body: 'A plan triggers on a five-minute candle above the first 15 minutes’ high, and never after 14:30 NPT.', href: '/#day' },
-  { area: 'paper', kind: 'Feature', title: 'Fills from trade prints', body: 'Paper orders fill only from fresh trade prints, with fees, slippage and a 10% participation cap.', href: '/#day' },
-  { area: 'paper', kind: 'Feature', title: 'Report card', body: 'Every call is graded against the NEPSE index five sessions later, and the report card keeps score.', href: '/#tour' },
-  { area: 'paper', kind: 'Feature', title: 'Paper portfolio', body: 'Cash, holdings, realised gains and fees in virtual NPR, with a 20% loss limit. No brokerage is connected.', href: '/#tour' },
-  { area: 'charts', kind: 'Feature', title: 'Advanced chart', body: 'Candles, indicators and drawing tools on MeroAlpha’s own chart engine, with 5-minute to weekly bars and a NEPSE comparison.', href: '/#tour' },
-  { area: 'charts', kind: 'Feature', title: 'Stock page', body: 'The last close, a price graph, the 52-week range, news and your paper position. Information only: there are no buy or sell buttons.', href: '/#tour' },
-  { area: 'privacy', kind: 'Feature', title: 'Local by default', body: 'Captured pages, findings and the paper account live in the app’s data folder on your computer.', href: '/privacy' },
-  { area: 'privacy', kind: 'Feature', title: 'Optional sharing', body: 'Sharing is a separate switch, off by default. Turned on, findings, your agent’s checks and questions, and graded paper calls go to other users, never the pages themselves.', href: '/privacy' },
+  { area: 'agent', title: 'Ask the agent', body: 'Ask about a stock, the market or a report. The agent reads the web and NEPSE sources in its own browser and answers with citations to the pages it read.', href: '/#demo' },
+  { area: 'agent', title: 'Bring your own Claude or Codex', body: 'Connect your own agent over the Agent Client Protocol, signed in with its own CLI.', href: '/#data' },
+  { area: 'paper', title: 'Plans with hard limits', body: 'After the close, the agent drafts plans for the watchlist: an entry ceiling, a fixed stop and target, and 1% of equity at risk.', href: '/#day' },
+  { area: 'paper', title: 'Five-minute triggers', body: 'A plan triggers on a five-minute candle above the first 15 minutes’ high, and never after 14:30 NPT.', href: '/#day' },
+  { area: 'paper', title: 'Fills from trade prints', body: 'Paper orders fill only from fresh trade prints, with fees, slippage and a 10% participation cap.', href: '/#day' },
+  { area: 'paper', title: 'Report card', body: 'Every call is graded against the NEPSE index five sessions later, and the report card keeps score.', href: '/#tour' },
+  { area: 'paper', title: 'Paper portfolio', body: 'Cash, holdings, realised gains and fees in virtual NPR, with a 20% loss limit. No brokerage is connected.', href: '/#tour' },
+  { area: 'charts', title: 'Advanced chart', body: 'Candles, indicators and drawing tools on MeroAlpha’s own chart engine, with 5-minute to weekly bars and a NEPSE comparison.', href: '/#tour' },
+  { area: 'charts', title: 'Stock page', body: 'The last close, a price graph, the 52-week range, news and your paper position. Information only: there are no buy or sell buttons.', href: '/#tour' },
+  { area: 'privacy', title: 'Local by default', body: 'Captured pages, findings and the paper account live in the app’s data folder on your computer.', href: '/privacy' },
+  { area: 'privacy', title: 'Optional sharing', body: 'Sharing is a separate switch, off by default. Turned on, findings, your agent’s checks and questions, and graded paper calls go to other users, never the pages themselves.', href: '/privacy' },
 ];
 
 // The roadmap, in order. The first two are in development; the rest are planned.

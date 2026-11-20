@@ -38,7 +38,7 @@ import '../styles/changelog.css';
         <ol class="changelog-page__next">
           {items.map((r) => (
             <Surface as="li">
-              <p class="update__tags"><span class="update__kind">{r.status}</span></p>
+              <p class="update__tags"><span class:list={['update__kind', r.status === 'In development' && 'update__kind--live']}>{r.status}</span></p>
               <h3>{r.title}</h3>
               <p>{r.body}</p>
               {r.href && <a class="link" href={r.href}>Learn more<span class="visually-hidden"> about {r.title}</span> <span aria-hidden="true">↳</span></a>}
