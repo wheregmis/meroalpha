@@ -47,10 +47,14 @@ itself. Read sign-ups in the Supabase dashboard.
 
 ## App releases
 
-This public repo also hosts MeroAlpha Agent downloads; app source stays private.
-[Releases](https://github.com/wheregmis/meroalpha/releases/latest) are readable
-without an account. Existing download buttons already use this destination.
-Stable binaries are published here, beginning with [v0.3.1](https://github.com/wheregmis/meroalpha/releases/tag/v0.3.1).
+**Current channel: the waitlist.** This repo has no public release today, and the site offers no download:
+every download or install link (including `/download`) goes to [/waitlist](https://meroalpha.com/waitlist).
+Point any new download or install link there too.
+
+The rest of this section is the publication procedure, kept ready behind the release gate in the agent's
+`docs/public-releases.md`. When a release is published, it goes to this repo's
+[Releases](https://github.com/wheregmis/meroalpha/releases), readable without an account; app source stays private.
+Changing the site's download links from the waitlist to Releases is a separate site change made at that point.
 
 | Asset | Purpose |
 | --- | --- |
@@ -103,7 +107,7 @@ Research/account data is never included in a release or sent by update checks.
 
 ## Landing-page changelog
 
-The What’s new section reads the latest three stable public releases from GitHub's unauthenticated releases API. Version/date links are validated against this repository; bodies render as bounded plain text, never HTML or remote images. No token, server or deployment secret is needed. API failure/rate limiting and disabled JavaScript retain a link to the full release history. Existing release notes are shown as-is; future agent releases supply useful changes from their reviewed prepared notes.
+The What’s new section reads the latest three stable public releases from GitHub's unauthenticated releases API. Version/date links are validated against this repository; bodies render as bounded plain text, never HTML or remote images. No token, server or deployment secret is needed. While there is no public release, it shows its empty state ("No releases are available yet"). API failure/rate limiting and disabled JavaScript retain a link to the full release history. Existing release notes are shown as-is; future agent releases supply useful changes from their reviewed prepared notes.
 
 Run `npm test`. Use `npm run dev` for visual checks. The landing page shows the latest three releases and `/changelog` up to ten. Website deployment is separate from a code PR.
 

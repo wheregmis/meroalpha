@@ -1,4 +1,4 @@
-// The Astro site (src/) built into dist/, with public/ (assets, install.sh) copied in, served as Workers static assets.
+// The Astro site (src/) built into dist/, with public/ (assets, headers) copied in, served as Workers static assets.
 // Workers Builds deploys master.
 {
   "$schema": "https://unpkg.com/wrangler@4.151.1/config-schema.json",
