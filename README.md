@@ -107,7 +107,7 @@ Research/account data is never included in a release or sent by update checks.
 
 ## Landing-page changelog
 
-The What’s new section reads the latest three stable public releases from GitHub's unauthenticated releases API. Version/date links are validated against this repository; bodies render as bounded plain text, never HTML or remote images. No token, server or deployment secret is needed. While there is no public release, it shows its empty state ("No releases are available yet"). API failure/rate limiting and disabled JavaScript retain a link to the full release history. Existing release notes are shown as-is; future agent releases supply useful changes from their reviewed prepared notes.
+The What’s new section reads the latest three stable public releases from GitHub's unauthenticated releases API. Version/date links are validated against this repository; bodies render as bounded plain text, never HTML or remote images. No token, server or deployment secret is needed. While there is no public release, it shows its empty state ("No releases are available yet"). API failure/rate limiting and disabled JavaScript retain a link to the full release history. Release notes are shown as-is; future agent releases supply useful changes from their reviewed prepared notes.
 
 Run `npm test`. Use `npm run dev` for visual checks. The landing page shows the latest three releases and `/changelog` up to ten. Website deployment is separate from a code PR.
 
