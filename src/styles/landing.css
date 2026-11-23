@@ -84,11 +84,14 @@
   .shot--hero img { width: 100%; margin-left: 0; border-radius: var(--radius-shot); outline: 1px solid var(--hair); outline-offset: -1px; box-shadow: 0 40px 100px -30px var(--color-shadow), 0 2px 6px var(--color-shadow); }
   .hud--a { left: 2%; } .hud--c { right: 2%; }
 }
-@media (max-width: 40rem) {
-  .hero { padding-top: var(--space-2xl); }
+/* Up to 860 px the whole window would be under 0.43x (text 10 px or less), so show the phone crop (#37); matches NARROW in Screenshot.tsx. */
+@media (max-width: 53.75rem) {
   .hud { display: none; }
   /* The phone crop of the Ask panel, upright and readable rather than a tilted miniature of the window. */
   .shot--hero { transform: none; animation-name: rise-flat; max-width: 22rem; margin-inline: auto; }
+}
+@media (max-width: 40rem) {
+  .hero { padding-top: var(--space-2xl); }
   .data__list { grid-template-columns: minmax(0, 1fr); }
   .close__card { padding: var(--space-2xl) var(--space-md); }
 }

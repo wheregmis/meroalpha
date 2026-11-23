@@ -70,3 +70,16 @@ test('phone captions stay at 14px and are never visually hidden on short phones 
   assert.match(css, /\.is-scrubbing \.scroll-demo__caption > p:last-of-type \{ font-size: var\(--text-sm\); line-height: 1\.45; \}/);
   assert.doesNotMatch(css, /scroll-demo__caption > p:last-of-type \{ position: absolute/);
 });
+
+test('the hero phone crop covers tablets up to 860px, in step with Screenshot (#37)', async () => {
+  const css = await readFile(new URL('../src/styles/landing.css', import.meta.url), 'utf8');
+  const tsx = await readFile(new URL('../src/components/Screenshot.tsx', import.meta.url), 'utf8');
+  assert.match(tsx, /const NARROW = '\(max-width: 53\.75rem\)'/);
+  assert.match(css, /@media \(max-width: 53\.75rem\) \{\n  \.hud \{ display: none; \}\n[^}]*\n  \.shot--hero \{ transform: none;/);
+});
+
+test('on phones the citation chip flies down, away from the highlighted sentence (#41)', async () => {
+  const css = await readFile(new URL('../src/styles/scroll-demo.css', import.meta.url), 'utf8');
+  const phone = css.slice(css.indexOf('@media (max-width: 720px) and (prefers-reduced-motion: no-preference)'));
+  assert.match(phone, /\.scroll-demo__citation \{ transform: translate\(calc\(var\(--flight\) \* 40px\), calc\(var\(--flight\) \* 40px\)\)/);
+});
