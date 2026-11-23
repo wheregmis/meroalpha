@@ -3,7 +3,8 @@
 // where the whole window would be too small to read.
 type Props = { name: string; alt: string; className?: string; priority?: boolean; phone?: string };
 
-const NARROW = '(max-width: 40rem)';
+// Matches the hero's phone-crop breakpoint in landing.css.
+const NARROW = '(max-width: 53.75rem)';
 
 export default function Screenshot({ name, alt, className, priority, phone }: Props) {
   return (

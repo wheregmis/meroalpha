@@ -186,6 +186,8 @@
   .is-scrubbing .scroll-demo__lines { height: 10px; }
   .is-scrubbing .scroll-demo__highlight { font-size: 9px; line-height: 1.3; margin-block: 4px; }
   .is-scrubbing .scroll-demo__cta { bottom: 12px; }
+  /* One column: fly down toward the findings, not up across the highlighted sentence (#41). */
+  .is-scrubbing .scroll-demo__citation { transform: translate(calc(var(--flight) * 40px), calc(var(--flight) * 40px)) scale(calc(1 - var(--flight) * 0.2)); }
   .is-scrubbing .scroll-demo__ask-orbit { padding-top: 0; }
   .is-scrubbing .scroll-demo__ask-orbit small { font-size: 10px; }
   .is-scrubbing .scroll-demo__prompt { margin-top: 12px; }
