@@ -26,13 +26,14 @@ npm run dev       # http://localhost:4321, with hot reload
 npm run build     # into dist/
 npm run preview   # serves dist/
 npm test
+npm run check     # tests and builds dist/; run before publishing
 ```
 
 Screenshots come from the app's synthetic tour fixture. The landing page's demo (`src/components/ScrollDemo.astro`) is a scroll-driven recreation of the app in HTML and SVG, on invented data.
 
 ## Workers Builds and local validation
 
-`wrangler preview` requires the tracked `previews: {}` block in `wrangler.jsonc`; branches created before that fix must bring in current `master`. Wrangler runs `npm run build` first (`build.command`) and serves `dist/`; Workers Builds installs dependencies itself. A read-only packaging check is `npx wrangler@4.156.2 deploy --dry-run`; it does not create a Preview or deploy the site.
+`wrangler preview` requires the tracked `previews: {}` block in `wrangler.jsonc`; branches created before that fix must bring in current `master`. Wrangler runs `npm run build` first (`build.command`) and serves `dist/`; Workers Builds installs dependencies itself. Because Workers Builds only runs the build, run `npm run check` (`npm test` and `npm run build`) locally before publishing a site change. A read-only packaging check is `npx wrangler@4.156.2 deploy --dry-run`; it does not create a Preview or deploy the site.
 
 The asset root is `dist/`: the built pages plus `public/`, copied as-is. Scripts, tests, sources and configuration are outside it. `.assetsignore` (from `public/`) still excludes hidden files, such as environment files and tooling databases. Never copy credentials or private application data into `public/`.
 
