@@ -4,6 +4,5 @@
 .wrangler
 wrangler.jsonc
 README.md
-release-contract.json
 scripts
 tests
